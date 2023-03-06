@@ -18,7 +18,7 @@ const GetStarted = (props) => {
         AI-powered Stress Assistant measures your stress level and generates
         personalized recommendations for you
       </p>
-      <p className="font-sans text-lg mb-5 text-center">
+      <p className="font-sans text-lg text-center">
       Don't let job stress control you - take control today!
       </p>
       <button
