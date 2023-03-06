@@ -5,7 +5,7 @@ const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), {
   ssr: false,
 });
 const StressScore = (props) => {
-  const texts=["Stress Assistant AI is analyzing your voice…","Computing Your Stress Level…","Generating Your Stress Report…"]
+  const texts=["Stress Assistant AI is analyzing your voice…","Computing Your Stress Level…","Generating Your Stress Report.."]
   const [status,setStatus]=useState(0)
   const voiceState = useContext(voiceContext);
   useEffect(()=>{
