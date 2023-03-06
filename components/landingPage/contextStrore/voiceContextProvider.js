@@ -7,15 +7,15 @@ const VoiceContextProvider = (props) => {
   const voiceStateHandler=(state,action)=>{
     switch(action.type){
       case "audioUpload":
-          return {loading:true,status:"Getting scores..."}
+          return {loading:true}
       case "results":
-        return {loading:false,score:action.scores.overallScore,control:action.scores.control,energy:action.scores.energy}
+        return {loading:false,score:action.scores.overallScore,live:action.scores.live,energy:action.scores.energy}
       default:
-        return {loading:true,status:"registering user..."}
+        return {loading:true}
     }
   }
 
-  const [voiceFeatures,dispatchVoiceFeatures]=useReducer(voiceStateHandler,{loading:true,status:"registering user..."})
+  const [voiceFeatures,dispatchVoiceFeatures]=useReducer(voiceStateHandler,{loading:true})
   let uid,filePath,token,signedURL;
   const generateToken = async (user) => {
     name=user.username;
@@ -137,14 +137,14 @@ const VoiceContextProvider = (props) => {
     if(status==="DONE"){
       const inference=res6.data.result.inference[0];
       const score=inference.score.value
-      const controlIndex=inference.voiceFeatures.findIndex((el)=>el.name==="Control");
+      const liveIndex=inference.voiceFeatures.findIndex((el)=>el.name==="Liveliness");
       const EnergyIndex=inference.voiceFeatures.findIndex((el)=>el.name==="Energy Range");
-      const controlScore=inference.voiceFeatures[controlIndex].score
+      const liveScore=inference.voiceFeatures[liveIndex].score
       const EnergyScore=inference.voiceFeatures[EnergyIndex].score
       console.log(score)
-      console.log(controlScore)
+      console.log(liveScore)
       console.log(EnergyScore)
-      dispatchVoiceFeatures({type:"results",scores:{overallScore:score,control:controlScore,energy:EnergyScore}})
+      dispatchVoiceFeatures({type:"results",scores:{overallScore:score,live:liveScore,energy:EnergyScore}})
       await Axios.post("/api/scores",{username:name,score,voiceFeatures:inference.voiceFeatures})
     }
     if(status==="FAIL"){
