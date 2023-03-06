@@ -115,7 +115,7 @@ const Card = () => {
 
  
   return (
-    <div className="w-[75rem] lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-10 xl:px-[6rem] lg:pl-[2rem] ">
+    <div className="w-[75rem] lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
