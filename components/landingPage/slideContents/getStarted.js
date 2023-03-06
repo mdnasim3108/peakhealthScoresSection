@@ -22,7 +22,7 @@ const GetStarted = (props) => {
       Don't let job stress control you - take control today!
       </p>
       <button
-        className="border text-lg border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold px-8 py-3 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+        className="border text-lg border-violet-500 bg-violet-500 relative top-5 hover:bg-violet-600 text-white font-bold px-8 py-3 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
         onMouseEnter={() => setShowArrow((prev) => !prev)}
         onMouseLeave={() => setShowArrow((prev) => !prev)}
         onClick={props.move}
