@@ -115,19 +115,19 @@ const Card = () => {
 
  
   return (
-    <div className="w-[75rem] lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem] ">
+    <div className="w-[75rem] lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-10 xl:px-[6rem] lg:pl-[2rem] ">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
       <div className="flex lg:flex-row flex-col py-10"> 
         <div className="lg:flex-[1] flex lg:flex-col w-auto mx-4" id="progress">
           {progressBarState.contentArray.map((el) => {
-            return <ProgressPoint icon={el.icon} progress={el} key={Math.random()} />;
+            return <ProgressPoint icon={el.icon} progress={el} />;
           })}
         </div>
         <div className=" w-full  px-5 rounded  " id="progressContents">
           {progressBarState.contentArray[progressBarState.contentNumber].com}
-          {/* <StressScore/> */}
+          {/* <GetDetails/> */}
         </div>
       </div>
     </div>
