@@ -41,7 +41,7 @@ const GetDetails = (props) => {
               className="w-[20rem] h-[20rem] relative bottom-5 ml-20"
             ></Player>
           </div>
-          <h1 className="text-2xl text-center">
+          <h1 className="text-sm text-center">
            Your information will be kept confidential and used only to measure your stress level and personalize your stress relief recommendations. Let's begin!
           </h1>
         </div>
