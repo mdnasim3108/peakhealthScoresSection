@@ -42,7 +42,7 @@ const GetDetails = (props) => {
             ></Player>
           </div>
           <h1 className="text-2xl text-center">
-            We are Processing your Results
+           Your information will be kept confidential and used only to measure your stress level and personalize your stress relief recommendations. Let's begin!
           </h1>
         </div>
         <div className="">
