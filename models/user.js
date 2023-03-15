@@ -11,7 +11,8 @@ var userSchema = new Schema(
     score: { type: String },
     voiceFeatures: { type: Array },
     guessScore:{type:String},
-    audio:{type:String}
+    audio:{type:String},
+    transcript:{type:String},
   },
   { timestamps: true }
 );
