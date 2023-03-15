@@ -34,7 +34,7 @@ const VoiceContextProvider = (props) => {
     const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
     console.log(ipdata.data.ip)
     // ip: ipdata.data.ip
-    const userData = { ...user,ip:ipdata };
+    const userData = { ...user,ip:ipdata.data.ip };
     const uidData = await Axios.post("/api/createUser", { details: userData });
     userId = uidData.data;
     name = user.username;
