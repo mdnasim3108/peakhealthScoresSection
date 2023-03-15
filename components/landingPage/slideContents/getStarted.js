@@ -1,10 +1,10 @@
 import getStartImage from "../../../public/getStart.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useState } from "react";
 const GetStarted = (props) => {
-  const [showArrow, setShowArrow] = useState(false);
+  // const [showArrow, setShowArrow] = useState(false);
   return (
     <div>
       <h1 className="font-bold mb-5 text-4xl text-center">What’s my Work Stress level?</h1>
