@@ -1,11 +1,17 @@
 import VoiceContext from "./voiceContext";
 import Axios from "axios";
-import { useReducer, useState } from "react";
+import { useReducer} from "react";
 import { Buffer } from "buffer";
+import generateTranscript from "./generateTranscript";
 const VoiceContextProvider = (props) => {
-  let name;
+
   const voiceStateHandler = (state, action) => {
     switch (action.type) {
+      case "registerUser":
+        return {
+          loading:state.loading,
+          ...action.data
+        }
       case "guessScore":
         return { ...state, guessScore: action.score };
       case "results":
@@ -15,8 +21,6 @@ const VoiceContextProvider = (props) => {
           score: action.scores.overallScore,
           live: action.scores.live,
           energy: action.scores.energy,
-          userId: action.userId,
-          userName:action.userName
         };
       default:
         return { loading: true };
@@ -45,7 +49,7 @@ const VoiceContextProvider = (props) => {
       {
         headers: {
           Authorization:
-          "Basic MmpkbDRkdWtkbzM2bDBlbmpmYjZwODk1YmQ6MXAyZnI4ZmxkOHRyc2lpdGsxdGF0NzJwY3FrdWtuYTg3ZW1yNzA3cWo1bjNsbHJsdjh1cA==",
+            "Basic MmpkbDRkdWtkbzM2bDBlbmpmYjZwODk1YmQ6MXAyZnI4ZmxkOHRyc2lpdGsxdGF0NzJwY3FrdWtuYTg3ZW1yNzA3cWo1bjNsbHJsdjh1cA==",
           "Content-Type": "application/x-www-form-urlencoded",
         },
       }
@@ -93,17 +97,18 @@ const VoiceContextProvider = (props) => {
     filePath = res3.data.filePath;
     console.log(filePath);
     console.log(signedURL);
+    dispatchVoiceFeatures({type:"registerUser",data:{objId:userId,uid,signedURL,token,filePath}})
   };
 
   const sendAudio = async (blobObj) => {
     console.log("were in");
     console.log(blobObj);
-    console.log(signedURL);
+    console.log(voiceFeatures.signedURL);
     const abuffer = await blobObj.blob.arrayBuffer();
 
     const mybuffer = Buffer.from(abuffer, "binary");
 
-    const res4 = await Axios.put(signedURL, mybuffer, {
+    const res4 = await Axios.put(voiceFeatures.signedURL, mybuffer, {
       headers: { "Content-Type": "audio/wav" },
     });
 
@@ -118,13 +123,13 @@ const VoiceContextProvider = (props) => {
             version: "v3",
           },
         ],
-        userIdentifier: uid,
-        filePath: filePath,
+        userIdentifier:voiceFeatures.uid,
+        filePath:voiceFeatures.filePath,
         measureName: "mental-fitness",
       },
       {
         headers: {
-          Authorization: token,
+          Authorization:voiceFeatures.token,
           "Content-Type": "application/json",
         },
       }
@@ -139,7 +144,7 @@ const VoiceContextProvider = (props) => {
       res6 = await Axios.get(
         `https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores/${jobid}`,
         {
-          headers: { Authorization: token },
+          headers: { Authorization:voiceFeatures.token },
         }
       );
       status = res6.data.status;
@@ -158,18 +163,17 @@ const VoiceContextProvider = (props) => {
       console.log("Total score" + score);
       console.log("Live Score", liveScore);
       console.log("EnergyScore", EnergyScore);
+      await Axios.post("/api/scores", {
+        id:voiceFeatures.objId,
+        score,
+        voiceFeatures: inference.voiceFeatures,
+        audio:voiceFeatures.signedURL,
+      });
       dispatchVoiceFeatures({
         type: "results",
         scores: { overallScore: score, live: liveScore, energy: EnergyScore },
-        userId: userId,
-        userName: name,
       });
-      await Axios.post("/api/scores", {
-        id:userId ,
-        score,
-        voiceFeatures: inference.voiceFeatures,
-        audio: blobObj.url,
-      });
+      generateTranscript(blobObj.blob,voiceFeatures.objId)
     }
     if (status === "FAIL") {
       console.log("something went wrong..");

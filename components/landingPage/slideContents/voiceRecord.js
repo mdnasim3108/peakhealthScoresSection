@@ -35,10 +35,15 @@ const VoiceRecord = (props) => {
         toastifyFailure();
       });
   };
-  const onStop = (audio) => {
+  const onStop =async(audio) => {
+    // var reader = new FileReader();
+    // reader.readAsDataURL(audio.blob);
+    // reader.onloadend = () => {
+    //   var base64data = reader.result;
+    //   console.log(base64data);
+    // }
     console.log(audio);
     voiceState.sendAudio(audio);
-    // console.log(voiceState.voiceFeatures)
   };
   return (
     <>

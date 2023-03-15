@@ -127,7 +127,6 @@ const Card = () => {
         </div>
         <div className=" w-full   px-5 rounded  " id="progressContents">
           {progressBarState.contentArray[progressBarState.contentNumber].com}
-          {/* <GetDetails/> */}
         </div>
       </div>
     </div>

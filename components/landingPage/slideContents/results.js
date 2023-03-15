@@ -9,9 +9,8 @@ const results = (props) => {
   const voiceState = useContext(voiceContext);
   console.log(voiceState.voiceFeatures);
   axios.post("/api/guessScore", {
-    username: voiceState.voiceFeatures.userName,
     guessScore: voiceState.voiceFeatures.guessScore,
-    id:voiceState.voiceFeatures.userId
+    id:voiceState.voiceFeatures.objId
   });
   const overallScore = voiceState.voiceFeatures.loading
     ? voiceState.voiceFeatures.score
