@@ -8,7 +8,7 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
-    <Head>
+   
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
         strategy="afterInteractive"
@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }) => {
           gtag('config', 'G-64VSBXJZV4');
         `}
       </Script>
-      </Head>
+      
 {/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
 
       <Component {...pageProps} />
