@@ -8,43 +8,63 @@ import {
 import GetStarted from "./slideContents/getStarted";
 import VoiceRecord from "./slideContents/voiceRecord";
 import GetDetails from "./slideContents/getDetails";
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import Quiz from "./slideContents/quiz";
 import MoreDetails from "./slideContents/moreDetails";
 import StressScore from "./slideContents/stressScore";
 import Recommendations from "./slideContents/recommondations";
 import ReviewBurnout from "./slideContents/reviewBurnout";
+import ContentContext from "./contextStrore/contentContext";
 const Card = () => {
-
+  const content=useContext(ContentContext)
   const nextPartHandler = () => {
     setProgressBarState(
        { contentNumber: 0, contentArray: contentArray2 }
     )
   };
   const moveToNext = () => {
+    
+  };
+  useEffect(()=>{
     setProgressBarState((prev) => {
       const updated = [...prev.contentArray];
-      updated[prev.contentNumber] = {
-        ...updated[prev.contentNumber],
-        completed: true,
-        animate: false,
-      };
-      if (prev.contentNumber !== prev.contentArray.length) {
-        updated[prev.contentNumber + 1] = {
-          ...updated[prev.contentNumber + 1],
-          working: true,
-          animate: true,
-        };
-      }
-      return { contentNumber: prev.contentNumber + 1, contentArray: updated };
+      // updated[prev.contentNumber] = {
+      //   ...updated[prev.contentNumber],
+      //   completed: true,
+      //   animate: false,
+      // };
+      // if (prev.contentNumber !== prev.contentArray.length) {
+      //   updated[prev.contentNumber + 1] = {
+      //     ...updated[prev.contentNumber + 1],
+      //     working: true,
+      //     animate: true,
+      //   };
+      // }
+      const num=content.contentNumber;
+      console.log(num)
+      const updated1 = updated.map((el)=>{
+           const id=prev.contentArray.indexOf(el)
+           if(id===num){
+              return {...el,working:true,animate:true,completed:false}
+           }
+           if(id<num){
+             return {...el,working:true,completed:true,animate:false}
+           }
+           return {...el,animate:false,working:false,completed:false}
+      })
+      return { contentNumber: prev.contentNumber + 1, contentArray: updated1 };
     });
-  };
+  },[content.contentNumber])
+
+  const moveHandler=()=>{
+    content.moveContent()
+  }
   
   const [progressBarState, setProgressBarState] = useState({
     contentNumber: 0,
     contentArray: [
       {
-        com:<GetStarted move={moveToNext} />,
+        com:<GetStarted move={moveHandler} />,
         working: true,
         completed: false,
         animate: true,
@@ -52,7 +72,7 @@ const Card = () => {
         icon: faPowerOff,
       },
       {
-        com: <GetDetails move={moveToNext} />,
+        com: <GetDetails move={moveHandler} />,
         working: false,
         completed: false,
         animate: false,
@@ -60,7 +80,7 @@ const Card = () => {
         icon: faMedal,
       },
       {
-        com: <VoiceRecord move={moveToNext} />,
+        com: <VoiceRecord move={moveHandler} />,
         working: false,
         completed: false,
         animate: false,
@@ -126,7 +146,7 @@ const Card = () => {
           })}
         </div>
         <div className=" w-full   px-5 rounded  " id="progressContents">
-          {progressBarState.contentArray[progressBarState.contentNumber].com}
+          {progressBarState.contentArray[content.contentNumber].com}
         </div>
       </div>
     </div>
