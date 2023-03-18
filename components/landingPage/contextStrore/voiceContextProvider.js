@@ -41,39 +41,12 @@ const VoiceContextProvider = (props) => {
 
   let uid, filePath, token, signedURL, userId;
   const generateToken = async (user) => {
-<<<<<<< HEAD
     try {
       const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
       const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
       const userData = { ...user, ip: ipdata.data.ip };
       const uidData = await Axios.post("/api/createUser", { details: userData });
       userId = uidData.data;
-=======
-    const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
-    // 
-    // const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
-    // console.log(ipdata.data.ip)  
-    // ip: ipdata.data.ip
-    const userData = { ...user,ip:"" };
-    const uidData = await Axios.post("/api/createUser", { details: userData });
-    userId = uidData.data;
-    name = user.username;
-    const res1 = await Axios.post(
-      "https://api.sondeservices.com/platform/v1/oauth2/token",
-      {
-        grant_type: "client_credentials",
-        scope:
-          "sonde-platform/users.write sonde-platform/voice-feature-scores.write sonde-platform/voice-feature-scores.read sonde-platform/storage.write",
-      },
-      {
-        headers: {
-          Authorization:
-            "Basic MmpkbDRkdWtkbzM2bDBlbmpmYjZwODk1YmQ6MXAyZnI4ZmxkOHRyc2lpdGsxdGF0NzJwY3FrdWtuYTg3ZW1yNzA3cWo1bjNsbHJsdjh1cA==",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
->>>>>>> 6f9d11ce29fae731608721ff56d0ac150e9d3069
 
       const res1 = await Axios.post(
         "https://api.sondeservices.com/platform/v1/oauth2/token",
