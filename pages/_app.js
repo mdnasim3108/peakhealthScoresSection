@@ -1,14 +1,16 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import Script from 'next/script'
-
+import AnswerContextProvider from '../components/landingPage/contextStrore/answerContextProvider';
+import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
+import { useContext } from 'react'
 // import { GoogleAnalytics } from 'nextjs-google-analytics'
 const App = ({ Component, pageProps }) => {
 
 
   return (
     <>
-   
+
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
         strategy="afterInteractive"
@@ -22,10 +24,14 @@ const App = ({ Component, pageProps }) => {
           gtag('config', 'G-64VSBXJZV4');
         `}
       </Script>
-      
-{/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
 
-      <Component {...pageProps} />
+      {/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
+
+      <VoiceContextProvider>
+        <AnswerContextProvider>
+          <Component {...pageProps} />
+        </AnswerContextProvider>
+      </VoiceContextProvider>
     </>
   )
 }
