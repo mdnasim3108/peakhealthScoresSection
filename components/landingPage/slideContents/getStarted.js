@@ -34,6 +34,7 @@ const GetStarted = (props) => {
             onClick={props.move}
           >
             Start my 1 min Stress Check
+            
             {/* {showArrow && (
               <i className="ml-[0.5rem] arrowIcon">
                 <FontAwesomeIcon icon={faArrowRight} />
