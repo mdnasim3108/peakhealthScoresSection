@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import processing from "../../../public/processing1.json";
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
