@@ -35,7 +35,8 @@ const progressPoint = (props) => {
           >
           </div>:<FontAwesomeIcon className="text-[0.7rem] text-white" icon={faCheck}/>}
         </div>
-
+        
+        
         {!props.progress.notextend && <div class="lg:h-[7.5rem] lg:w-[0.15rem] h-[0.18rem] w-[85%] bg-gray-200 border-0 rounded">
           <div
             className={`w-full   transition-all duration-[600ms] ease-linear bg-[#6ed1f9] ${

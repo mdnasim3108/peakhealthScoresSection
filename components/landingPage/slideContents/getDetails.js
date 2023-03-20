@@ -2,6 +2,8 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import processing from "../../../public/processing1.json";
 import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
+import { CircularProgress, circularProgressClasses } from "@mui/material";
+import { Check } from "@mui/icons-material";
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
@@ -16,15 +18,19 @@ const GetDetails = (props) => {
       return { ...prev, [e.target.id]: e.target.value };
     });
   };
+  useEffect(()=>{
+      if(voiceState.voiceFeatures.registered){
+        setTimeout(()=>props.move(),2000)
+      }
+  },[voiceState.voiceFeatures.registered])
   const getSubmitHandler = async (e) => {
     e.preventDefault();
     voiceState.registerUser({
       username: details.username,
       gender: details.gender,
       year: details.year,
-      email: details.email,
+      email: details.email, 
     });
-    props.move();
   };
   return (
     <>
@@ -100,6 +106,23 @@ const GetDetails = (props) => {
               type="submit"
             >
               Check My Stress
+              {
+              voiceState.voiceFeatures.registering &&
+              <CircularProgress
+              variant="indeterminate"
+              disableShrink
+              sx={{
+                animationDuration: '550ms',
+                [`& .${circularProgressClasses.circle}`]: {
+                  strokeLinecap: 'round',
+                },
+              }}
+              size={20}
+              thickness={4}
+              className="relative left-[15%] top-[2px] "
+              style={{color:"white"}}
+            />}
+              {voiceState.voiceFeatures.registered && <Check className="text-sm relative bottom-[2px] left-[15%]"/>}
             </button>
           </form>
         </div>

@@ -7,16 +7,19 @@ const VoiceContextProvider = (props) => {
 
   const voiceStateHandler = (state, action) => {
     switch (action.type) {
+      case "registering":
+         return {...state,registering:true}
       case "registerUser":
         return {
           loading: state.loading,
           ...action.data,
+          registering:false,
           registered:true
         }
       case "guessScore":
         return { ...state, guessScore: action.score };
       case "error":
-        return { ...state, loading: false, error: true, errorData:{...action} }
+        return { ...state, loading: false, error: true, errorData:{...action},registering:false,registered:false }
       case "reset":
         return { ...state, loading: true, error: false }
       case "results":
@@ -36,12 +39,14 @@ const VoiceContextProvider = (props) => {
   const [voiceFeatures, dispatchVoiceFeatures] = useReducer(voiceStateHandler, {
     loading: true,
     error: false,
-    registered:false
+    registered:false,
+    registerLoading:false,
   });
 
   let uid, filePath, token, signedURL, userId;
   const generateToken = async (user) => {
     try {
+      dispatchVoiceFeatures({type:"registering"})
       const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
       const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
       const userData = { ...user, ip: ipdata.data.ip };
