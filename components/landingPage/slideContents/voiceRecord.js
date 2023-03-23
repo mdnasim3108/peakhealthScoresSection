@@ -47,7 +47,7 @@ const VoiceRecord = (props) => {
   };
   return (
     <>
-      <h1 className="text-4xl font-bold  font-sans text-center">
+      <h1 className="sm:text-4xl text-2xl  relative top-5 sm:top-0 font-bold  font-sans text-center">
         Question Of The Day
       </h1>
       <div className="voiceRecord relative flex justify-between md:flex-row flex-col-reverse sm:mt-0 mt-8">
@@ -79,7 +79,7 @@ const VoiceRecord = (props) => {
             !record.isRecording ? "sm:mt-[8rem]" : "sm:mt-[6rem]"
           } transition-all duration-[300] ease-linear text-center`}
         >
-          <p className="mt-5 font-bold text-3xl">
+          <p className="mt-5 font-bold sm:text-3xl text-xl">
           How are you feeling about your workload today?
           </p>
           <AudioReactRecorder
@@ -91,7 +91,7 @@ const VoiceRecord = (props) => {
           {!record.audio && (
             <div
               onClick={voiceClickHandler}
-              class="w-[6rem] h-[6rem] bg-violet-500 hover:bg-violet-600 hover:scale-125 transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto"
+              class="sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] bg-violet-500 hover:bg-violet-600 hover:scale-125 transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto"
             >
               <FontAwesomeIcon
                 icon={faMicrophone}

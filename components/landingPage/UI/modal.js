@@ -8,7 +8,7 @@ const modal = (props) => {
     const voiceState=useContext(voiceContext)
     const Backdrop = () => {
         return (
-            <div className=" w-screen absolute h-[100vh] bg-black/75 z-20"></div>
+            <div className=" w-screen absolute sm:h-[100vh] h-[200vh] bg-black/75 z-20"></div>
         )
     }
     const OverLay = (props) => {

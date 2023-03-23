@@ -48,7 +48,7 @@ const Card = () => {
               return {...el,working:true,animate:true,completed:false}
            }
            if(id<num){
-             return {...el,working:true,completed:true,animate:false}
+             return {...el,working:false,completed:true,animate:false}
            }
            return {...el,animate:false,working:false,completed:false}
       })
@@ -135,12 +135,12 @@ const Card = () => {
 
  
   return (
-    <div className="w-[85%] flex items-center lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
+    <div className="w-[85%] flex items-center lg:h-[100vh] md:h-[100vh]  max-w-[90%] bg-white  shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
       <div className="flex lg:flex-row flex-col py-10 w-full"> 
-        <div className="lg:flex-[1] flex lg:flex-col w-auto mx-4" id="progress">
+        <div className="lg:flex-[1] flex lg:flex-col w-full ml-[10%] mb-5 lg:m-0 " id="progress">
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}

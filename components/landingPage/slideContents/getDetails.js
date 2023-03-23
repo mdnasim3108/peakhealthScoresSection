@@ -34,20 +34,20 @@ const GetDetails = (props) => {
   };
   return (
     <>
-      <h1 className="text-3xl text-center font-bold font-sans relative top-5 w-max">
+      <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
         Your details for AI to measure your stress level accurately
       </h1>
-      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around">
+      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around w-full">   
         <div className="flex flex-col justify-center items-center ">
           <div className="ml-10 mt-5 md:m-0">
             <Player
               autoplay
               loop
               src={processing}
-              className="w-[20rem] h-[20rem] relative bottom-5 left-5"
+              className="sm:w-[20rem] sm:h-[20rem] w-[15rem] h-[15rem] relative bottom-5 sm:left-5"
             ></Player>
           </div>
-          <p className="text-sm w-[20rem] text-gray-500 text-center">
+          <p className="text-sm sm:w-[20rem] text-gray-500 text-center">
             Your information will be kept confidential and used only to measure
             your stress level and personalize your stress relief
             recommendations. Let's begin!
@@ -119,10 +119,10 @@ const GetDetails = (props) => {
               }}
               size={20}
               thickness={4}
-              className="relative left-[15%] top-[2px] "
+              className="relative sm:left-[15%] left-[10%] top-[2px] "
               style={{color:"white"}}
             />}
-              {voiceState.voiceFeatures.registered && <Check className="text-sm relative bottom-[2px] left-[15%]"/>}
+              {voiceState.voiceFeatures.registered && <Check className="text-sm relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
             </button>
           </form>
         </div>
