@@ -203,15 +203,15 @@ const VoiceContextProvider = (props) => {
         });
         generateTranscript(blobObj.blob, voiceFeatures.objId)
       }
-      if (status === "FAIL") {
-        dispatchVoiceFeatures({
-          type: "error",
-          content: 2,
-          head: "Audio not supported",
-          message: "your audio format is invalid,please re record your voice and try again...",
-          btnLabel: "record again"
-        });
-      }
+      // if (status === "FAIL") {
+      //   dispatchVoiceFeatures({
+      //     type: "error",
+      //     content: 2,
+      //     head: "Audio not supported",
+      //     message: "your audio format is invalid,please re record your voice and try again...",
+      //     btnLabel: "record again"
+      //   });
+      // }
     }
     catch (err) {
       console.log(err)
