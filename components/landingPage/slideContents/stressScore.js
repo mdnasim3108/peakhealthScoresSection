@@ -8,8 +8,9 @@ const StressScore = (props) => {
 
   return (
     <>
-      {voiceState.voiceFeatures.loading && <LoadingScore />}
-      {!voiceState.voiceFeatures.loading && !voiceState.voiceFeatures.error && <Results move={props.move} />}
+      {/* {voiceState.voiceFeatures.loading && <LoadingScore />}
+      {!voiceState.voiceFeatures.loading && !voiceState.voiceFeatures.error && <Results move={props.move} />} */}
+      {voiceState.voiceFeatures.loading?<LoadingScore />:<Results move={props.move} />}
     </>
 
   )
