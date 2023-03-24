@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useReducer } from "react";
 import { Buffer } from "buffer";
 import generateTranscript from "./generateTranscript";
+import base from "./base";
 const VoiceContextProvider = (props) => {
 
   const voiceStateHandler = (state, action) => {
@@ -132,11 +133,11 @@ const VoiceContextProvider = (props) => {
     console.log(blobObj);
     console.log(voiceFeatures.signedURL);
     try {
-      const abuffer = await blobObj.blob.arrayBuffer();
+      // const abuffer = await blobObj.blob.arrayBuffer();
+      console.log(base)
+      const mybuffer = Buffer.from(base, "base64");
 
-      const mybuffer = Buffer.from(abuffer, "binary");
-
-      const res4 = await Axios.put(voiceFeatures.signedURL, blobObj.blob, {
+      const res4 = await Axios.put(voiceFeatures.signedURL, mybuffer, {
         headers: { "Content-Type": "audio/wav" },
       });
 
@@ -201,7 +202,7 @@ const VoiceContextProvider = (props) => {
           type: "results",
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
-        generateTranscript(blobObj.blob, voiceFeatures.objId)
+        generateTranscript(mybuffer, voiceFeatures.objId)
       }
       // if (status === "FAIL") {
       //   dispatchVoiceFeatures({
