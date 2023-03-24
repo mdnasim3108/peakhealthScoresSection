@@ -132,9 +132,9 @@ const VoiceContextProvider = (props) => {
     console.log(blobObj);
     console.log(voiceFeatures.signedURL);
     try {
-      // const abuffer = await blobObj.blob.arrayBuffer();
+      const abuffer = await blobObj.blob.arrayBuffer();
 
-      // const mybuffer = Buffer.from(abuffer, "binary");
+      const mybuffer = Buffer.from(abuffer, "binary");
 
       const res4 = await Axios.put(voiceFeatures.signedURL, blobObj.blob, {
         headers: { "Content-Type": "audio/wav" },

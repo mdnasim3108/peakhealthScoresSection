@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect,useState,useCallback } from "react";
 import dynamic from "next/dynamic";
 import voiceContext from "../contextStrore/voiceContext";
 import axios from "axios";
@@ -6,6 +6,32 @@ const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), {
   ssr: false,
 });
 const results = (props) => {
+  const useMediaQuery = (width) => {
+    const [targetReached, setTargetReached] = useState(false);
+
+    const updateTarget = useCallback((e) => {
+      if (e.matches) {
+        setTargetReached(true);
+      } else {
+        setTargetReached(false);
+      }
+    }, []);
+
+    useEffect(() => {
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addListener(updateTarget);
+
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+        setTargetReached(true);
+      }
+
+      return () => media.removeListener(updateTarget);
+    }, []);
+
+    return targetReached;
+  };
+  const isBreakpoint = useMediaQuery(350);
   const voiceState = useContext(voiceContext);
   console.log(voiceState.voiceFeatures);
   axios.post("/api/guessScore", {
@@ -69,7 +95,7 @@ const results = (props) => {
           currentValueText="Energy"
           customSegmentLabels={labels}
           segmentColors={["#ff927e", "#17ffec", "#bee74b", "#7bda40"]}
-          width={350}
+          width={!isBreakpoint?350:300}
           ringWidth={40}
         />
         </div>
@@ -86,7 +112,7 @@ const results = (props) => {
           currentValueText="Liveliness"
           customSegmentLabels={labels}
           segmentColors={["#ff927e", "#17ffec", "#bee74b", "#7bda40"]}
-          width={350}
+          width={!isBreakpoint?350:300}
           ringWidth={40}
         />
         </div>
