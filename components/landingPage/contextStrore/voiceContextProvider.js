@@ -134,10 +134,10 @@ const VoiceContextProvider = (props) => {
     console.log(voiceFeatures.signedURL);
     try {
       // const abuffer = await blobObj.blob.arrayBuffer();
-      console.log(base)
-      const mybuffer = Buffer.from(base, "base64");
+      // console.log(base)
+      // const mybuffer = Buffer.from(base, "base64");
 
-      const res4 = await Axios.put(voiceFeatures.signedURL, mybuffer, {
+      const res4 = await Axios.put(voiceFeatures.signedURL, blobObj, {
         headers: { "Content-Type": "audio/wav" },
       });
 
@@ -202,7 +202,7 @@ const VoiceContextProvider = (props) => {
           type: "results",
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
-        generateTranscript(mybuffer, voiceFeatures.objId)
+        generateTranscript(blobObj, voiceFeatures.objId)
       }
       // if (status === "FAIL") {
       //   dispatchVoiceFeatures({

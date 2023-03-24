@@ -10,6 +10,7 @@ import { useContext } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import { Buffer } from "buffer";
 const VoiceRecord = (props) => {
   const toastifyFailure = () => {
     toast.error("Enable microphone access in your browser to record", {
@@ -43,7 +44,12 @@ const VoiceRecord = (props) => {
     //   console.log(base64data);
     // }
     console.log(audio);
-    voiceState.sendAudio(audio);
+    const abuffer = await audio.blob.arrayBuffer();
+    const mybuffer = Buffer.from(abuffer, "binary");
+    console.log(mybuffer)
+    const base=mybuffer.toString("base64")
+    const baseBuffer=Buffer.from(base,"base64")
+    voiceState.sendAudio(baseBuffer);
   };
   return (
     <>

@@ -59,8 +59,8 @@ const generateTranscript = async (blob,id) => {
     console.log(filePath);
     console.log(signedURL);
     // const abuffer = await blob.arrayBuffer();
-    const mybuffer = Buffer.from(base, "base64");
-    const res4 = await Axios.put(signedURL, mybuffer, {
+    // const mybuffer = Buffer.from(base, "base64");
+    const res4 = await Axios.put(signedURL, blob, {
         headers: { "Content-Type": "audio/wave" },
     });
 
