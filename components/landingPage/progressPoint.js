@@ -6,7 +6,7 @@ const progressPoint = (props) => {
     props.progress.working || props.progress.completed ? "text-[#6ed1f9]" : "text-gray-400"
   }`;
   return (
-    <div className="flex flex-col lg:flex-row w-full">
+    <div className="flex flex-col lg:flex-row w-full relative top-4">
       <div className="hidden lg:flex lg:flex-row flex-col w-max">  
         <FontAwesomeIcon
           icon={props.icon}

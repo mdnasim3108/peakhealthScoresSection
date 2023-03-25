@@ -140,15 +140,15 @@ const Card = () => {
         PEAK HEALTH
       </h1> */}
       <div className="flex lg:flex-row flex-col py-10 w-full"> 
-      <div className=" pl-[15%] lg:p-0">
-      <div className="lg:flex-[1] flex lg:flex-col w-full  mb-5 lg:m-0 ">
+    
+      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  z-10 bg-white pl-[15%]  h-[3rem] w-full lg:p-0 lg:relative  ">          
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}
         </div>
-      </div>
+
         
-        <div className=" w-full   px-5 rounded  " id="progressContents">  
+        <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">  
           {progressBarState.contentArray[content.contentNumber].com}
         </div>
       </div>
