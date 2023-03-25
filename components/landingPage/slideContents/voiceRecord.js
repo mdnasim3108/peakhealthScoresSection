@@ -44,12 +44,12 @@ const VoiceRecord = (props) => {
     //   console.log(base64data);
     // }
     console.log(audio);
-    const abuffer = await audio.blob.arrayBuffer();
-    const mybuffer = Buffer.from(abuffer, "binary");
-    console.log(mybuffer)
-    const base=mybuffer.toString("base64")
-    const baseBuffer=Buffer.from(base,"base64")
-    voiceState.sendAudio(baseBuffer);
+    // const abuffer = await audio.blob.arrayBuffer();
+    // const mybuffer = Buffer.from(abuffer, "binary");
+    // console.log(mybuffer)
+    // const base=mybuffer.toString("base64")
+    // const baseBuffer=Buffer.from(base,"base64")
+    voiceState.sendAudio(audio.blob);
   };
   return (
     <>
