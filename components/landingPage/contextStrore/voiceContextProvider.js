@@ -133,12 +133,11 @@ const VoiceContextProvider = (props) => {
     console.log(blobObj);
     console.log(voiceFeatures.signedURL);
     try {
-      if(blobObj){
       // const abuffer = await blobObj.blob.arrayBuffer();
       // console.log(base)
       // const mybuffer = Buffer.from(base, "base64");
 
-      const res4 = await Axios.put(voiceFeatures.signedURL, blobObj, {
+      const res4 = await Axios.put(voiceFeatures.signedURL,blobObj, {
         headers: { "Content-Type": "audio/wav" },
       });
 
@@ -177,6 +176,7 @@ const VoiceContextProvider = (props) => {
             headers: { Authorization: voiceFeatures.token },
           }
         );
+        console.log(res6)
         responseStatus = res6.data.status;
       }
       if (responseStatus === "DONE") {
@@ -205,16 +205,15 @@ const VoiceContextProvider = (props) => {
         });
         generateTranscript(blobObj, voiceFeatures.objId)
       }
-      if (responseStatus === "FAIL") {
+      if (responseStatus === "FAIL" && res6.data.result.code==="SERVER_ERROR") {
         dispatchVoiceFeatures({
           type: "error",
           content: 2,
           head: "Audio not supported",
-          message: "your audio format is invalid,please re record your voice and try again...",
+          message: "this is from here....",
           btnLabel: "record again"
         });
       }
-    }
     }
     catch (err) {
       console.log(err)
