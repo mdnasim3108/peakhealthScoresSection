@@ -167,18 +167,18 @@ const VoiceContextProvider = (props) => {
       const jobid = res5.data.jobId;
       console.log("jobid" + jobid);
       let res6;
-      let status = "IN_PROGRESS";
+      let responseStatus = "IN_PROGRESS";
 
-      while (status === "IN_PROGRESS") {
+      while (responseStatus === "IN_PROGRESS") {
         res6 = await Axios.get(
           `https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores/${jobid}`,
           {
             headers: { Authorization: voiceFeatures.token },
           }
         );
-        status = res6.data.status;
+        responseStatus = res6.data.status;
       }
-      if (status === "DONE") {
+      if (responseStatus === "DONE") {
         const inference = res6.data.result.inference[0];
         const score = inference.score.value;
         const liveIndex = inference.voiceFeatures.findIndex(
@@ -204,7 +204,7 @@ const VoiceContextProvider = (props) => {
         });
         generateTranscript(blobObj, voiceFeatures.objId)
       }
-      if (status === "FAIL") {
+      if (responseStatus === "FAIL") {
         dispatchVoiceFeatures({
           type: "error",
           content: 2,
