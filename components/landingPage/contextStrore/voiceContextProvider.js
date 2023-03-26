@@ -137,7 +137,7 @@ const VoiceContextProvider = (props) => {
       // console.log(base)
       // const mybuffer = Buffer.from(base, "base64");
 
-      const res4 = await Axios.put(voiceFeatures.signedURL,blobObj, {
+      const res4 = await Axios.put(voiceFeatures.signedURL, blobObj, {
         headers: { "Content-Type": "audio/wav" },
       });
 
@@ -167,19 +167,18 @@ const VoiceContextProvider = (props) => {
       const jobid = res5.data.jobId;
       console.log("jobid" + jobid);
       let res6;
-      var responseStatus = "IN_PROGRESS";
+      let status = "IN_PROGRESS";
 
-      while (responseStatus === "IN_PROGRESS") {
+      while (status === "IN_PROGRESS") {
         res6 = await Axios.get(
           `https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores/${jobid}`,
           {
             headers: { Authorization: voiceFeatures.token },
           }
         );
-        console.log(res6)
-        responseStatus = res6.data.status;
+        status = res6.data.status;
       }
-      if (responseStatus === "DONE") {
+      if (status === "DONE") {
         const inference = res6.data.result.inference[0];
         const score = inference.score.value;
         const liveIndex = inference.voiceFeatures.findIndex(
@@ -205,12 +204,12 @@ const VoiceContextProvider = (props) => {
         });
         generateTranscript(blobObj, voiceFeatures.objId)
       }
-      if (responseStatus === "FAIL" && res6.data.result.code==="SERVER_ERROR") {
+      if (status === "FAIL") {
         dispatchVoiceFeatures({
           type: "error",
           content: 2,
           head: "Audio not supported",
-          message: "this is from here....",
+          message: "your audio format is invalid,please re record your voice and try again...",
           btnLabel: "record again"
         });
       }
