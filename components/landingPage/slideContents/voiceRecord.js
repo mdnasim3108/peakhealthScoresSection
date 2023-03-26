@@ -49,7 +49,9 @@ const VoiceRecord = (props) => {
     // console.log(mybuffer)
     // const base=mybuffer.toString("base64")
     // const baseBuffer=Buffer.from(base,"base64")
-    voiceState.sendAudio(audio.blob);
+    if(audio.blob){
+      voiceState.sendAudio(audio.blob);
+    }
   };
   return (
     <>

@@ -133,6 +133,7 @@ const VoiceContextProvider = (props) => {
     console.log(blobObj);
     console.log(voiceFeatures.signedURL);
     try {
+      if(blobObj){
       // const abuffer = await blobObj.blob.arrayBuffer();
       // console.log(base)
       // const mybuffer = Buffer.from(base, "base64");
@@ -167,7 +168,7 @@ const VoiceContextProvider = (props) => {
       const jobid = res5.data.jobId;
       console.log("jobid" + jobid);
       let res6;
-      let responseStatus = "IN_PROGRESS";
+      var responseStatus = "IN_PROGRESS";
 
       while (responseStatus === "IN_PROGRESS") {
         res6 = await Axios.get(
@@ -213,6 +214,7 @@ const VoiceContextProvider = (props) => {
           btnLabel: "record again"
         });
       }
+    }
     }
     catch (err) {
       console.log(err)
