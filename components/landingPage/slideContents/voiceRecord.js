@@ -1,17 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
-import AudioReactRecorder, { RecordState } from "audio-react-recorder";
-import { useState } from "react";
+// import AudioReactRecorder, { RecordState } from "audio-react-recorder";
+import { useState, useEffect } from "react";
+import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { faSquare } from "@fortawesome/free-solid-svg-icons";
 import audioWave from "../../../public/AudioWave.json";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { Buffer } from "buffer";
+import { WavRecorder } from "webm-to-wav-converter";
 const VoiceRecord = (props) => {
+  const wavRecorder = new WavRecorder();
+  const [status, setStatus] = useState("")
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = new WavRecorder()
+  }, [])
   const toastifyFailure = () => {
     toast.error("Enable microphone access in your browser to record", {
       position: "top-center",
@@ -24,33 +32,66 @@ const VoiceRecord = (props) => {
       theme: "light",
     });
   };
+  const recorderControls = useAudioRecorder()
   const voiceState = useContext(voiceContext);
   const [record, setRecord] = useState({ audio: null, isRecording: false });
   const voiceClickHandler = async () => {
     await navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        setRecord({ audio: RecordState.START, isRecording: true });
+        setStatus("recording");
+        ref.current.start()
       })
       .catch((err) => {
         toastifyFailure();
       });
   };
-  const onStop =async(audio) => {
-    // var reader = new FileReader();
-    // reader.readAsDataURL(audio.blob);
-    // reader.onloadend = () => {
-    //   var base64data = reader.result;
-    //   console.log(base64data);
-    // }
-    console.log(audio);
-    // const abuffer = await audio.blob.arrayBuffer();
-    // const mybuffer = Buffer.from(abuffer, "binary");
-    // console.log(mybuffer)
-    // const base=mybuffer.toString("base64")
-    // const baseBuffer=Buffer.from(base,"base64")
-    voiceState.sendAudio(audio.blob);
+  // const {
+  //   startRecording,
+  //   stopRecording,
+  //   togglePauseResume,
+  //   recordingBlob,
+  //   isRecording,
+  //   isPaused,
+  //   recordingTime,
+  // } = useAudioRecorder();
+  // const onStop =async(audio) => {
+  //   // var reader = new FileReader();
+  //   // reader.readAsDataURL(audio.blob);
+  //   // reader.onloadend = () => {
+  //   //   var base64data = reader.result;
+  //   //   console.log(base64data);
+  //   // }
+  //   console.log(audio);
+  //   // const abuffer = await audio.blob.arrayBuffer();
+  //   // const mybuffer = Buffer.from(abuffer, "binary");
+  //   // console.log(mybuffer)
+  //   // const base=mybuffer.toString("base64")
+  //   // const baseBuffer=Buffer.from(base,"base64")
+  //   voiceState.sendAudio(audio.blob);
+  // };
+  const addAudioElement = async (blob) => {
+    // const url = URL.createObjectURL(blob);
+    // const audio = document.createElement("audio");
+    // audio.src = url;
+    // audio.controls = true;
+    // document.body.appendChild(audio);
+    // console.log("here")
+    // console.log(blob)
+    // voiceState.sendAudio(blob)
+    // const inputName = 'input.webm';
+    // const outputName = 'output.wav';
+
+    // ffmpeg.FS('writeFile', inputName, blob.arrayBuffer());
+
+    // await ffmpeg.run('-i', inputName, outputName);
+
+    // const outputData = ffmpeg.FS('readFile', outputName);
+    // const outputBlob = new Blob([outputData.buffer], { type: 'audio/wav' });
+
+    // console.log(outputBlob);
   };
+
   return (
     <>
       <h1 className="sm:text-4xl text-2xl  relative top-5 sm:top-0 font-bold  font-sans text-center">
@@ -81,20 +122,19 @@ const VoiceRecord = (props) => {
           </div>
         </div>
         <div
-          className={`${
-            !record.isRecording ? "sm:mt-[8rem]" : "sm:mt-[6rem]"
-          } transition-all duration-[300] ease-linear text-center`}
+          className={`${status === "" ? "sm:mt-[8rem]" : "sm:mt-[6rem]"
+            } transition-all duration-[300] ease-linear text-center`}
         >
           <p className="mt-5 font-bold sm:text-3xl text-xl">
-          How are you feeling about your workload today?
+            How are you feeling about your workload today?
           </p>
-          <AudioReactRecorder
+          {/* <AudioReactRecorder
             canvasWidth={0}
             canvasHeight={0}
             state={record.audio}
             onStop={onStop}
-          />
-          {!record.audio && (
+          /> */}
+          {status === "" && (
             <div
               onClick={voiceClickHandler}
               class="sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] bg-violet-500 hover:bg-violet-600 hover:scale-125 transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto"
@@ -106,7 +146,7 @@ const VoiceRecord = (props) => {
             </div>
           )}
 
-          {record.isRecording && (
+          {status === "recording" && (
             <div className="flex justify-end flex-col mt-10 recording">
               <p className="font-sans text-lg">Please speak for 30 seconds</p>
               <Player
@@ -123,8 +163,10 @@ const VoiceRecord = (props) => {
                   colorsTime={[7, 5, 2, 0]}
                   size={80}
                   strokeWidth={5}
-                  onComplete={() => {
-                    setRecord({ audio: RecordState.STOP, isRecording: true });
+                  onComplete={async () => {
+                    // setRecord({ audio: RecordState.STOP, isRecording: true });
+                    ref.current.stop()
+                    setStatus("stop")
                     setTimeout(() => {
                       props.move();
                     }, 300);
@@ -134,13 +176,8 @@ const VoiceRecord = (props) => {
                     return (
                       <div
                         onClick={() => {
-                          setRecord({
-                            audio: RecordState.STOP,
-                            isRecording: true,
-                          });
-                          setTimeout(() => {
-                            props.move();
-                          }, 300);
+                          ref.current.stop()
+                          setStatus("stop")
                         }}
                         class="w-[4.2rem] h-[4rem] mr-2 bg-violet-500 hover:bg-violet-600 transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
                       >
@@ -156,6 +193,17 @@ const VoiceRecord = (props) => {
               </div>
             </div>
           )}
+          {status === "stop" &&
+                  <button
+                    className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150"
+                    onClick={async () =>{
+                       voiceState.sendAudio(await ref.current.getBlob())
+                       props.move()
+                      }
+                    }>
+                    Get scores
+                  </button>
+                }
         </div>
       </div>
     </>

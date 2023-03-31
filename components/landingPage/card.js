@@ -132,7 +132,7 @@ const Card = () => {
       icon: faList,
     },
   ];
-
+  
  
   return (
     <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
