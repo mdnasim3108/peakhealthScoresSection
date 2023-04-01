@@ -169,7 +169,7 @@ const VoiceContextProvider = (props) => {
       let res6;
       let status = "IN_PROGRESS";
 
-      while (status === "IN_PROGRESS") {
+      while (status === "IN_PROGRESS" || status === "READY") {
         res6 = await Axios.get(
           `https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores/${jobid}`,
           {
@@ -177,6 +177,7 @@ const VoiceContextProvider = (props) => {
           }
         );
         status = res6.data.status;
+        console.log(status)
       }
       if (status === "DONE") {
         const inference = res6.data.result.inference[0];

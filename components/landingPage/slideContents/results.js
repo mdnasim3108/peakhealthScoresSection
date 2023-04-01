@@ -72,7 +72,7 @@ const results = (props) => {
       <div className="bg-gradient-to-r mt-20 rounded flex justify-end from-green-600 via-orange-500 to-red-500 scoreFill  sm:h-8 h-5 transition-all duration-500 ease-linear ">
         <div
           className="h-full bg-gray-200  overlay rounded-r"
-          style={{ width: `${100 - overallScore}%` }}
+          style={{ width: `40%` }}
         ></div>
       </div>
       <div className="flex justify-between">

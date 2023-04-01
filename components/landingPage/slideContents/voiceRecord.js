@@ -1,25 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
-// import AudioReactRecorder, { RecordState } from "audio-react-recorder";
-import { useState, useEffect } from "react";
-import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
+import AudioReactRecorder, { RecordState } from "audio-react-recorder";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { faSquare } from "@fortawesome/free-solid-svg-icons";
 import audioWave from "../../../public/AudioWave.json";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { Buffer } from "buffer";
 import { WavRecorder } from "webm-to-wav-converter";
 const VoiceRecord = (props) => {
-  const wavRecorder = new WavRecorder();
-  const [status, setStatus] = useState("")
-  const ref = useRef()
-  useEffect(() => {
-    ref.current = new WavRecorder()
-  }, [])
   const toastifyFailure = () => {
     toast.error("Enable microphone access in your browser to record", {
       position: "top-center",
@@ -32,9 +24,14 @@ const VoiceRecord = (props) => {
       theme: "light",
     });
   };
-  const recorderControls = useAudioRecorder()
   const voiceState = useContext(voiceContext);
-  const [record, setRecord] = useState({ audio: null, isRecording: false });
+  // const [record, setRecord] = useState({ audio: null, isRecording: false });
+
+  const [status, setStatus] = useState("")
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = new WavRecorder()
+  }, [])
   const voiceClickHandler = async () => {
     await navigator.mediaDevices
       .getUserMedia({ audio: true })
@@ -46,15 +43,6 @@ const VoiceRecord = (props) => {
         toastifyFailure();
       });
   };
-  // const {
-  //   startRecording,
-  //   stopRecording,
-  //   togglePauseResume,
-  //   recordingBlob,
-  //   isRecording,
-  //   isPaused,
-  //   recordingTime,
-  // } = useAudioRecorder();
   // const onStop =async(audio) => {
   //   // var reader = new FileReader();
   //   // reader.readAsDataURL(audio.blob);
@@ -70,28 +58,6 @@ const VoiceRecord = (props) => {
   //   // const baseBuffer=Buffer.from(base,"base64")
   //   voiceState.sendAudio(audio.blob);
   // };
-  const addAudioElement = async (blob) => {
-    // const url = URL.createObjectURL(blob);
-    // const audio = document.createElement("audio");
-    // audio.src = url;
-    // audio.controls = true;
-    // document.body.appendChild(audio);
-    // console.log("here")
-    // console.log(blob)
-    // voiceState.sendAudio(blob)
-    // const inputName = 'input.webm';
-    // const outputName = 'output.wav';
-
-    // ffmpeg.FS('writeFile', inputName, blob.arrayBuffer());
-
-    // await ffmpeg.run('-i', inputName, outputName);
-
-    // const outputData = ffmpeg.FS('readFile', outputName);
-    // const outputBlob = new Blob([outputData.buffer], { type: 'audio/wav' });
-
-    // console.log(outputBlob);
-  };
-
   return (
     <>
       <h1 className="sm:text-4xl text-2xl  relative top-5 sm:top-0 font-bold  font-sans text-center">
@@ -123,7 +89,7 @@ const VoiceRecord = (props) => {
         </div>
         <div
           className={`${status === "" ? "sm:mt-[8rem]" : "sm:mt-[6rem]"
-            } transition-all duration-[300] ease-linear text-center`}
+            } transition-all  duration-[300] lg:ml-[3rem] ease-linear text-center`}
         >
           <p className="mt-5 font-bold sm:text-3xl text-xl">
             How are you feeling about your workload today?
@@ -134,6 +100,7 @@ const VoiceRecord = (props) => {
             state={record.audio}
             onStop={onStop}
           /> */}
+
           {status === "" && (
             <div
               onClick={voiceClickHandler}
@@ -163,8 +130,7 @@ const VoiceRecord = (props) => {
                   colorsTime={[7, 5, 2, 0]}
                   size={80}
                   strokeWidth={5}
-                  onComplete={async () => {
-                    // setRecord({ audio: RecordState.STOP, isRecording: true });
+                  onComplete={() => {
                     ref.current.stop()
                     setStatus("stop")
                     setTimeout(() => {
@@ -178,8 +144,11 @@ const VoiceRecord = (props) => {
                         onClick={() => {
                           ref.current.stop()
                           setStatus("stop")
+                          // setTimeout(() => {
+                          //   props.move();
+                          // }, 300);
                         }}
-                        class="w-[4.2rem] h-[4rem] mr-2 bg-violet-500 hover:bg-violet-600 transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
+                        className="w-[4.2rem] h-[4rem] mr-2 bg-violet-500 hover:bg-violet-600 transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
                       >
                         <FontAwesomeIcon
                           icon={faSquare}
@@ -194,16 +163,19 @@ const VoiceRecord = (props) => {
             </div>
           )}
           {status === "stop" &&
-                  <button
-                    className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150"
-                    onClick={async () =>{
-                       voiceState.sendAudio(await ref.current.getBlob())
-                       props.move()
-                      }
-                    }>
-                    Get scores
-                  </button>
-                }
+            <button
+              className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150"
+              onClick={async () => {
+                const audio=await ref.current.getBlob()
+                const url=URL.createObjectURL(audio)
+                console.log(url)
+                voiceState.sendAudio(audio)
+                props.move()
+              }
+              }>
+              Get scores
+            </button>
+          }
         </div>
       </div>
     </>
