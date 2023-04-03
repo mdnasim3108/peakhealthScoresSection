@@ -15,6 +15,8 @@ import StressScore from "./slideContents/stressScore";
 import Recommendations from "./slideContents/recommondations";
 import ReviewBurnout from "./slideContents/reviewBurnout";
 import ContentContext from "./contextStrore/contentContext";
+import { faMagnifyingGlassChart } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
   const content=useContext(ContentContext)
   const nextPartHandler = () => {
@@ -77,7 +79,7 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Give your details",
-        icon: faMedal,
+        icon: faClipboardCheck,
       },
       {
         com: <VoiceRecord move={moveHandler} />,
@@ -85,7 +87,8 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Check your Stress score(30sec)",
-        icon: faCheck,
+        icon: "voice",
+        mate:true,
       },
       {
         com: <StressScore move={()=>console.log("finished")} />,
@@ -93,7 +96,7 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Review your stress score",
-        icon: faList,
+        icon: faMagnifyingGlassChart,
         notextend:true
       },
     ],

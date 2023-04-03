@@ -1,17 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { CircularProgress } from "@mui/material";
+import { RecordVoiceOver } from "@mui/icons-material";
 const progressPoint = (props) => {
   const classes = `${
     props.progress.working || props.progress.completed ? "text-[#6ed1f9]" : "text-gray-400"
   }`;
+  let Custom;
+  if(props.mate) Custom=`${props.icon}`
   return (
     <div className="flex flex-col lg:flex-row w-full relative top-4">
-      <div className="hidden lg:flex lg:flex-row flex-col w-max">  
-        <FontAwesomeIcon
+      <div className="hidden lg:flex lg:flex-row flex-col w-full justify-between">  
+        {props.icon==="voice" && props.progress.mate && <RecordVoiceOver className={`text-2xl mt-2  ${classes} transition-all duration-300 ease-linear`}
+ />}
+        
+        {!props.progress.mate && <FontAwesomeIcon
           icon={props.icon}
-          className={`text-xl mt-2 mr-4 ${classes} transition-all duration-300 ease-linear`}
-        />
+          className={`text-xl mt-2 ${classes} transition-all duration-300 ease-linear`}
+        />}
         <div>
           <p
             className={` font-[4rem] ${classes} transition-all duration-300 ease-linear w-[8rem] text-center`}

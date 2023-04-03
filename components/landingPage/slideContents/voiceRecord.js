@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
-import AudioReactRecorder, { RecordState } from "audio-react-recorder";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { faSquare } from "@fortawesome/free-solid-svg-icons";
 import audioWave from "../../../public/AudioWave.json";
@@ -9,7 +8,6 @@ import { useContext, useEffect, useState, useRef } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { Buffer } from "buffer";
 import { WavRecorder } from "webm-to-wav-converter";
 const VoiceRecord = (props) => {
   const toastifyFailure = () => {
@@ -25,12 +23,25 @@ const VoiceRecord = (props) => {
     });
   };
   const voiceState = useContext(voiceContext);
-  // const [record, setRecord] = useState({ audio: null, isRecording: false });
 
   const [status, setStatus] = useState("")
   const ref = useRef()
+  const buttonRef = useRef(null)
+    function handleClick() {
+    setTimeout(async()=>{
+      const audio = await ref.current.getBlob()
+      console.log(audio)
+      voiceState.sendAudio(audio)
+      props.move()
+    },100)
+  }
+
+  function simulateClick() {
+    buttonRef.current.click()
+  }
   useEffect(() => {
     ref.current = new WavRecorder()
+
   }, [])
   const voiceClickHandler = async () => {
     await navigator.mediaDevices
@@ -43,21 +54,6 @@ const VoiceRecord = (props) => {
         toastifyFailure();
       });
   };
-  // const onStop =async(audio) => {
-  //   // var reader = new FileReader();
-  //   // reader.readAsDataURL(audio.blob);
-  //   // reader.onloadend = () => {
-  //   //   var base64data = reader.result;
-  //   //   console.log(base64data);
-  //   // }
-  //   console.log(audio);
-  //   // const abuffer = await audio.blob.arrayBuffer();
-  //   // const mybuffer = Buffer.from(abuffer, "binary");
-  //   // console.log(mybuffer)
-  //   // const base=mybuffer.toString("base64")
-  //   // const baseBuffer=Buffer.from(base,"base64")
-  //   voiceState.sendAudio(audio.blob);
-  // };
   return (
     <>
       <h1 className="sm:text-4xl text-2xl  relative top-5 sm:top-0 font-bold  font-sans text-center">
@@ -94,12 +90,6 @@ const VoiceRecord = (props) => {
           <p className="mt-5 font-bold sm:text-3xl text-xl">
             How are you feeling about your workload today?
           </p>
-          {/* <AudioReactRecorder
-            canvasWidth={0}
-            canvasHeight={0}
-            state={record.audio}
-            onStop={onStop}
-          /> */}
 
           {status === "" && (
             <div
@@ -132,10 +122,7 @@ const VoiceRecord = (props) => {
                   strokeWidth={5}
                   onComplete={() => {
                     ref.current.stop()
-                    setStatus("stop")
-                    setTimeout(() => {
-                      props.move();
-                    }, 300);
+                    simulateClick()
                   }}
                 >
                   {({ remainingTime }) => {
@@ -143,10 +130,7 @@ const VoiceRecord = (props) => {
                       <div
                         onClick={() => {
                           ref.current.stop()
-                          setStatus("stop")
-                          // setTimeout(() => {
-                          //   props.move();
-                          // }, 300);
+                          simulateClick()
                         }}
                         className="w-[4.2rem] h-[4rem] mr-2 bg-violet-500 hover:bg-violet-600 transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
                       >
@@ -162,20 +146,14 @@ const VoiceRecord = (props) => {
               </div>
             </div>
           )}
-          {status === "stop" &&
-            <button
-              className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150"
-              onClick={async () => {
-                const audio=await ref.current.getBlob()
-                const url=URL.createObjectURL(audio)
-                console.log(url)
-                voiceState.sendAudio(audio)
-                props.move()
-              }
-              }>
-              Get scores
-            </button>
-          }
+
+          <button
+            id="btn"
+            className="border hidden border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150"
+            ref={buttonRef} onClick={handleClick}>
+            Get scores
+          </button>
+
         </div>
       </div>
     </>

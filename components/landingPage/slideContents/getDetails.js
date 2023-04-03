@@ -109,7 +109,7 @@ const GetDetails = (props) => {
               {
               voiceState.voiceFeatures.registering &&
               <CircularProgress
-              variant="indeterminate"
+              variant="indeterminate" 
               disableShrink
               sx={{
                 animationDuration: '550ms',
@@ -122,7 +122,7 @@ const GetDetails = (props) => {
               className="relative sm:left-[15%] left-[10%] top-[2px] "
               style={{color:"white"}}
             />}
-              {voiceState.voiceFeatures.registered && <Check className="text-sm relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
+              {voiceState.voiceFeatures.registered && <Check className="text-xl relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
             </button>
           </form>
         </div>

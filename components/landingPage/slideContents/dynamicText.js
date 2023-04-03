@@ -1,18 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 const dynamicText = (props) => {
-  // const [status, setStatus] = useState(0);
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setStatus((prev) => {
-  //       if (prev === props.texts.length - 1) return 0;
-  //       return prev + 1;
-  //     });
-  //   }, 10000);
-  // });
+  const [status, setStatus] = useState(0);
+  const shuffle = useCallback(() => {
+      setStatus((prev) => {
+        if (prev === props.texts.length - 1) return 0;
+        return prev + 1;
+      })
+  }, [])
+
+  useEffect(() => {
+    // setInterval(() => {
+    //   setStatus((prev) => {
+    //     if (prev === props.texts.length - 1) return 0;
+    //     return prev + 1;
+    //   });
+    // }, 10000);
+    const id=setInterval(shuffle,10000)
+    return ()=>clearInterval(id)
+  },[]);
+
 
   return (
     <h1 className="sm:text-xl text-lg font-sans status">
-   {props.texts[0]}
+      {props.texts[status]}
     </h1>
   );
 };
