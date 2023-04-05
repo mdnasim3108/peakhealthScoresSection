@@ -48,9 +48,10 @@ const VoiceContextProvider = (props) => {
   const generateToken = async (user) => {
     try {
       dispatchVoiceFeatures({type:"registering"})
-//       const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
-//       const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
-      const userData = { ...user, ip: "check" };
+      const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
+      const ipdata = await Axios.post("/api/ip");
+      const userData = { ...user, ip: ipdata.data };
+      console.log(userData)
       const uidData = await Axios.post("/api/createUser", { details: userData });
       userId = uidData.data;
 

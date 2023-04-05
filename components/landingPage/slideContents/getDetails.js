@@ -4,6 +4,7 @@ import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { CircularProgress, circularProgressClasses } from "@mui/material";
 import { Check } from "@mui/icons-material";
+import Axios from "axios";    
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
@@ -25,12 +26,14 @@ const GetDetails = (props) => {
   },[voiceState.voiceFeatures.registered])
   const getSubmitHandler = async (e) => {
     e.preventDefault();
+    if(yearIsValid){
     voiceState.registerUser({
       username: details.username,
       gender: details.gender,
       year: details.year,
       email: details.email, 
     });
+  }
   };
   return (
     <>

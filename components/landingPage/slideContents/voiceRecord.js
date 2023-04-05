@@ -29,10 +29,10 @@ const VoiceRecord = (props) => {
   const buttonRef = useRef(null)
     function handleClick() {
     setTimeout(async()=>{
+      props.move()
       const audio = await ref.current.getBlob()
       console.log(audio)
       voiceState.sendAudio(audio)
-      props.move()
     },100)
   }
 
@@ -61,7 +61,7 @@ const VoiceRecord = (props) => {
       </h1>
       <div className="voiceRecord relative flex justify-between md:flex-row flex-col-reverse sm:mt-0 mt-8">
         <ToastContainer />
-        <div className="px-10 py-10 mt-20 w-full   border-2 rounded shadow-lg">
+        <div className="px-10 py-10 mt-20 w-full h-max   border-2 rounded shadow-lg">
           <div className="">
             <h1 className="text-lg font-bold tracking-wide text-center">INSTRUCTIONS</h1>
             <ul className="text-left list-disc mt-8 ">

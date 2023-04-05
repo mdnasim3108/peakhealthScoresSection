@@ -119,7 +119,7 @@ const results = (props) => {
       </div>
       <div className="relative bottom-20">
         <button
-          className="rounded border-violet-500 bg-violet-500 hover:bg-violet-600 mt-3 sm:p-2 p-1 text-white sm:text-lg text-sm font-sans"
+          className="rounded border-violet-500 bg-violet-500 hover:bg-violet-600 mt-3 p-2 text-white sm:text-lg text-sm font-sans"
           onClick={props.move}
         >
           Check my personalized recommendations
