@@ -237,8 +237,8 @@ const VoiceContextProvider = (props) => {
     block:()=>dispatchVoiceFeatures({
       type: "error",
       content: 2,
-      head: "Unsupported Browser",
-      message: "Currently we are not supporting brave browser,Please try with any other browser..",
+      head: "This browser is not supported.",
+      message: "To use AI powered Stress Assistant,we recommend using the latest version of Chrome,Firefox,Safari or Microsoft Edge.",
       btnLabel: "record again",
       hideButton:true
     })
