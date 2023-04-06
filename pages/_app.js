@@ -3,11 +3,11 @@ import Head from 'next/head'
 import Script from 'next/script'
 import AnswerContextProvider from '../components/landingPage/contextStrore/answerContextProvider';
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
-import { useContext } from 'react'
+
 // import { GoogleAnalytics } from 'nextjs-google-analytics'
 const App = ({ Component, pageProps }) => {
 
-
+ 
   return (
     <>
 

@@ -15,6 +15,7 @@ const GetDetails = (props) => {
     year: "",
   });
   const changeHandler = (e) => {
+    navigator.u
     setDetails((prev) => {
       return { ...prev, [e.target.id]: e.target.value };
     });
@@ -94,14 +95,15 @@ const GetDetails = (props) => {
               type="number"
               onChange={(event) => {
                 changeHandler(event);
-                setYearIsValid(event.target.value.length === 4);
+                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear()-(+event.target.value)>16);
               }}
               placeholder="Year of birth"
               required={true}
             />
+          
             {!yearIsValid && (
               <p className="text-sm text-red-300 relative bottom-5 font-sans text-left">
-                Enter a four digit Number
+                Enter a valid year and you should be atleast 16 years old.
               </p>
             )}
             <button

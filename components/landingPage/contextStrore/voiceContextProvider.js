@@ -233,7 +233,15 @@ const VoiceContextProvider = (props) => {
     voiceFeatures: voiceFeatures,
     guessScore: (value) =>
       dispatchVoiceFeatures({ type: "guessScore", score: value }),
-    reset: () => dispatchVoiceFeatures({ type: "reset" })
+    reset: () => dispatchVoiceFeatures({ type: "reset" }),
+    block:()=>dispatchVoiceFeatures({
+      type: "error",
+      content: 2,
+      head: "Unsupported Browser",
+      message: "Currently we are not supporting brave browser,Please try with any other browser..",
+      btnLabel: "record again",
+      hideButton:true
+    })
   };
   return (
     <VoiceContext.Provider value={voiceStuff}>
