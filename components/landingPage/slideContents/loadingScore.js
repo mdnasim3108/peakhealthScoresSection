@@ -27,8 +27,8 @@ const loadingScore = () => {
   //     },
   //   })(Slider);
   return (
-    <div className="bg-gray-200 opacity-50  h-full lg:pt-10 text-center">
-      <h1 className="text-xl">Your Stress Assistant AI is...</h1>
+    <div className="bg-gray-200 opacity-50 lg:h-full h-[100vh] sm:pt-10 py-[20%] text-center">
+      <h1 className="sm:text-xl text-lg ">Your Stress Assistant AI is...</h1>
       <DynamicText
         texts={[
           " analyzing your voice",
@@ -36,18 +36,18 @@ const loadingScore = () => {
           "generating your stress report",
         ]}
       />
-      <h1 className="text-2xl font-sans font-bold mt-[5rem] mb-5">
+      <h1 className="sm:text-2xl text-lg font-sans font-bold mt-[5rem] mb-5">
         Can you guess, what's your stress level!!!
       </h1>
       <p className="relative bottom-5">(Slide the marker)</p>
-      <div className="w-[70%] mx-auto">
+      <div className="sm:w-[70%] w-[90%] mx-auto">
         <ThemeProvider theme={CustomSlider}>
             <Slider
-            className="horizontal-slider h-[1.3rem]"
+            className="horizontal-slider"
             onChange={(e) => voiceState.guessScore(e.target.value)}
             />
         </ThemeProvider>
-        <div className="flex justify-between relative bottom-3">
+        <div className="flex justify-between relative bottom-3 text-[0.7rem] sm:text-lg">
           <p>Low Stress</p>
           <p>Medium Stress</p>
           <p>high Stress</p>

@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useReducer } from "react";
 import { Buffer } from "buffer";
 import generateTranscript from "./generateTranscript";
+import base from "./base";
 const VoiceContextProvider = (props) => {
 
   const voiceStateHandler = (state, action) => {
@@ -48,8 +49,9 @@ const VoiceContextProvider = (props) => {
     try {
       dispatchVoiceFeatures({type:"registering"})
       const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
-      const ipdata = await Axios.get(`https://api.ipdata.co?api-key=${apiKey}`);
-      const userData = { ...user, ip: ipdata.data.ip };
+      const ipdata = await Axios.post("/api/ip");
+      const userData = { ...user, ip: ipdata.data };
+      console.log(userData)
       const uidData = await Axios.post("/api/createUser", { details: userData });
       userId = uidData.data;
 
@@ -132,11 +134,11 @@ const VoiceContextProvider = (props) => {
     console.log(blobObj);
     console.log(voiceFeatures.signedURL);
     try {
-      const abuffer = await blobObj.blob.arrayBuffer();
+      // const abuffer = await blobObj.blob.arrayBuffer();
+      // console.log(base)
+      // const mybuffer = Buffer.from(base, "base64");
 
-      const mybuffer = Buffer.from(abuffer, "binary");
-
-      const res4 = await Axios.put(voiceFeatures.signedURL, mybuffer, {
+      const res4 = await Axios.put(voiceFeatures.signedURL, blobObj, {
         headers: { "Content-Type": "audio/wav" },
       });
 
@@ -168,7 +170,7 @@ const VoiceContextProvider = (props) => {
       let res6;
       let status = "IN_PROGRESS";
 
-      while (status === "IN_PROGRESS") {
+      while (status === "IN_PROGRESS" || status === "READY") {
         res6 = await Axios.get(
           `https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores/${jobid}`,
           {
@@ -176,6 +178,7 @@ const VoiceContextProvider = (props) => {
           }
         );
         status = res6.data.status;
+        console.log(status)
       }
       if (status === "DONE") {
         const inference = res6.data.result.inference[0];
@@ -201,7 +204,7 @@ const VoiceContextProvider = (props) => {
           type: "results",
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
-        generateTranscript(blobObj.blob, voiceFeatures.objId)
+        generateTranscript(blobObj, voiceFeatures.objId)
       }
       if (status === "FAIL") {
         dispatchVoiceFeatures({
@@ -230,7 +233,15 @@ const VoiceContextProvider = (props) => {
     voiceFeatures: voiceFeatures,
     guessScore: (value) =>
       dispatchVoiceFeatures({ type: "guessScore", score: value }),
-    reset: () => dispatchVoiceFeatures({ type: "reset" })
+    reset: () => dispatchVoiceFeatures({ type: "reset" }),
+    block:()=>dispatchVoiceFeatures({
+      type: "error",
+      content: 2,
+      head: "This browser is not supported.",
+      message: "To use AI powered Stress Assistant,we recommend using the latest version of Chrome,Firefox,Safari or Microsoft Edge.",
+      btnLabel: "record again",
+      hideButton:true
+    })
   };
   return (
     <VoiceContext.Provider value={voiceStuff}>

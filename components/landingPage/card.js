@@ -15,6 +15,8 @@ import StressScore from "./slideContents/stressScore";
 import Recommendations from "./slideContents/recommondations";
 import ReviewBurnout from "./slideContents/reviewBurnout";
 import ContentContext from "./contextStrore/contentContext";
+import { faMagnifyingGlassChart } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 const Card = () => {
   const content=useContext(ContentContext)
   const nextPartHandler = () => {
@@ -48,7 +50,7 @@ const Card = () => {
               return {...el,working:true,animate:true,completed:false}
            }
            if(id<num){
-             return {...el,working:true,completed:true,animate:false}
+             return {...el,working:false,completed:true,animate:false}
            }
            return {...el,animate:false,working:false,completed:false}
       })
@@ -77,7 +79,7 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Give your details",
-        icon: faMedal,
+        icon: faClipboardCheck,
       },
       {
         com: <VoiceRecord move={moveHandler} />,
@@ -85,7 +87,8 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Check your Stress score(30sec)",
-        icon: faCheck,
+        icon: "voice",
+        mate:true,
       },
       {
         com: <StressScore move={()=>console.log("finished")} />,
@@ -93,7 +96,7 @@ const Card = () => {
         completed: false,
         animate: false,
         label: "Review your stress score",
-        icon: faList,
+        icon: faMagnifyingGlassChart,
         notextend:true
       },
     ],
@@ -132,20 +135,23 @@ const Card = () => {
       icon: faList,
     },
   ];
-
+  
  
   return (
-    <div className="w-[85%] flex items-center lg:h-[100vh] h-max  max-w-[90%] bg-white  shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
+    <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
       <div className="flex lg:flex-row flex-col py-10 w-full"> 
-        <div className="lg:flex-[1] flex lg:flex-col w-auto mx-4" id="progress">
+    
+      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  z-10 bg-white pl-[15%]  h-[3rem] w-full lg:p-0 lg:relative  ">          
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}
         </div>
-        <div className=" w-full   px-5 rounded  " id="progressContents">
+
+        
+        <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">  
           {progressBarState.contentArray[content.contentNumber].com}
         </div>
       </div>

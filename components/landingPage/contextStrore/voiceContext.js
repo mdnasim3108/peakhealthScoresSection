@@ -1,6 +1,7 @@
 import React from "react";
 const voiceContext=React.createContext({
     userData:{yearOfBirth:"",gender:""},
-    sendAudio:()=>{}
+    sendAudio:()=>{},
+    block:()=>{}
 })
 export default voiceContext;

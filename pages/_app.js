@@ -8,7 +8,7 @@ import VoiceContextProvider from '../components/landingPage/contextStrore/voiceC
 
 const App = ({ Component, pageProps }) => {
 
-
+ 
   return (
     <>
 

@@ -1,4 +1,5 @@
 import Axios from "axios";
+import base from "./base";
 const generateTranscript = async (blob,id) => {
     let uid, filePath, token, signedURL;
     const res1 = await Axios.post(
@@ -57,9 +58,9 @@ const generateTranscript = async (blob,id) => {
     filePath = res3.data.filePath;
     console.log(filePath);
     console.log(signedURL);
-    const abuffer = await blob.arrayBuffer();
-    const mybuffer = Buffer.from(abuffer, "binary");
-    const res4 = await Axios.put(signedURL, mybuffer, {
+    // const abuffer = await blob.arrayBuffer();
+    // const mybuffer = Buffer.from(base, "base64");
+    const res4 = await Axios.put(signedURL, blob, {
         headers: { "Content-Type": "audio/wave" },
     });
 

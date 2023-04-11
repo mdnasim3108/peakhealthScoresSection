@@ -4,6 +4,7 @@ import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { CircularProgress, circularProgressClasses } from "@mui/material";
 import { Check } from "@mui/icons-material";
+import Axios from "axios";    
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
@@ -14,6 +15,7 @@ const GetDetails = (props) => {
     year: "",
   });
   const changeHandler = (e) => {
+    navigator.u
     setDetails((prev) => {
       return { ...prev, [e.target.id]: e.target.value };
     });
@@ -25,29 +27,31 @@ const GetDetails = (props) => {
   },[voiceState.voiceFeatures.registered])
   const getSubmitHandler = async (e) => {
     e.preventDefault();
+    if(yearIsValid){
     voiceState.registerUser({
       username: details.username,
       gender: details.gender,
       year: details.year,
       email: details.email, 
     });
+  }
   };
   return (
     <>
-      <h1 className="text-3xl text-center font-bold font-sans relative top-5 w-max">
+      <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
         Your details for AI to measure your stress level accurately
       </h1>
-      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around">
+      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around w-full">   
         <div className="flex flex-col justify-center items-center ">
           <div className="ml-10 mt-5 md:m-0">
             <Player
               autoplay
               loop
               src={processing}
-              className="w-[20rem] h-[20rem] relative bottom-5 left-5"
+              className="sm:w-[20rem] sm:h-[20rem] w-[15rem] h-[15rem] relative bottom-5 sm:left-5"
             ></Player>
           </div>
-          <p className="text-sm w-[20rem] text-gray-500 text-center">
+          <p className="text-sm sm:w-[20rem] text-gray-500 text-center">
             Your information will be kept confidential and used only to measure
             your stress level and personalize your stress relief
             recommendations. Let's begin!
@@ -91,14 +95,15 @@ const GetDetails = (props) => {
               type="number"
               onChange={(event) => {
                 changeHandler(event);
-                setYearIsValid(event.target.value.length === 4);
+                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear()-(+event.target.value)>16);
               }}
               placeholder="Year of birth"
               required={true}
             />
+          
             {!yearIsValid && (
               <p className="text-sm text-red-300 relative bottom-5 font-sans text-left">
-                Enter a four digit Number
+                Enter a valid year and you should be atleast 16 years old.
               </p>
             )}
             <button
@@ -109,7 +114,7 @@ const GetDetails = (props) => {
               {
               voiceState.voiceFeatures.registering &&
               <CircularProgress
-              variant="indeterminate"
+              variant="indeterminate" 
               disableShrink
               sx={{
                 animationDuration: '550ms',
@@ -119,10 +124,10 @@ const GetDetails = (props) => {
               }}
               size={20}
               thickness={4}
-              className="relative left-[15%] top-[2px] "
+              className="relative sm:left-[15%] left-[10%] top-[2px] "
               style={{color:"white"}}
             />}
-              {voiceState.voiceFeatures.registered && <Check className="text-sm relative bottom-[2px] left-[15%]"/>}
+              {voiceState.voiceFeatures.registered && <Check className="text-xl relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
             </button>
           </form>
         </div>
