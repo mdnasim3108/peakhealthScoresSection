@@ -1,18 +1,17 @@
 import '@/styles/globals.css'
-import Head from 'next/head'
+
 
 import Script from 'next/script'
 import AnswerContextProvider from '../components/landingPage/contextStrore/answerContextProvider';
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
-import { useContext } from 'react'
-// import { GoogleAnalytics } from 'nextjs-google-analytics'
+
+
 const App = ({ Component, pageProps }) => {
-// googleAnalytics_id = G-64VSBXJZV4
+
 
   return (
     <>
 
-{/* <!-- Hotjar Tracking Code for https://check.peakhealth.tech --> */}
 <Script>
   {
    `    (function(h,o,t,j,a,r){
@@ -24,10 +23,8 @@ const App = ({ Component, pageProps }) => {
     a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
 </Script>
-  
    
-   
-      <Script
+    <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
         strategy="afterInteractive"
       />
