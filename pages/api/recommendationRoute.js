@@ -9,23 +9,33 @@ import axios from "axios";
 export default async function createUser(req, res) {
     
     await connectMongo();
-    const key = "AIzaSyBbJ1C3DAdIu3mfUOoXdw2TGnnB92qP5r8"
-    const part = "snippet,statistics"
     
-    const youtubeUrl = "https://www.youtube.com/watch?v=t1rRo6cgM_E"
+    const key = "AIzaSyBbJ1C3DAdIu3mfUOoXdw2TGnnB92qP5r8"
+    const part = "snippet,statistics,contentDetails"
+    
+    const youtubeUrl = "https://www.youtube.com/watch?v=aUBawr1hUwo"
     const youtubeId = youtubeUrl.split("=")
+    const speaker = "Male"
+    const speechCategory = "Author"
+    const ActionType = "Mindfulness"
 
     const responseData = await  axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=${part}&id=${youtubeId}&key=${key}`)
     
+    const channelId =  responseData.data.items[0].snippet.channelId
+    const channelData = await axios.get (`https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${key}`)
+    const channelLogo =channelData.data.items[0].snippet.thumbnails.default.url
    
     const title =  responseData.data.items[0].snippet.title
-    const speaker = "Female"
-    const speechCategory = "Meditation Teacher"
-    const ActionType = "Visualization"
-  
-    const duration = "10:57"
-    const channelTitle = responseData.data.items[0].snippet.channelTitle
+    const duration = responseData.data.items[0].contentDetails.duration
 
+    let array=duration.match(/(\d+)(?=[MHS])/ig)||[];   
+    var videoDuration=array.map(function(item){
+        if(item.length<2) return '0'+item;
+        return item;
+    }).join(':');
+
+    const channelTitle = responseData.data.items[0].snippet.channelTitle
+    const publishedAt = responseData.data.items[0].snippet.publishedAt.split("T")[0]
     const thumbnailUrl = responseData.data.items[0].snippet.thumbnails.default.url
     const categoryId = responseData.data.items[0].snippet.categoryId
     const tag = responseData.data.items[0].snippet.tags
@@ -34,32 +44,31 @@ export default async function createUser(req, res) {
     const description = responseData.data.items[0].snippet.description
     
     
-    // console.log(responseData.data.items[0].snippet)
+    
     const recommendationData = new recommendationModel ({
         youtubeURL:youtubeUrl,
         channelTitle:channelTitle,
+        channelLogo:channelLogo,
         videoTitle:title,
         speakerGender:speaker,
         speakerCategory:speechCategory,
         actionType:ActionType,
-        videoDuration:duration,
+        videoDuration:videoDuration,
+        publishedAt:publishedAt,
         thumbnailURL:thumbnailUrl,
         categoryID:categoryId,
         tags:tag,
         views:views,
         likes:likes,
         videoDescription:description,
-        author:"",
-        authorLogo:""
     })
 
-    // res.json(tags)
     try {
         const result = await recommendationData.save();
-        console.log(result)
+       
         res.json(recommendationData._id.valueOf(),result)
     } catch (err) {
         res.send(err.message)
     }
-    // res.send("Happy")
+   
 }
