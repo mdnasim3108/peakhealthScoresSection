@@ -91,12 +91,21 @@ const Card = () => {
         mate:true,
       },
       {
-        com: <StressScore move={()=>console.log("finished")} />,
+        com: <StressScore move={moveHandler} />,
         working: false,
         completed: false,
         animate: false,
         label: "Review your stress score",
         icon: faMagnifyingGlassChart,
+      },
+      {
+        com: <Recommendations move={()=>console.log("finished")} />,
+        working: false,
+        completed: false,
+        animate: false,
+        label: "Your Stress Relief Solutions", 
+        icon: "recommend",
+        mate:true,
         notextend:true
       },
     ],
@@ -138,21 +147,21 @@ const Card = () => {
   
  
   return (
-    <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:px-[6rem] lg:pl-[2rem]">
+    <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[2rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
       <div className="flex lg:flex-row flex-col py-10 w-full"> 
     
-      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  z-10 bg-white pl-[15%]  h-[3rem] w-full lg:p-0 lg:relative  ">          
+      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}
         </div>
 
         
-        <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">  
-          {progressBarState.contentArray[content.contentNumber].com}
+        <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">   
+          {progressBarState.contentArray[4].com}
         </div>
       </div>
     </div>
