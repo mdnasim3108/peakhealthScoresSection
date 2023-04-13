@@ -161,7 +161,7 @@ const Card = () => {
 
         
         <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">   
-          {progressBarState.contentArray[4].com}
+          {progressBarState.contentArray[content.contentNumber].com}
         </div>
       </div>
     </div>

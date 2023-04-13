@@ -13,7 +13,6 @@ var recommendationSchema = mongoose.Schema
         speakerCategory:{ type: String },
         actionType:{ type: String },
         videoDuration:{ type: String },
-       
         thumbnailURL : { type: String },
         categoryID :{ type: String },
         tags :{type:Array},
@@ -21,7 +20,7 @@ var recommendationSchema = mongoose.Schema
         likes:{ type: String },
         videoDescription :{ type: String },
         author : {type:String},
-        authorLogo : {type:String}
+        channelLogo : {type:String}
     },
     {timestamps:true}
 )
