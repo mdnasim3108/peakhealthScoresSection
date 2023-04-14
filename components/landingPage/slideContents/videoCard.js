@@ -12,9 +12,7 @@ const videoCard = (props) => {
       onMouseLeave={() => setCardState((prev) => {
         return { ...prev, card1: false }
       })}
-      onClick={async () => {
-       console.log("samp")
-      }}
+      onClick={()=>props.onClick(props.id)}
     >
       <Image
         src={props.thumbnail}

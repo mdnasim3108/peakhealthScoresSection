@@ -147,11 +147,11 @@ const Card = () => {
   
  
   return (
-    <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[2rem]">
+    <div className=" flex items-center  lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
-      <div className="flex lg:flex-row flex-col py-10 w-full"> 
+      <div className="flex lg:flex-row flex-col items-center justify-center py-10 w-full"> 
     
       <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
           {progressBarState.contentArray.map((el) => {

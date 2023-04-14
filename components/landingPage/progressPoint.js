@@ -29,22 +29,6 @@ const progressPoint = (props) => {
       </div>
 
       <div className="flex flex-row lg:flex-col lg:w-[3rem]  w-full items-center">
-        {/* <CircularProgress variant="determinate"  value={100} size={20} className=" text-[#6ed1f9]" /> */}
-
-        {/* <div
-          className={` w-[15px] h-[15px] md:w-[20px] md:h-[20px] ${
-            props.progress.working ? "bg-[#6ed1f9]" : "bg-gray-200"
-          } rounded-full flex items-center  justify-center transition-all duration-300 ease-linear`}
-        >
-          {!props.progress.completed?<div
-            className={` flex items-center justify-center md:w-[15px] md:h-[15px] relative top-[0.1px] md:left-[0.3px] ${
-              props.progress.working  ? "bg-white" : "bg-gray-200"
-            } 
-            ${props.progress.animate && "pulse"}
-             rounded-full transition-all duration-600 ease-linear`}
-          >
-          </div>:<FontAwesomeIcon className="text-[0.7rem] text-white" icon={faCheck}/>}
-        </div> */}
 
         {props.progress.working && <div className="rounded-full pulse shrink-0  lg:w-[20px] lg:h-[20px] w-[18px] h-[18px]  border-[3px] border-blue-400" />}
 
@@ -58,7 +42,7 @@ const progressPoint = (props) => {
 
 
 
-        {!props.progress.notextend && <div class="lg:h-[6.5rem] lg:w-[0.15rem] h-[0.18rem] w-full bg-gray-200 border-0 rounded">
+        {!props.progress.notextend && <div class="lg:h-[7rem] lg:w-[0.15rem] h-[0.18rem] w-full bg-gray-200 border-0 rounded">
           <div
             className={`w-full   transition-all duration-[600ms] ease-linear bg-[#6ed1f9] ${props.progress.completed ? "lg:w-full h-full" : "lg:h-[0rem] w-[0rem]"
               }`}

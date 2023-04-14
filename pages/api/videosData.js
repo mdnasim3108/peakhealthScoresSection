@@ -16,7 +16,6 @@ export default async function guessScore(req, res) {
         ]}
     })
     const extract=data.map((el)=>{
-    
         return {
                 authImg: el.channelLogo,
                 description: el.videoTitle,
@@ -25,7 +24,8 @@ export default async function guessScore(req, res) {
                 color: "bg-blue-500",
                 type: el.actionType,
                 duration: el.videoDuration,
-                thumbnail:el.thumbnailURL
+                thumbnail:el.thumbnailURL,
+                id:el.youtubeURL.split("=")[1]
         }
     })
     res.json(extract)
