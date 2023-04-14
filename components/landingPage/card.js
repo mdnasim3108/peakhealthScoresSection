@@ -151,9 +151,9 @@ const Card = () => {
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
-      <div className="flex lg:flex-row flex-col items-center justify-center py-10 w-full"> 
+      <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full"> 
     
-      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
+      <div className="lg:flex-[1] flex lg:flex-col py-5   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}
