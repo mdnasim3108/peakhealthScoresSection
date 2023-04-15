@@ -42,9 +42,6 @@ export default async function createUser(req, res) {
     const views = responseData.data.items[0].statistics.viewCount
     const likes = responseData.data.items[0].statistics.likeCount
     const description = responseData.data.items[0].snippet.description
-    
-    
-    
     const recommendationData = new recommendationModel ({
         youtubeURL:youtubeUrl,
         channelTitle:channelTitle,
@@ -64,9 +61,9 @@ export default async function createUser(req, res) {
     })
 
     try {
-        const result = await recommendationData.save();
+        // const result = await recommendationData.save();
        
-        res.json(recommendationData._id.valueOf(),result)
+        res.json(recommendationData._id.valueOf())
     } catch (err) {
         res.send(err.message)
     }
