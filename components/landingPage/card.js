@@ -147,13 +147,13 @@ const Card = () => {
   
  
   return (
-    <div className=" flex items-center lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[2rem]">
+    <div className=" flex items-center  lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}
-      <div className="flex lg:flex-row flex-col py-10 w-full"> 
+      <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full"> 
     
-      <div className="lg:flex-[1] flex lg:flex-col   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
+      <div className="lg:flex-[1] flex lg:flex-col py-5   fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative ">          
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />;
           })}
@@ -161,7 +161,7 @@ const Card = () => {
 
         
         <div className=" w-full   px-5 rounded lg:m-0 mt-5 " id="progressContents">   
-          {progressBarState.contentArray[4].com}
+          {progressBarState.contentArray[content.contentNumber].com}
         </div>
       </div>
     </div>

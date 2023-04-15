@@ -9,18 +9,18 @@ const VoiceContextProvider = (props) => {
   const voiceStateHandler = (state, action) => {
     switch (action.type) {
       case "registering":
-         return {...state,registering:true}
+        return { ...state, registering: true }
       case "registerUser":
         return {
           loading: state.loading,
           ...action.data,
-          registering:false,
-          registered:true
+          registering: false,
+          registered: true
         }
       case "guessScore":
         return { ...state, guessScore: action.score };
       case "error":
-        return { ...state, loading: false, error: true, errorData:{...action},registering:false,registered:false }
+        return { ...state, loading: false, error: true, errorData: { ...action }, registering: false, registered: false }
       case "reset":
         return { ...state, loading: true, error: false }
       case "results":
@@ -32,6 +32,8 @@ const VoiceContextProvider = (props) => {
           live: action.scores.live,
           energy: action.scores.energy,
         };
+        case "videoData":
+          return {...state,videoData:action.videoData,videos:true}
       default:
         return { loading: true };
     }
@@ -40,14 +42,14 @@ const VoiceContextProvider = (props) => {
   const [voiceFeatures, dispatchVoiceFeatures] = useReducer(voiceStateHandler, {
     loading: true,
     error: false,
-    registered:false,
-    registerLoading:false,
+    registered: false,
+    registerLoading: false,
   });
 
   let uid, filePath, token, signedURL, userId;
   const generateToken = async (user) => {
     try {
-      dispatchVoiceFeatures({type:"registering"})
+      dispatchVoiceFeatures({ type: "registering" })
       const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
       const ipdata = await Axios.post("/api/ip");
       const userData = { ...user, ip: ipdata.data };
@@ -205,6 +207,9 @@ const VoiceContextProvider = (props) => {
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
         generateTranscript(blobObj, voiceFeatures.objId)
+        const videoRes=await Axios.post("/api/videosData");
+        console.log(videoRes.data)
+        dispatchVoiceFeatures({type:"videoData",videoData:videoRes.data})
       }
       if (status === "FAIL") {
         dispatchVoiceFeatures({
@@ -234,13 +239,13 @@ const VoiceContextProvider = (props) => {
     guessScore: (value) =>
       dispatchVoiceFeatures({ type: "guessScore", score: value }),
     reset: () => dispatchVoiceFeatures({ type: "reset" }),
-    block:()=>dispatchVoiceFeatures({
+    block: () => dispatchVoiceFeatures({
       type: "error",
       content: 2,
       head: "This browser is not supported.",
       message: "To use AI powered Stress Assistant,we recommend using the latest version of Chrome,Firefox,Safari or Microsoft Edge.",
       btnLabel: "record again",
-      hideButton:true
+      hideButton: true
     })
   };
   return (

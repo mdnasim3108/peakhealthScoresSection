@@ -21,6 +21,8 @@ var recommendationSchema = mongoose.Schema
         views :{ type: String },
         likes:{ type: String },
         videoDescription :{ type: String },
+        author : {type:String},
+        channelLogo : {type:String}
         
         
     },
