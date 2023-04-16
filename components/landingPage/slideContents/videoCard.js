@@ -5,7 +5,7 @@ const videoCard = (props) => {
   const [cardState, setCardState] = useState({})
   return (
     <div
-      className={`rounded flex border shadow-lg relative px-5 py-4  ${props.top ? props.top : ""} hover:bg-violet-500 cursor-pointer w-full hover:text-white hover:scale-[1.02] transition-all duration-200 ease-linear`}
+      className={`rounded flex border shadow-lg relative px-5 py-4  ${props.top ? props.top : ""} hover:bg-violet-300 cursor-pointer w-full hover:text-white hover:scale-[1.02] transition-all duration-200 ease-linear`}
       onMouseEnter={() => setCardState((prev) => {
         return { ...prev, card1: true }
       })}
