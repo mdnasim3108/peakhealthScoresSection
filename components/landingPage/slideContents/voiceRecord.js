@@ -93,10 +93,12 @@ const VoiceRecord = (props) => {
 
           {status === "" && (
             <div
+              id="microphone"
               onClick={voiceClickHandler}
               class="sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] bg-violet-500 hover:bg-violet-600 hover:scale-125 transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto"
             >
               <FontAwesomeIcon
+               
                 icon={faMicrophone}
                 className="text-4xl text-white"
               />
