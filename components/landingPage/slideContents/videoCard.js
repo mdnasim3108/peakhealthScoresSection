@@ -18,7 +18,7 @@ const videoCard = (props) => {
         src={props.thumbnail}
         width={100}
         height={100}
-        className=" sm:w-[22%] mr-[3%] h-[8rem]  inline rounded-lg object-cover"
+        className=" sm:w-[22%] mr-[3%] h-[7rem]  inline object-cover rounded-lg"
         alt="getStart"
       />
       <div className=' w-[25%]   text-left pl-3'>
@@ -35,15 +35,15 @@ const videoCard = (props) => {
       </div>
 
       <div className='w-[20%]   text-center'>
-        <h1 className='font-bold text-lg'>{props.category}</h1>
+        <h1 className='font-bold text-[1.23rem]'>{props.category}</h1>
       </div>
 
-      <div className={` w-[20%] rounded-xl h-max  ${props.color} text-center text-white px-2 `}>
-        <h1 className='font-bold text-lg  text-center'>{props.type}</h1>
+      <div className={` w-[20%] rounded-xl h-max  ${props.color} text-center text-white`}>
+        <h1 className='font-bold  text-xl text-center'>{props.type}</h1>
       </div>
 
       <div className='w-[10%]  text-center'>
-        <h1 className='font-bold text-sm'>{props.duration}</h1>
+        <h1 className='font-bold text-xl'>{props.duration}</h1>
       </div>
 
     </div>

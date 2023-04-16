@@ -1,5 +1,6 @@
 import connectMongo from "../../utils/connectMongo";
 import recommendations from "../../models/recommendationmodel";
+import user from "../../models/user";
 import mongoose from "mongoose";
 /**
  *
@@ -15,6 +16,7 @@ export default async function guessScore(req, res) {
            new mongoose.Types.ObjectId('6436de00d28e6bddc30e36a2')
         ]}
     })
+    const {objId}=req.body;
     const extract=data.map((el)=>{
         return {
                 authImg: el.channelLogo,
@@ -29,4 +31,10 @@ export default async function guessScore(req, res) {
         }
     })
     res.json(extract)
+    const arr=[
+        {vId:data[0].youtubeURL.split("=")[1]},
+        {vId:data[1].youtubeURL.split("=")[1]},
+        {vId:data[2].youtubeURL.split("=")[1]},
+]
+   await user.updateOne({_id:objId},{$set:{videos:arr}})
 }
