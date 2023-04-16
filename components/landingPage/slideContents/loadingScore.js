@@ -41,8 +41,9 @@ const loadingScore = () => {
       </h1>
       <p className="relative bottom-5">(Slide the marker)</p>
       <div className="sm:w-[70%] w-[90%] mx-auto">
-        <ThemeProvider id="slider" theme={CustomSlider}>
+        <ThemeProvider  theme={CustomSlider}>
             <Slider 
+            id="slider"
             className="horizontal-slider"
             onChange={(e) => voiceState.guessScore(e.target.value)}
             />
