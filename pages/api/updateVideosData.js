@@ -7,6 +7,7 @@ import peakHealthUsers from "../../models/user";
  */
 export default async function updateVideosData(req, res) {
   const {objId,vId,icons} = req.body;
+  console.log(icons)
   await connectMongo();
   const data=await peakHealthUsers.findOne({_id:objId})
   const videos=[...data.videos]

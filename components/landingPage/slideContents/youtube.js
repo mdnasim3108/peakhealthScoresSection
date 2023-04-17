@@ -46,22 +46,21 @@ const YoutubeComp = (props) => {
 
       <div className='pl-[5.5rem]'>
         <YouTube videoId={props.id} opts={opts} onReady={onReady} />
-
       </div>
 
       <div className='flex justify-center'>
-        <button className="border rounded-full mr-4 text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
+        <button id="back" className="border rounded-full mr-4 text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
           onClick={()=>{
             props.back()
             console.log(activeIcons)
           }}
         >
-          <FontAwesomeIcon icon={faArrowLeft} className='text-white mr-4' />
+          <FontAwesomeIcon  icon={faArrowLeft} className='text-white mr-4' />
           Back
         </button>
 
 
-        <div className=' px-4 border shadow-lg h-[3.1rem] mt-5 flex items-center rounded-full '>
+        <div id="icons" className=' px-4 border shadow-lg h-[3.1rem] mt-5 flex items-center rounded-full '>
 
           {!activeIcons.thumbsUp ? <FontAwesomeIcon
             onClick={() => setActiveIcons((prev) => {
