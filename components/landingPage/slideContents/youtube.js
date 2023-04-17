@@ -60,50 +60,50 @@ const YoutubeComp = (props) => {
         </button>
 
 
-        <div id="icons" className=' px-4 border shadow-lg h-[3.1rem] mt-5 flex items-center rounded-full '>
+        <div  className=' px-4 border shadow-lg h-[3.1rem] mt-5 flex items-center rounded-full '>
 
-          {!activeIcons.thumbsUp ? <FontAwesomeIcon
+          {!activeIcons.thumbsUp ? <FontAwesomeIcon id="icon"
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsUp: true }
             })}
             icon={faThumbsUp}
             className='text-violet-500 mymodal hover:text-violet-600 text-2xl mr-4 cursor-pointer' /> :
-            <ThumbsUp onClick={() => setActiveIcons((prev) => {
+            <ThumbsUp id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsUp: false }
             })} />
           }
 
-          {!activeIcons.laugh ? <FontAwesomeIcon
+          {!activeIcons.laugh ? <FontAwesomeIcon id="icon"
             icon={faFaceLaughSquint}
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, laugh: true }
             })}
             className='text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer' /> :
-            <Laugh onClick={() => setActiveIcons((prev) => {
+            <Laugh id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, laugh: false }
             })} />
           }
 
-          {!activeIcons.heart ? <BsEmojiHeartEyes
+          {!activeIcons.heart ? <BsEmojiHeartEyes id="icon"
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, heart: true }
             })}
             className="text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer"
           />
-            : <BsEmojiHeartEyesFill
+            : <BsEmojiHeartEyesFill id="icon"
               onClick={() => setActiveIcons((prev) => {
                 return { ...prev, heart: false }
               })}
               className="text-violet-500 mymodal hover:text-violet-600 text-2xl mr-4 cursor-pointer" />
           }
 
-          {!activeIcons.thumbsDown ? <FontAwesomeIcon
+          {!activeIcons.thumbsDown ? <FontAwesomeIcon id="icon"
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsDown: true }
             })}
             icon={faThumbsDown}
             className='text-violet-500 mymodal hover:text-violet-600 text-2xl cursor-pointer' />
-            : <ThumbsDown onClick={() => setActiveIcons((prev) => {
+            : <ThumbsDown id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsDown: false }
             })} />
           }
