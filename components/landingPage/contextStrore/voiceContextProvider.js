@@ -207,7 +207,7 @@ const VoiceContextProvider = (props) => {
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
         generateTranscript(blobObj, voiceFeatures.objId)
-        const videoRes=await Axios.post("/api/videosData");
+        const videoRes=await Axios.post("/api/videosData",{objId:voiceFeatures.objId});
         console.log(videoRes.data)
         dispatchVoiceFeatures({type:"videoData",videoData:videoRes.data})
       }
