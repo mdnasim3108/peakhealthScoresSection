@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
 
-{/* <Script>
+ <Script>
   {
    `    (function(h,o,t,j,a,r){
     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }) => {
     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
     a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-</Script> */}
+</Script>
    
     <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
