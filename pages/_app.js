@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
 
-<Script>
+{/* <Script>
   {
    `    (function(h,o,t,j,a,r){
     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }) => {
     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
     a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-</Script>
+</Script> */}
    
     <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
@@ -37,12 +37,15 @@ const App = ({ Component, pageProps }) => {
           gtag('config', 'G-64VSBXJZV4');
         `}
       </Script>
-      {/* <!-- Google Tag Manager --> */}
-<Script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KVK8C36');`}</Script>
+{/* {/* <!-- Google Tag Manager --!> */}
+            <Script>
+            {`(function(w,d,s,l,i){
+              w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })
+              (window,document,'script','dataLayer','GTM-KVK8C36');`
+            }
+            </Script>
 {/* <!-- End Google Tag Manager --> */}
 
       {/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
