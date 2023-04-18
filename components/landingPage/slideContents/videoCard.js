@@ -12,7 +12,7 @@ const videoCard = (props) => {
       onMouseLeave={() => setCardState((prev) => {
         return { ...prev, card1: false }
       })}
-      onClick={()=>props.onClick(props.id)}
+      onClick={() => props.onClick(props.id)}
     >
       <Image
         src={props.thumbnail}
@@ -21,29 +21,31 @@ const videoCard = (props) => {
         className=" sm:w-[22%] mr-[3%] h-[7rem]  inline object-cover rounded-lg"
         alt="getStart"
       />
-      <div className=' w-[25%]   text-left pl-3'>
-        <h1 className='font-bold text-lg'>{props.description}</h1>
+      <div className=' w-[27%]   text-left pl-3'>
+        <div className=' leading-[1.5em] h-[3em] overflow-hidden text-ellipsis'>
+          <h1 className='font-bold 2xl:text-[1.1rem] tracking-tight xl:text-[1rem] lg:text-[0.9rem] text-ellipsis'>{props.description.length>=50?props.description.slice(0,51)+"...":props.description}</h1>
+        </div>
         <div className='flex mt-3'>
-            <Image
-              src={props.authImg}
-              width={100}
-              height={100}
-              className='rounded-full border-2 bg-gray-300 w-[3rem] h-[3rem] mr-3'
-            />
+          <Image
+            src={props.authImg}
+            width={100}
+            height={100}
+            className='rounded-full border-2 bg-gray-300 w-[3rem] h-[3rem] mr-3'
+          />
           <p className={`${!cardState.card1 ? "text-gray-600" : "text-white"}`}>{props.channelTitle}</p>
         </div>
       </div>
 
-      <div className='w-[20%]   text-center'>
-        <h1 className='font-bold text-[1.23rem]'>{props.category}</h1>
+      <div className='w-[18%]   text-center'>
+        <h1 className='text-lg'>{props.category}</h1>
       </div>
 
-      <div className={` w-[20%] rounded-xl h-max  ${props.color} text-center text-white`}>
-        <h1 className='font-bold  text-xl text-center'>{props.type}</h1>
+      <div className={` w-[20%] rounded-xl h-max px-2  ${props.color} text-center text-white`}>
+        <h1 className='  text-lg text-center'>{props.type}</h1>
       </div>
 
       <div className='w-[10%]  text-center'>
-        <h1 className='font-bold text-xl'>{props.duration}</h1>
+        <h1 className='text-lg'>{props.duration}</h1>
       </div>
 
     </div>

@@ -70,7 +70,7 @@ const Card = () => {
         working: true,
         completed: false,
         animate: true,
-        label: "Get Started",
+        label: "Get started",
         icon: faPowerOff,
       },
       {
@@ -86,7 +86,7 @@ const Card = () => {
         working: false,
         completed: false,
         animate: false,
-        label: "Check your Stress score(30sec)",
+        label: "Check your stress score(30sec)",
         icon: "voice",
         mate:true,
       },
@@ -103,7 +103,7 @@ const Card = () => {
         working: false,
         completed: false,
         animate: false,
-        label: "Your Stress Relief Solutions", 
+        label: "Your stress relief solutions", 
         icon: "recommend",
         mate:true,
         notextend:true
@@ -147,7 +147,7 @@ const Card = () => {
   
  
   return (
-    <div className=" flex items-center  lg:h-screen  sm:w-[85%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]">
+    <div className=" flex items-center  lg:h-screen  sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]">
       {/* <h1 className="font-sans tracking-wide text-xl font-bold relative top-2">
         PEAK HEALTH
       </h1> */}

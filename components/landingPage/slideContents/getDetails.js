@@ -22,7 +22,7 @@ const GetDetails = (props) => {
   };
   useEffect(()=>{
       if(voiceState.voiceFeatures.registered){
-        setTimeout(()=>props.move(),2000)
+        setTimeout(()=>props.move(),1000)
       }
   },[voiceState.voiceFeatures.registered])
   const getSubmitHandler = async (e) => {
@@ -107,7 +107,7 @@ const GetDetails = (props) => {
               </p>
             )}
             <button
-              className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5 w-full py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className="border text-lg border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold mt-5 w-full py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="submit"
             >
               Check My Stress

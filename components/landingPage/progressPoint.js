@@ -42,7 +42,7 @@ const progressPoint = (props) => {
 
 
 
-        {!props.progress.notextend && <div class="lg:h-[7rem] lg:w-[0.15rem] h-[0.18rem] w-full bg-gray-200 border-0 rounded">
+        {!props.progress.notextend && <div class="lg:h-[15vh] lg:w-[0.15rem] h-[0.18rem] w-full bg-gray-200 border-0 rounded">
           <div
             className={`w-full   transition-all duration-[600ms] ease-linear bg-[#6ed1f9] ${props.progress.completed ? "lg:w-full h-full" : "lg:h-[0rem] w-[0rem]"
               }`}
