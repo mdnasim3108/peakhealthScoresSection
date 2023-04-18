@@ -38,47 +38,49 @@ const results = (props) => {
     guessScore: voiceState.voiceFeatures.guessScore,
     id:voiceState.voiceFeatures.objId
   });
-  const overallScore = voiceState.voiceFeatures.loading
-    ? voiceState.voiceFeatures.score
-    : 40;
   const labels = [
     {
       text: "Bad",
       position: "INSIDE",
       color: "#555",
+      fontSize:"13px"
     },
     {
       text: "Good",
       position: "INSIDE",
       color: "#555",
+      fontSize:"13px"
     },
     {
       text: "Great",
       position: "INSIDE",
       color: "#555",
+      fontSize:"13px"
     },
     {
       text: "Awesome",
       position: "INSIDE",
       color: "#555",
+      fontSize:"13px"
+
     },
   ];
   return (
     <div className=" px-0 md:px-10 recording md:relative text-center">
-      <h1 className="xl:text-4xl lg:text-2xl text-xl font-bold">
+      <h1 className="xl:text-3xl lg:text-2xl text-xl font-bold">
         Your Work Stress Score for today
       </h1>
       <div className="xl:w-full lg:w-[90%]">
       <div className="bg-gradient-to-r mt-20 rounded flex justify-end from-green-600 via-orange-500 to-red-500 scoreFill  sm:h-8 h-5 transition-all duration-500 ease-linear ">
         <div
           className="h-full bg-gray-200  overlay rounded-r"
-          style={{ width: `40%` }}
+          style={{ width: `${voiceState.voiceFeatures.score}%` }}
         ></div>
       </div>
       <div className="flex justify-between">
-        <p className="text-sm text-gray-400">Low Stress</p>
-        <p className="text-sm text-gray-400">Medium Stress</p>
-        <p className="text-sm text-gray-400">High Stress</p>
+        <p className="text-lg text-gray-400">Low Stress</p>
+        <p className="text-lg text-gray-400">Medium Stress</p>
+        <p className="text-lg text-gray-400">High Stress</p>
       </div>
       </div>
       <div className="flex justify-center items-center md:justify-around md:flex-row flex-col mt-[3rem]">
@@ -95,7 +97,7 @@ const results = (props) => {
           currentValueText="Energy"
           customSegmentLabels={labels}
           segmentColors={["#ff927e", "#17ffec", "#bee74b", "#7bda40"]}
-          width={!isBreakpoint?350:300}
+          width={!isBreakpoint?330:300}
           ringWidth={40}
         />
         </div>
