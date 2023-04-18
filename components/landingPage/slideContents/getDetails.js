@@ -107,11 +107,7 @@ const GetDetails = (props) => {
               </p>
             )}
             <button
-<<<<<<< HEAD
               className="border border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-5 w-full py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-=======
-              className="border text-lg border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold mt-5 w-full py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
               type="submit"
             >
               Check My Stress
