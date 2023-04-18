@@ -49,13 +49,8 @@ const YoutubeComp = (props) => {
         <YouTube videoId={props.id} opts={opts} onReady={onReady} />
       </div>
 
-<<<<<<< HEAD
-      <div className='flex justify-center'>
-        <button id="back" className="border rounded-full mr-4 text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase mt-5  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
-=======
       <div className='flex flex-col-reverse justify-center'>
         <button className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
           onClick={()=>{
             props.back()
             console.log(activeIcons)
@@ -66,11 +61,7 @@ const YoutubeComp = (props) => {
         </button>
 
 
-<<<<<<< HEAD
-        <div  className=' px-4 border shadow-lg h-[3.1rem] mt-5 flex items-center rounded-full '>
-=======
         <div className='  px-4 border shadow-lg h-[3.1rem] mt-2 flex items-center rounded-full '>
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
 
           {!activeIcons.thumbsUp ? <FontAwesomeIcon id="icon"
             onClick={() => setActiveIcons((prev) => {
@@ -83,25 +74,12 @@ const YoutubeComp = (props) => {
             })} />
           }
 
-<<<<<<< HEAD
-          {!activeIcons.laugh ? <FontAwesomeIcon id="icon"
-            icon={faFaceLaughSquint}
-=======
           {!activeIcons.light ? <FontAwesomeIcon
             icon={faLightbulb}
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: true }
             })}
             className='text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer' /> :
-<<<<<<< HEAD
-            <Laugh id="icon" onClick={() => setActiveIcons((prev) => {
-              return { ...prev, laugh: false }
-            })} />
-          }
-
-          {!activeIcons.heart ? <BsEmojiHeartEyes id="icon"
-=======
             <Bulb onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: false }
             })} />
@@ -109,17 +87,12 @@ const YoutubeComp = (props) => {
 
           {!activeIcons.heart ? <FontAwesomeIcon
           icon={faHeart}
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, heart: true }
             })}
             className="text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer"
           />
-<<<<<<< HEAD
-            : <BsEmojiHeartEyesFill id="icon"
-=======
             : <Heart
->>>>>>> 5f432fec0d6a1ad7064b85999aebd377fc1f4347
               onClick={() => setActiveIcons((prev) => {
                 return { ...prev, heart: false }
               })}
