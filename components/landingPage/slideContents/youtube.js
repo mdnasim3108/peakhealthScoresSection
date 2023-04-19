@@ -50,7 +50,9 @@ const YoutubeComp = (props) => {
       </div>
 
       <div className='flex flex-col-reverse justify-center'>
-        <button className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
+        <button 
+        id="back"
+        className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
           onClick={()=>{
             props.back()
             console.log(activeIcons)
@@ -63,7 +65,8 @@ const YoutubeComp = (props) => {
 
         <div className='  px-4 border shadow-lg h-[3.1rem] mt-2 flex items-center rounded-full '>
 
-          {!activeIcons.thumbsUp ? <FontAwesomeIcon id="icon"
+          {!activeIcons.thumbsUp ? 
+          <FontAwesomeIcon id="icon"
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsUp: true }
             })}
@@ -75,17 +78,19 @@ const YoutubeComp = (props) => {
           }
 
           {!activeIcons.light ? <FontAwesomeIcon
+            id="icon"
             icon={faLightbulb}
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: true }
             })}
             className='text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer' /> :
-            <Bulb onClick={() => setActiveIcons((prev) => {
+            <Bulb id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: false }
             })} />
           }
 
           {!activeIcons.heart ? <FontAwesomeIcon
+          id="icon"
           icon={faHeart}
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, heart: true }
@@ -93,6 +98,7 @@ const YoutubeComp = (props) => {
             className="text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer"
           />
             : <Heart
+              id="icon"
               onClick={() => setActiveIcons((prev) => {
                 return { ...prev, heart: false }
               })}

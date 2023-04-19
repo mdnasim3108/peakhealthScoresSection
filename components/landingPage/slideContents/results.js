@@ -121,6 +121,7 @@ const results = (props) => {
       </div>
       <div className="relative bottom-20">
         <button
+        id="personalizedRecommendation"
           className="rounded border-violet-500 bg-violet-500 hover:bg-violet-600 mt-3 p-2 text-white sm:text-lg text-sm font-sans"
           onClick={props.move}
         >
