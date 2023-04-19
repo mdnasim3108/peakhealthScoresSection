@@ -56,6 +56,7 @@ const GetDetails = (props) => {
             your stress level and personalize your stress relief
             recommendations. Let's begin!
           </p>
+          
         </div>
         <div className="">
           <form className="mt-10" onSubmit={getSubmitHandler}>
