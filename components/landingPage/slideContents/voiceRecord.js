@@ -33,6 +33,8 @@ const VoiceRecord = (props) => {
       const audio = await ref.current.getBlob()
       console.log(audio)
       voiceState.sendAudio(audio)
+      const url=URL.createObjectURL(audio)
+      console.log(url)
     },100)
   }
 
