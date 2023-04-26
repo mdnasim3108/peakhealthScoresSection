@@ -1,8 +1,8 @@
 import YouTube, { YouTubeProps } from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { faThumbsUp, faThumbsDown,faHeart,faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import { useEffect, useRef, useState,useContext } from 'react';
+import { faThumbsUp, faThumbsDown, faHeart, faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { useEffect, useRef, useState, useContext } from 'react';
 import { BsEmojiHeartEyes, BsEmojiHeartEyesFill } from 'react-icons/bs'
 import Bulb from '../UI/FASolid/bulb';
 import Heart from '../UI/FASolid/heart';
@@ -12,14 +12,15 @@ import axios from 'axios';
 import voiceContext from '../contextStrore/voiceContext';
 const YoutubeComp = (props) => {
   const playerRef = useRef(null);
-  const voiceState=useContext(voiceContext)
+  const voiceState = useContext(voiceContext)
+  const [showText, setShowText] = useState({})
   const [activeIcons, setActiveIcons] = useState({ thumbsUp: false, light: false, thumbsDown: false, heart: false })
-  const apiCall=async()=>{
-   await axios.post("/api/updateVideosData",{vId:props.id,objId:voiceState.voiceFeatures.objId,icons:activeIcons})
+  const apiCall = async () => {
+    await axios.post("/api/updateVideosData", { vId: props.id, objId: voiceState.voiceFeatures.objId, icons: activeIcons })
   }
-  useEffect(()=>{
-      apiCall();
-  },[activeIcons])
+  useEffect(() => {
+    apiCall();
+  }, [activeIcons])
   const onReady = (event) => {
     playerRef.current = event.target;
   };
@@ -39,7 +40,7 @@ const YoutubeComp = (props) => {
       showRelatedVideos: false,
       showVideoAnnotations: false,
       origin: "http://localhost:3000",
-      rel:0,
+      rel: 0,
     },
   };
   return (
@@ -49,56 +50,62 @@ const YoutubeComp = (props) => {
         <YouTube videoId={props.id} opts={opts} onReady={onReady} />
       </div>
 
-      <div className='flex flex-col-reverse justify-center'>
-        <button 
-        id="back"
-        className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
-          onClick={()=>{
-            props.back()
-            console.log(activeIcons)
-          }}
-        >
-          <FontAwesomeIcon  icon={faArrowLeft} className='text-white mr-4' />
-          Back
-        </button>
+      <div className='flex flex-col  justify-center'>
 
 
-        <div className='  px-4 border shadow-lg h-[3.1rem] mt-2 flex items-center rounded-full '>
+        <div className='sm:flex hidden justify-between  relative top-[0.7rem] h-0'>
+          {showText.great && !activeIcons.thumbsUp && <p className='text-[0.7rem] popText relative left-4  text-gray-600  text-center'>great</p>}
+          {showText.interesting && !activeIcons.light && <p className='text-[0.7rem] popText relative left-[2.8rem]  text-gray-500 text-center'>interesting</p>}
+          {showText.like && !activeIcons.heart && <p className='text-[0.7rem] popText relative left-[5.9rem]  text-gray-500 text-center'>like</p>}
+          {showText.dislike && !activeIcons.thumbsDown && <p className='text-[0.7rem] popText relative left-[8rem]  text-gray-500 text-center'>dislike</p>}
+        </div>
 
-          {!activeIcons.thumbsUp ? 
-          <FontAwesomeIcon id="icon"
-            onClick={() => setActiveIcons((prev) => {
-              return { ...prev, thumbsUp: true }
-            })}
-            icon={faThumbsUp}
-            className='text-violet-500 mymodal hover:text-violet-600 text-2xl mr-4 cursor-pointer' /> :
+        <div className='  px-4 relative border shadow-lg h-[3.6rem] mt-2 flex items-center rounded-full '>
+
+          {!activeIcons.thumbsUp ?
+
+
+            <FontAwesomeIcon id="icon"
+              onClick={() => setActiveIcons((prev) => {
+                return { ...prev, thumbsUp: true, }
+              })}
+              icon={faThumbsUp}
+              onMouseEnter={() => setShowText({ great: true })}
+              onMouseLeave={() => setShowText({ great: false })}
+              className='text-violet-500  mymodal hover:text-violet-600 text-2xl mr-4 cursor-pointer' />
+
+            :
             <ThumbsUp id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsUp: false }
             })} />
           }
 
+
+
           {!activeIcons.light ? <FontAwesomeIcon
-            id="icon"
             icon={faLightbulb}
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: true }
             })}
-            className='text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer' /> :
-            <Bulb id="icon" onClick={() => setActiveIcons((prev) => {
+            className='text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer'
+            onMouseEnter={() => setShowText({ interesting: true })}
+            onMouseLeave={() => setShowText({ interesting: false })}
+          /> :
+            <Bulb onClick={() => setActiveIcons((prev) => {
               return { ...prev, light: false }
             })} />
           }
 
           {!activeIcons.heart ? <FontAwesomeIcon
-          id="icon"
-          icon={faHeart}
+            icon={faHeart}
             onClick={() => setActiveIcons((prev) => {
               return { ...prev, heart: true }
             })}
+            onMouseEnter={() => setShowText({ like: true })}
+            onMouseLeave={() => setShowText({ like: false })}
             className="text-violet-500 mymodal text-2xl hover:text-violet-600 mr-4 cursor-pointer"
           />
             : <Heart
-              id="icon"
               onClick={() => setActiveIcons((prev) => {
                 return { ...prev, heart: false }
               })}
@@ -110,13 +117,25 @@ const YoutubeComp = (props) => {
               return { ...prev, thumbsDown: true }
             })}
             icon={faThumbsDown}
-            className='text-violet-500 mymodal hover:text-violet-600 text-2xl cursor-pointer' />
+            className='text-violet-500 mymodal hover:text-violet-600 text-2xl cursor-pointer'
+            onMouseEnter={() => setShowText({ dislike: true })}
+            onMouseLeave={() => setShowText({ dislike: false })}
+          />
             : <ThumbsDown id="icon" onClick={() => setActiveIcons((prev) => {
               return { ...prev, thumbsDown: false }
             })} />
           }
 
         </div>
+        <button className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
+          onClick={() => {
+            props.back()
+            console.log(activeIcons)
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className='text-white mr-4' />
+          Back
+        </button>
       </div>
 
 

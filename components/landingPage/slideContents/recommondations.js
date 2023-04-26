@@ -10,11 +10,11 @@ const recommendations = () => {
   const [video, setVideo] = useState({play:false,id:""})
   return (
 
-    !video.play ? <div className="relative bottom-7">
+    !video.play ? <div className="relative sm:bottom-7">
 
-      <h1 className="text-3xl text-center font-[500]">For your current stress level, here are few things you can do…</h1>
+      <h1 className="sm:text-3xl sm:m-0 mb-4 text-xl text-center font-[500]">For your current stress level, here are few things you can do…</h1>
 
-      <div className="flex w-full  p-5  text-gray-500">
+      <div className="sm:flex w-full hidden  p-5  text-gray-500">
         <div
           className=" sm:w-[25%]"
         />

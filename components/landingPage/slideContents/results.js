@@ -21,7 +21,7 @@ const results = (props) => {
       const media = window.matchMedia(`(max-width: ${width}px)`);
       media.addListener(updateTarget);
 
-      // Check on mount (callback is not called until a change occurs)
+      // Check on mount (callback is not called until a change occurs)  
       if (media.matches) {
         setTargetReached(true);
       }
@@ -78,9 +78,9 @@ const results = (props) => {
         ></div>
       </div>
       <div className="flex justify-between">
-        <p className="text-lg text-gray-400">Low Stress</p>
-        <p className="text-lg text-gray-400">Medium Stress</p>
-        <p className="text-lg text-gray-400">High Stress</p>
+        <p className="sm:text-lg text-sm text-gray-400">Low Stress</p>
+        <p className="sm:text-lg text-sm text-gray-400">Medium Stress</p>
+        <p className="sm:text-lg text-sm text-gray-400">High Stress</p>
       </div>
       </div>
       <div className="flex justify-center items-center md:justify-around md:flex-row flex-col mt-[3rem]">
