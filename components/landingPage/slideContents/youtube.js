@@ -2,7 +2,7 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp, faThumbsDown, faHeart, faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import { useEffect, useRef, useState, useContext } from 'react';
+import { useEffect, useRef, useState, useContext,useCallback } from 'react';
 import { BsEmojiHeartEyes, BsEmojiHeartEyesFill } from 'react-icons/bs'
 import Bulb from '../UI/FASolid/bulb';
 import Heart from '../UI/FASolid/heart';
@@ -11,6 +11,32 @@ import ThumbsDown from '../UI/FASolid/thumbsDown';
 import axios from 'axios';
 import voiceContext from '../contextStrore/voiceContext';
 const YoutubeComp = (props) => {
+    const useMediaQuery = (width) => {
+    const [targetReached, setTargetReached] = useState(false);
+
+    const updateTarget = useCallback((e) => {
+      if (e.matches) {
+        setTargetReached(true);
+      } else {
+        setTargetReached(false);
+      }
+    }, []);
+
+    useEffect(() => {
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addListener(updateTarget);
+
+      // Check on mount (callback is not called until a change occurs)  
+      if (media.matches) {
+        setTargetReached(true);
+      }
+
+      return () => media.removeListener(updateTarget);
+    }, []);
+
+    return targetReached;
+  };
+  const isBreakpoint = useMediaQuery(600);
   const playerRef = useRef(null);
   const voiceState = useContext(voiceContext)
   const [showText, setShowText] = useState({})
@@ -32,8 +58,8 @@ const YoutubeComp = (props) => {
     }
   }, [playerRef]);
   const opts = {
-    height: '400',
-    width: '700',
+    height: isBreakpoint?'160':'400',
+    width: isBreakpoint?'300':'700',
     playerVars: {
       autoplay: 1,
       controls: 1,
@@ -46,9 +72,9 @@ const YoutubeComp = (props) => {
   return (
     <div className=' flex flex-col items-center justify-center lg:p-10'>
 
-      <div className=''>
-        <YouTube videoId={props.id} opts={opts} onReady={onReady} />
-      </div>
+        
+        <YouTube className='' videoId={props.id} opts={opts} onReady={onReady} />
+    
 
       <div className='flex flex-col  justify-center'>
 
