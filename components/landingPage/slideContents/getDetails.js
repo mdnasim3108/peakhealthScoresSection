@@ -1,10 +1,13 @@
 import { Player } from "@lottiefiles/react-lottie-player";
+import app from "../../../firebase.config";
+import {GoogleAuthProvider,signInWithPopup,getAuth} from "firebase/auth"
 import processing from "../../../public/processing1.json";
 import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { CircularProgress, circularProgressClasses } from "@mui/material";
 import { Check } from "@mui/icons-material";
-import Axios from "axios";    
+import { data } from "autoprefixer";
+// import Axios from "axios";    
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
@@ -36,6 +39,23 @@ const GetDetails = (props) => {
     });
   }
   };
+
+// signin with google
+const auth = getAuth(app)
+const provider = new GoogleAuthProvider();
+
+
+const handleClick = () =>{
+  
+  signInWithPopup(auth,provider).then((result) => {
+  const credential = GoogleAuthProvider.credentialFromResult(result);
+  const userId = result.user.uid;
+  console.log(userId)
+}).catch((error)=>console.log(error))
+ 
+}
+
+
   return (
     <>
       <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
@@ -132,6 +152,7 @@ const GetDetails = (props) => {
               {voiceState.voiceFeatures.registered && <Check className="text-xl relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
             </button>
           </form>
+          <button onClick={handleClick}>SignIn with Google</button>
         </div>
       </div>
     </>
