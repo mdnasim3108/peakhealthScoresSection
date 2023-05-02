@@ -50,6 +50,7 @@ const handleClick = () =>{
   signInWithPopup(auth,provider).then((result) => {
   const credential = GoogleAuthProvider.credentialFromResult(result);
   const userId = result.user.uid;
+  console.log(result.user)
   console.log(userId)
 }).catch((error)=>console.log(error))
  
