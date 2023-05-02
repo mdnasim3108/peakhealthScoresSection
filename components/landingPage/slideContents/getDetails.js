@@ -1,17 +1,20 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import {GoogleAuthProvider,signInWithPopup,getAuth} from "firebase/auth"
+import {GoogleAuthProvider,signInWithPopup,getAuth, sendSignInLinkToEmail} from "firebase/auth"
+import {useAuthState} from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
 import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import { CircularProgress, circularProgressClasses } from "@mui/material";
 import { Check } from "@mui/icons-material";
-import { data } from "autoprefixer";
-// import Axios from "axios";    
+// import { data } from "autoprefixer";
+
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
-  const [value,setValue]=useState("")
+  const [email,setEmail] = useState("")
+  // const [value,setValue]=useState("")
+  const [infoMsg,setInfoMsg] = useState("")
   const [details, setDetails] = useState({
     username: "",
     email: "",
@@ -20,6 +23,7 @@ const GetDetails = (props) => {
   });
   const changeHandler = (e) => {
     setDetails((prev) => {
+      
       return { ...prev, [e.target.id]: e.target.value };
     });
   };
@@ -44,9 +48,10 @@ const GetDetails = (props) => {
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider();
 
+const [user,loading,error] = useAuthState(auth);
+
 
 const handleClick = () =>{
-  
   signInWithPopup(auth,provider).then((result) => {
   const credential = GoogleAuthProvider.credentialFromResult(result);
   const userId = result.user.uid;
@@ -54,6 +59,23 @@ const handleClick = () =>{
   console.log(userId)
 }).catch((error)=>console.log(error))
  
+}
+
+const emailSubmit = (e) =>{
+    e.preventDefault();
+    sendSignInLinkToEmail(auth,email,{
+      url:"https://check.peakhealth.tech/",
+      handleCodeInApp:true
+    }).then(
+      (result)=>{
+        console.log("Successfull")
+        console.log(result)
+        setInfoMsg("Please check Your Inbox for authentication")
+      }
+    ).catch((error)=>{
+      console.log(error.message)
+    })
+
 }
 
 
@@ -154,7 +176,19 @@ const handleClick = () =>{
               {voiceState.voiceFeatures.registered && <Check className="text-xl relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
             </button>
           </form>
+         <form onSubmit={emailSubmit}>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
+                type="email"
+                placeholder="Your email"
+                required
+                value= {email || ""}
+                onChange={(e)=>setEmail(e.target.value)}
+              />
+            <button type="submit">Send Email</button>
+          </form>
           <button onClick={handleClick}>SignIn with Google</button>
+
         </div>
       </div>
     </>
