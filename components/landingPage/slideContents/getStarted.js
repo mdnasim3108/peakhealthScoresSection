@@ -1,12 +1,17 @@
 import getStartImage from "../../../public/getStart.jpg";
+import ContentContext from "../contextStrore/contentContext";
+import { useContext,useRef } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
 const GetStarted = (props) => {
-  // const [showArrow, setShowArrow] = useState(false);
+  const [showArrow, setShowArrow] = useState(true);
+  const content=useContext(ContentContext)
+  const nodeRef = useRef(null);
   return (
-    <div>
+        <div className="" ref={nodeRef}>
       <h1 className="font-bold mb-5 md:text-3xl text-xl  text-center">What’s my Work Stress level?</h1>
       <h2 className="text-lg text-gray-500 relative bottom-5 text-center">
         Find out with Science and AI powered Stress Assistant!
@@ -32,7 +37,9 @@ const GetStarted = (props) => {
             className=" border w-max border-violet-500 text-lg bg-violet-500 hover:bg-violet-600 text-white font-bold sm:px-8 sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             // onMouseEnter={() => setShowArrow((prev) => !prev)}
             // onMouseLeave={() => setShowArrow((prev) => !prev)}
-            onClick={props.move}
+            onClick={()=>{
+              props.move()
+            }}
           >
             Start My 1 Min Stress Check
             

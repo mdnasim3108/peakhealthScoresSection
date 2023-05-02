@@ -94,6 +94,7 @@ const VoiceRecord = (props) => {
           </p>
 
           {status === "" && (
+            <div className="">
             <div
               id="microphone"
               onClick={voiceClickHandler}
@@ -104,6 +105,8 @@ const VoiceRecord = (props) => {
                 icon={faMicrophone}
                 className="text-4xl text-white"
               />
+            </div>
+            <p className="text-lg text-gray-500 mt-4">click to record</p>
             </div>
           )}
 

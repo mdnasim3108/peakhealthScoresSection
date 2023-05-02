@@ -6,15 +6,15 @@ import AnswerContextProvider from '../components/landingPage/contextStrore/answe
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
 
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps, router }) => {
 
- 
+
   return (
     <>
 
-  <Script>
-  {
-   `    (function(h,o,t,j,a,r){
+      <Script>
+        {
+          `    (function(h,o,t,j,a,r){
     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
     h._hjSettings={hjid:3406143,hjsv:6};
     a=o.getElementsByTagName('head')[0];
@@ -22,22 +22,22 @@ const App = ({ Component, pageProps }) => {
     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
     a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`
-  }
-    </Script>
-   
+        }
+      </Script>
 
-    <Script type="text/javascript">
-       {` 
+
+      <Script type="text/javascript">
+        {` 
           (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "gu2a7l52va");
       `}
-    </Script>
+      </Script>
 
 
-    <Script
+      <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-64VSBXJZV4"
         strategy="afterInteractive"
       />
@@ -50,24 +50,25 @@ const App = ({ Component, pageProps }) => {
           gtag('config', 'G-64VSBXJZV4');
         `}
       </Script>
-{/* {/* <!-- Google Tag Manager --!> */}
-            <Script>
-            {`(function(w,d,s,l,i){
+      {/* {/* <!-- Google Tag Manager --!> */}
+      <Script>
+        {`(function(w,d,s,l,i){
               w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })
               (window,document,'script','dataLayer','GTM-KVK8C36');`
-            }
-            </Script>
-{/* <!-- End Google Tag Manager --> */}
+        }
+      </Script>
+      {/* <!-- End Google Tag Manager --> */}
 
       {/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
+      
+          <VoiceContextProvider>
+            <AnswerContextProvider>
+              <Component {...pageProps} />
+            </AnswerContextProvider>
+          </VoiceContextProvider>
 
-      <VoiceContextProvider>
-        <AnswerContextProvider>
-          <Component {...pageProps} />
-        </AnswerContextProvider>
-      </VoiceContextProvider>
     </>
   )
 }
