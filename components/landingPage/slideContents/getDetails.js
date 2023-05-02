@@ -11,6 +11,7 @@ import { data } from "autoprefixer";
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
+  const [value,setValue]=useState("")
   const [details, setDetails] = useState({
     username: "",
     email: "",
@@ -18,7 +19,6 @@ const GetDetails = (props) => {
     year: "",
   });
   const changeHandler = (e) => {
-    navigator.u
     setDetails((prev) => {
       return { ...prev, [e.target.id]: e.target.value };
     });
@@ -113,15 +113,16 @@ const handleClick = () =>{
                 yearIsValid ? "focus:border-violet-500" : "focus:border-red-500"
               } `}
               id="year"
-              type="number"
+              type="text"
               onChange={(event) => {
                 changeHandler(event);
-                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear()-(+event.target.value)>16);
+                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear()-(+event.target.value)>16 && new Date().getFullYear()-(+event.target.value)<100);
               }}
               placeholder="Year of birth"
               required={true}
+              maxLength="4"
             />
-          
+            
             {!yearIsValid && (
               <p className="text-sm text-red-300 relative bottom-5 font-sans text-left">
                 Enter a valid year and you should be atleast 16 years old.

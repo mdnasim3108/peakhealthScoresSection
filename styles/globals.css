@@ -80,6 +80,17 @@
         opacity: 0;
     }
 }
+@keyframes hoverText {
+    0%{
+        opacity: 0;
+        scale:0.9;
+    }
+    100%{
+        opacity: 1;
+        scale:1.05;
+        bottom:5px;
+    }
+}
 @keyframes slide-down {
     0% {
         opacity: 0;
@@ -108,6 +119,9 @@
   }
 .mymodal{
     animation: slide-down 300ms ease-out forwards;
+}
+.popText{
+    animation: hoverText 150ms ease-out forwards;
 }
 .thumb{
     height: 2rem;

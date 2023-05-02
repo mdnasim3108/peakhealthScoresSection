@@ -27,7 +27,7 @@ const loadingScore = () => {
   //     },
   //   })(Slider);
   return (
-    <div className="bg-gray-200 opacity-50 lg:h-full h-[100vh] sm:pt-10 py-[20%] text-center">
+    <div className="bg-gray-200 opacity-50 lg:h-full h-[100vh] sm:pt-10 py-[20%] text-center -z-10">
       <h1 className="sm:text-2xl text-lg ">Your Stress Assistant AI is...</h1>
       <DynamicText
         texts={[
