@@ -117,12 +117,7 @@ const GetDetails = (props) => {
   }
 
 
-    sendSignInLinkToEmail(auth,email,actionCodeSettings)
-          .then(()=>{
-            console.log("Successfull")
-            window.localStorage.setItem('emailForSignIn',email)})
-          .catch((error)=>console.log(error.message))
-        }
+    
     
   return (
     <>
@@ -245,5 +240,5 @@ const GetDetails = (props) => {
       </div>
     </>
   );
-
+ }
 export default GetDetails;
