@@ -245,5 +245,5 @@ const GetDetails = (props) => {
       </div>
     </>
   );
-};
+
 export default GetDetails;
