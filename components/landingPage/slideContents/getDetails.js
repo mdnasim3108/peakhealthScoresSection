@@ -1,16 +1,48 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail } from "firebase/auth"
+// import { useAuthState } from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
 import { useState, useContext, useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
-import { Check } from "@mui/icons-material";
-import { data } from "autoprefixer";
+// import { Check } from "@mui/icons-material";
+// import { data } from "autoprefixer";
 import ContentContext from "../contextStrore/contentContext";
 import GoogleButton from 'react-google-button'
+import dynamic from "next/dynamic";
+
+// import { google } from "googleapis";
+// const google = dynamic(() => import(('googleapis')))
 const GetDetails = (props) => {
+  // const people = google.people('v1');
+  // const gapiauth = new google.auth.GoogleAuth({
+  //   scopes: [
+  //     'https://www.googleapis.com/auth/contacts',
+  //     'https://www.googleapis.com/auth/contacts.readonly',
+  //     'https://www.googleapis.com/auth/directory.readonly',
+  //     'https://www.googleapis.com/auth/user.addresses.read',
+  //     'https://www.googleapis.com/auth/user.birthday.read',
+  //     'https://www.googleapis.com/auth/user.emails.read',
+  //     'https://www.googleapis.com/auth/user.gender.read',
+  //     'https://www.googleapis.com/auth/user.organization.read',
+  //     'https://www.googleapis.com/auth/user.phonenumbers.read',
+  //     'https://www.googleapis.com/auth/userinfo.email',
+  //     'https://www.googleapis.com/auth/userinfo.profile',
+  //   ],
+  // });
+  // const initClient=async()=>{
+  //   const authClient = await gapiauth.getClient();
+  //   google.options({auth: authClient});
+  // }
+  // useEffect(async()=>{
+  //     initClient()
+  // },[])
+  
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
+  const [email, setEmail] = useState("")
+  // const [value,setValue]=useState("")
+  const [infoMsg, setInfoMsg] = useState("")
   const [details, setDetails] = useState({
     username: "",
     email: "",
@@ -20,37 +52,67 @@ const GetDetails = (props) => {
   const content = useContext(ContentContext)
   const changeHandler = (e) => {
     setDetails((prev) => {
+
       return { ...prev, [e.target.id]: e.target.value };
     });
   };
   const getSubmitHandler = async (e) => {
     e.preventDefault();
     if (yearIsValid) {
+      props.move()
       voiceState.registerUser({
         username: details.username,
         gender: details.gender,
         year: details.year,
         email: details.email,
       });
-      props.move()
+      
     }
   };
 
   const provider = new GoogleAuthProvider();
   provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
   provider.addScope("https://www.googleapis.com/auth/user.gender.read")
-  // signin with google
-  const auth = getAuth(app)
 
+  const auth = getAuth(app)
+ 
 
   const handleClick = () => {
-    signInWithPopup(auth, provider).then((result) => {
+    signInWithPopup(auth, provider).then(async(result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const userId = result.user;
+      // const service = google.people({version: 'v1', auth})
+      // const res = await service.people.connections.list({
+      //   resourceName: 'people/me',
+      //   pageSize: 10,
+      //   personFields: 'names,emailAddresses',
+      // });
       
-      // const userProfile = additionalUserInfo.profile;
-      console.log(userId)
+      // const res1 = await people.people.get({
+      //   personFields: 'birthdays,genders',
+      //   'requestMask.includeField': 'person.names',
+      //   resourceName: 'people/117044242738047874308',
+      //   sources: 'placeholder-value',
+      // });
+      console.log(userId);
     }).catch((error) => console.log(error))
+
+  }
+
+  const emailSubmit = (e) => {
+    e.preventDefault();
+    sendSignInLinkToEmail(auth, email, {
+      url: "https://check.peakhealth.tech/",
+      handleCodeInApp: true
+    }).then(
+      (result) => {
+        console.log("Successfull")
+        console.log(result)
+        setInfoMsg("Please check Your Inbox for authentication")
+      }
+    ).catch((error) => {
+      console.log(error.message)
+    })
 
   }
 
@@ -149,15 +211,28 @@ const GetDetails = (props) => {
                   style={{ color: "white" }}
                 />} */}
             </button>
+            <h1 className="text-lg text-center text-gray-500">OR</h1>
+            <div className="w-full flex items-center justify-center mt-2">
+              <GoogleButton
+                type="light"
+                className="w-full rounded"
+                onClick={handleClick}
+              />
+            </div>
           </form>
-          <h1 className="text-lg text-center text-gray-500">OR</h1>
-          <div className="w-full flex items-center justify-center mt-2">
-            <GoogleButton
-              type="light"
-              className="w-full rounded"
-              onClick={handleClick}
+          {/* <form onSubmit={emailSubmit}>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
+              type="email"
+              placeholder="Your email"
+              required
+              value={email || ""}
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
+            <button type="submit">Send Email</button>
+          </form> */}
+
+
 
         </div>
       </div>
