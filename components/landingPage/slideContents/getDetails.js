@@ -1,7 +1,7 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import {GoogleAuthProvider,signInWithPopup,getAuth, sendSignInLinkToEmail} from "firebase/auth"
-import {useAuthState} from "react-firebase-hooks/auth"
+import {GoogleAuthProvider,signInWithPopup,getAuth,sendSignInLinkToEmail} from "firebase/auth"
+
 import processing from "../../../public/processing1.json";
 import { useState, useContext,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
@@ -48,7 +48,6 @@ const GetDetails = (props) => {
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider();
 
-const [user,loading,error] = useAuthState(auth);
 
 
 const handleClick = () =>{
@@ -61,24 +60,21 @@ const handleClick = () =>{
  
 }
 
+
+const actionCodeSettings = {
+  url:"https://check.peakhealth.tech/",
+  handleCodeInApp: true
+};
+
 const emailSubmit = (e) =>{
     e.preventDefault();
-    sendSignInLinkToEmail(auth,email,{
-      url:"https://check.peakhealth.tech/",
-      handleCodeInApp:true
-    }).then(
-      (result)=>{
-        console.log("Successfull")
-        console.log(result)
-        setInfoMsg("Please check Your Inbox for authentication")
-      }
-    ).catch((error)=>{
-      console.log(error.message)
-    })
-
-}
-
-
+    sendSignInLinkToEmail(auth,email,actionCodeSettings)
+          .then(()=>{
+            console.log("Successfull")
+            window.localStorage.setItem('emailForSignIn',email)})
+          .catch((error)=>console.log(error.message))
+        }
+    
   return (
     <>
       <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
@@ -182,7 +178,6 @@ const emailSubmit = (e) =>{
                 type="email"
                 placeholder="Your email"
                 required
-                value= {email || ""}
                 onChange={(e)=>setEmail(e.target.value)}
               />
             <button type="submit">Send Email</button>
