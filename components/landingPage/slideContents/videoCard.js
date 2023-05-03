@@ -5,7 +5,7 @@ const videoCard = (props) => {
   const [cardState, setCardState] = useState({})
   return (
     <div id="youtube-video"
-      className={`rounded sm:flex sm:flex-row flex-col border shadow-lg relative px-5 py-4  ${props.top ? props.top : ""} hover:bg-violet-300 cursor-pointer w-full hover:text-white hover:scale-[1.02] transition-all duration-200 ease-linear`}
+      className={`rounded sm:flex sm:flex-row flex-col border shadow-lg relative px-5 py-4  ${props.top ? props.top : ""} sm:hover:bg-violet-300 cursor-pointer w-full hover:text-white hover:scale-[1.02] transition-all duration-200 ease-linear`}
       onMouseEnter={() => setCardState((prev) => {
         return { ...prev, card1: true }
       })}
@@ -53,7 +53,6 @@ const videoCard = (props) => {
           <h1 className='text-lg'>{props.duration}</h1>
         </div>
       </div>
-
 
       <div className='sm:w-[10%] sm:visible invisible  text-center'>
         <h1 className='text-lg'>{props.duration}</h1>

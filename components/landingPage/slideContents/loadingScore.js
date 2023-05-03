@@ -51,7 +51,7 @@ const loadingScore = () => {
         <div className="flex justify-between relative bottom-3 text-[0.7rem] sm:text-lg">
           <p>Low Stress</p>
           <p>Medium Stress</p>
-          <p>high Stress</p>
+          <p>High Stress</p>
         </div>
       </div>
     </div>

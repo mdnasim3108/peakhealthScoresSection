@@ -1,73 +1,122 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import {GoogleAuthProvider,signInWithPopup,getAuth,sendSignInLinkToEmail} from "firebase/auth"
-
+import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail } from "firebase/auth"
+// import { useAuthState } from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
-import { useState, useContext,useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
-import { CircularProgress, circularProgressClasses } from "@mui/material";
-import { Check } from "@mui/icons-material";
+// import { Check } from "@mui/icons-material";
 // import { data } from "autoprefixer";
+import ContentContext from "../contextStrore/contentContext";
+import GoogleButton from 'react-google-button'
+import dynamic from "next/dynamic";
 
+// import { google } from "googleapis";
+// const google = dynamic(() => import(('googleapis')))
 const GetDetails = (props) => {
+  // const people = google.people('v1');
+  // const gapiauth = new google.auth.GoogleAuth({
+  //   scopes: [
+  //     'https://www.googleapis.com/auth/contacts',
+  //     'https://www.googleapis.com/auth/contacts.readonly',
+  //     'https://www.googleapis.com/auth/directory.readonly',
+  //     'https://www.googleapis.com/auth/user.addresses.read',
+  //     'https://www.googleapis.com/auth/user.birthday.read',
+  //     'https://www.googleapis.com/auth/user.emails.read',
+  //     'https://www.googleapis.com/auth/user.gender.read',
+  //     'https://www.googleapis.com/auth/user.organization.read',
+  //     'https://www.googleapis.com/auth/user.phonenumbers.read',
+  //     'https://www.googleapis.com/auth/userinfo.email',
+  //     'https://www.googleapis.com/auth/userinfo.profile',
+  //   ],
+  // });
+  // const initClient=async()=>{
+  //   const authClient = await gapiauth.getClient();
+  //   google.options({auth: authClient});
+  // }
+  // useEffect(async()=>{
+  //     initClient()
+  // },[])
+  
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
-  const [email,setEmail] = useState("")
+  const [email, setEmail] = useState("")
   // const [value,setValue]=useState("")
-  const [infoMsg,setInfoMsg] = useState("")
+  const [infoMsg, setInfoMsg] = useState("")
   const [details, setDetails] = useState({
     username: "",
     email: "",
     gender: "",
     year: "",
   });
+  const content = useContext(ContentContext)
   const changeHandler = (e) => {
     setDetails((prev) => {
-      
+
       return { ...prev, [e.target.id]: e.target.value };
     });
   };
-  useEffect(()=>{
-      if(voiceState.voiceFeatures.registered){
-        setTimeout(()=>props.move(),1000)
-      }
-  },[voiceState.voiceFeatures.registered])
   const getSubmitHandler = async (e) => {
     e.preventDefault();
-    if(yearIsValid){
-    voiceState.registerUser({
-      username: details.username,
-      gender: details.gender,
-      year: details.year,
-      email: details.email, 
-    });
-  }
+    if (yearIsValid) {
+      props.move()
+      voiceState.registerUser({
+        username: details.username,
+        gender: details.gender,
+        year: details.year,
+        email: details.email,
+      });
+      
+    }
   };
 
-// signin with google
-const auth = getAuth(app)
-const provider = new GoogleAuthProvider();
+  const provider = new GoogleAuthProvider();
+  provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
+  provider.addScope("https://www.googleapis.com/auth/user.gender.read")
 
-
-
-const handleClick = () =>{
-  signInWithPopup(auth,provider).then((result) => {
-  const credential = GoogleAuthProvider.credentialFromResult(result);
-  const userId = result.user.uid;
-  console.log(result.user)
-  console.log(userId)
-}).catch((error)=>console.log(error))
+  const auth = getAuth(app)
  
-}
 
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then(async(result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const userId = result.user;
+      // const service = google.people({version: 'v1', auth})
+      // const res = await service.people.connections.list({
+      //   resourceName: 'people/me',
+      //   pageSize: 10,
+      //   personFields: 'names,emailAddresses',
+      // });
+      
+      // const res1 = await people.people.get({
+      //   personFields: 'birthdays,genders',
+      //   'requestMask.includeField': 'person.names',
+      //   resourceName: 'people/117044242738047874308',
+      //   sources: 'placeholder-value',
+      // });
+      console.log(userId);
+    }).catch((error) => console.log(error))
 
-const actionCodeSettings = {
-  url:"https://check.peakhealth.tech/",
-  handleCodeInApp: true
-};
+  }
 
-const emailSubmit = (e) =>{
+  const emailSubmit = (e) => {
     e.preventDefault();
+    sendSignInLinkToEmail(auth, email, {
+      url: "https://check.peakhealth.tech/",
+      handleCodeInApp: true
+    }).then(
+      (result) => {
+        console.log("Successfull")
+        console.log(result)
+        setInfoMsg("Please check Your Inbox for authentication")
+      }
+    ).catch((error) => {
+      console.log(error.message)
+    })
+
+  }
+
+
     sendSignInLinkToEmail(auth,email,actionCodeSettings)
           .then(()=>{
             console.log("Successfull")
@@ -80,7 +129,7 @@ const emailSubmit = (e) =>{
       <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
         Your details for AI to measure your stress level accurately
       </h1>
-      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around w-full">   
+      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around w-full">
         <div className="flex flex-col justify-center items-center ">
           <div className="ml-10 mt-5 md:m-0">
             <Player
@@ -95,7 +144,7 @@ const emailSubmit = (e) =>{
             your stress level and personalize your stress relief
             recommendations. Let's begin!
           </p>
-          
+
         </div>
         <div className="">
           <form className="mt-10" onSubmit={getSubmitHandler}>
@@ -128,20 +177,19 @@ const emailSubmit = (e) =>{
               <option value="female">Female</option>
             </select>
             <input
-              className={`yearInput shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 ${
-                yearIsValid ? "focus:border-violet-500" : "focus:border-red-500"
-              } `}
+              className={`yearInput shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 ${yearIsValid ? "focus:border-violet-500" : "focus:border-red-500"
+                } `}
               id="year"
               type="text"
               onChange={(event) => {
                 changeHandler(event);
-                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear()-(+event.target.value)>16 && new Date().getFullYear()-(+event.target.value)<100);
+                setYearIsValid(event.target.value.length === 4 && new Date().getFullYear() - (+event.target.value) > 16 && new Date().getFullYear() - (+event.target.value) < 100);
               }}
               placeholder="Year of birth"
               required={true}
               maxLength="4"
             />
-            
+
             {!yearIsValid && (
               <p className="text-sm text-red-300 relative bottom-5 font-sans text-left">
                 Enter a valid year and you should be atleast 16 years old.
@@ -153,36 +201,45 @@ const emailSubmit = (e) =>{
               type="submit"
             >
               Check My Stress
-              {
-              voiceState.voiceFeatures.registering &&
-              <CircularProgress
-              variant="indeterminate" 
-              disableShrink
-              sx={{
-                animationDuration: '550ms',
-                [`& .${circularProgressClasses.circle}`]: {
-                  strokeLinecap: 'round',
-                },
-              }}
-              size={20}
-              thickness={4}
-              className="relative sm:left-[15%] left-[10%] top-[2px] "
-              style={{color:"white"}}
-            />}
-              {voiceState.voiceFeatures.registered && <Check className="text-xl relative bottom-[2px] sm:left-[15%] left-[10%]"/>}
+              {/* {
+                voiceState.voiceFeatures.registering &&
+                <CircularProgress
+                  variant="indeterminate"
+                  disableShrink
+                  sx={{
+                    animationDuration: '550ms',
+                    [`& .${circularProgressClasses.circle}`]: {
+                      strokeLinecap: 'round',
+                    },
+                  }}
+                  size={20}
+                  thickness={4}
+                  className="relative sm:left-[15%] left-[10%] top-[2px] "
+                  style={{ color: "white" }}
+                />} */}
             </button>
-          </form>
-         <form onSubmit={emailSubmit}>
-            <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
-                type="email"
-                placeholder="Your email"
-                required
-                onChange={(e)=>setEmail(e.target.value)}
+            <h1 className="text-lg text-center text-gray-500">OR</h1>
+            <div className="w-full flex items-center justify-center mt-2">
+              <GoogleButton
+                type="light"
+                className="w-full rounded"
+                onClick={handleClick}
               />
-            <button type="submit">Send Email</button>
+            </div>
           </form>
-          <button onClick={handleClick}>SignIn with Google</button>
+          {/* <form onSubmit={emailSubmit}>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
+              type="email"
+              placeholder="Your email"
+              required
+              value={email || ""}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button type="submit">Send Email</button>
+          </form> */}
+
+
 
         </div>
       </div>
