@@ -34,20 +34,17 @@ const GetStarted = (props) => {
           </p>
           <button
             id ="startingButton"
-            className=" border w-max border-violet-500 text-lg bg-violet-500 hover:bg-violet-600 text-white font-bold sm:px-8 sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-            // onMouseEnter={() => setShowArrow((prev) => !prev)}
-            // onMouseLeave={() => setShowArrow((prev) => !prev)}
+            className=" border border-violet-500 tracking-wide text-lg hover:bg-violet-500 text-violet-500 hover:text-white   font-bold sm:px-8 sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             onClick={()=>{
               props.move()
             }}
           >
             Start My 1 Min Stress Check
-            
-            {/* {showArrow && (
-              <i className="ml-[0.5rem] arrowIcon">
-                <FontAwesomeIcon icon={faArrowRight} />
-              </i>
-            )} */}
+          </button>
+          <button
+          className="border mt-4 tracking-wide text-lg bg-violet-500 border-violet-500 text-white  hover:bg-violet-600  font-bold sm:px-[3.2rem] sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+          >
+            New user?Register here
           </button>
         </div>
       </div>

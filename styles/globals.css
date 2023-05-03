@@ -161,6 +161,25 @@
         transition: all 500ms ease-out
     }
 }
+@keyframes pulse-purple {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(142, 68, 173, 0.7);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(142, 68, 173, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(142, 68, 173, 0);
+    }
+  }
+.onepulse{
+    animation: pulse-purple 400ms linear ease-in-out; 
+  }
 .sampAnime{
     animation:samp 300ms ease-in-out linear;
 }

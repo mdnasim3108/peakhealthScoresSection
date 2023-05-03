@@ -9,6 +9,7 @@ import voiceContext from "../contextStrore/voiceContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { WavRecorder } from "webm-to-wav-converter";
+import DynamicText from "./dynamicText";
 const VoiceRecord = (props) => {
   const toastifyFailure = () => {
     toast.error("Enable microphone access in your browser to record", {
@@ -27,15 +28,15 @@ const VoiceRecord = (props) => {
   const [status, setStatus] = useState("")
   const ref = useRef()
   const buttonRef = useRef(null)
-    function handleClick() {
-    setTimeout(async()=>{
+  function handleClick() {
+    setTimeout(async () => {
       props.move()
       const audio = await ref.current.getBlob()
       console.log(audio)
       voiceState.sendAudio(audio)
-      const url=URL.createObjectURL(audio)
+      const url = URL.createObjectURL(audio)
       console.log(url)
-    },100)
+    }, 100)
   }
 
   function simulateClick() {
@@ -71,7 +72,7 @@ const VoiceRecord = (props) => {
                 <p className="">Find a quiet place</p>
               </li>
               <li className="mb-6">
-                <p className="">Answer question in your normal voice</p>        
+                <p className="">Answer question in your normal voice</p>
               </li>
               <li className="mb-6">
                 <p className="">Speak freely and honestly</p>
@@ -95,18 +96,21 @@ const VoiceRecord = (props) => {
 
           {status === "" && (
             <div className="">
-            <div
-              id="microphone"
-              onClick={voiceClickHandler}
-              class="sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] bg-violet-500 hover:bg-violet-600 hover:scale-125 transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto"
-            >
-              <FontAwesomeIcon
-               
-                icon={faMicrophone}
-                className="text-4xl text-white"
-              />
-            </div>
-            <p className="text-lg text-gray-500 mt-4">click to record</p>
+              <button
+                id="microphone" 
+                onClick={voiceState.voiceFeatures.registered && voiceClickHandler}
+                className={`sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] ${!voiceState.voiceFeatures.registered ? "bg-gray-500" : " bg-violet-500 hover:bg-violet-600 hover:scale-125 onepulse"}   transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto`}
+                disabled={!voiceState.voiceFeatures.registered}
+              >
+                <FontAwesomeIcon
+                  icon={faMicrophone}
+                  className="text-4xl text-white"
+                />
+              </button>
+              <p className="text-lg text-gray-500 mt-4">
+                {voiceState.voiceFeatures.registered ? "click to record" :
+                  <DynamicText texts={["getting things ready","almost there...","read these instructions"]} classes="text-sm" />}
+              </p>
             </div>
           )}
 
