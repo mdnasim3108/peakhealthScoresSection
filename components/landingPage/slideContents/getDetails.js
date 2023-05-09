@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail, getAdditionalUserInfo } from "firebase/auth"
 // import { useAuthState } from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
 import { useState, useContext, useEffect } from "react";
@@ -44,8 +44,6 @@ const GetDetails = (props) => {
   // const [value,setValue]=useState("")
   const [infoMsg, setInfoMsg] = useState("")
   const [details, setDetails] = useState({
-    username: "",
-    email: "",
     gender: "",
     year: "",
   });
@@ -61,10 +59,8 @@ const GetDetails = (props) => {
     if (yearIsValid) {
       props.move()
       voiceState.registerUser({
-        username: details.username,
         gender: details.gender,
         year: details.year,
-        email: details.email,
       });
       
     }
@@ -73,10 +69,9 @@ const GetDetails = (props) => {
   const provider = new GoogleAuthProvider();
   provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
   provider.addScope("https://www.googleapis.com/auth/user.gender.read")
-
+  provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
   const auth = getAuth(app)
- 
-
+  
   const handleClick = () => {
     signInWithPopup(auth, provider).then(async(result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -94,6 +89,10 @@ const GetDetails = (props) => {
       //   resourceName: 'people/117044242738047874308',
       //   sources: 'placeholder-value',
       // });
+      var profile = result.additionalUserInfo;
+      console.log(profile)
+      const add=getAdditionalUserInfo(result)
+      console.log(add)
       console.log(userId);
     }).catch((error) => console.log(error))
 
@@ -113,9 +112,9 @@ const GetDetails = (props) => {
     ).catch((error) => {
       console.log(error.message)
     })
-
+  
   }
-
+  
 
   return (
     <>
@@ -139,9 +138,9 @@ const GetDetails = (props) => {
           </p>
 
         </div>
-        <div className="">
+        <div className="w-[50%]">
           <form className="mt-10" onSubmit={getSubmitHandler}>
-            <input
+            {/* <input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
               id="username"
               type="text"
@@ -156,7 +155,7 @@ const GetDetails = (props) => {
               placeholder="Your Email"
               onChange={changeHandler}
               required={true}
-            />
+            /> */}
             <select
               id="gender"
               class=" border  bg-white text-gray-400 text-[17px] shadow focus:outline-none  rounded  focus:border-violet-500 block w-full py-1 px-3 mb-5"
@@ -211,14 +210,14 @@ const GetDetails = (props) => {
                   style={{ color: "white" }}
                 />} */}
             </button>
-            <h1 className="text-lg text-center text-gray-500">OR</h1>
-            <div className="w-full flex items-center justify-center mt-2">
+            {/* <h1 className="text-lg text-center text-gray-500">OR</h1> */}
+            {/* <div className="w-full flex items-center justify-center mt-2">
               <GoogleButton
                 type="light"
                 className="w-full rounded"
                 onClick={handleClick}
               />
-            </div>
+            </div> */}
           </form>
           {/* <form onSubmit={emailSubmit}>
             <input

@@ -6,11 +6,9 @@ import peakHealthUsers from "../../models/user";
  * @param {import('next').NextApiResponse} res
  */
 export default async function createUser(req, res) {
-    const {email,gender,year,ip}=req.body.details;
-    let userData
+    const {email}=req.body;
     await connectMongo();
-    if(email)     userData=await new peakHealthUsers({gender,year,ip,email});
-    else userData=await new peakHealthUsers({gender,year,ip});
-    await userData.save();
-    res.json(userData._id.valueOf())
+    const user=await peakHealthUsers.findOne({email})
+    if(user) res.json(user)
+    else res.json("not found")
 }

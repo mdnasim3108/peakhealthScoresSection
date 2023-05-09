@@ -14,13 +14,12 @@ const VoiceContextProvider = (props) => {
         return {
           loading: state.loading,
           ...action.data,
-          registering: false,
           registered: true
         }
       case "guessScore":
         return { ...state, guessScore: action.score };
       case "error":
-        return { ...state, loading: false, error: true, errorData: { ...action }, registering: false, registered: false }
+        return { ...state, loading: false, error: true, errorData: { ...action }, registered: action.registered }
       case "reset":
         return { ...state, loading: true, error: false }
       case "results":
@@ -43,7 +42,6 @@ const VoiceContextProvider = (props) => {
     loading: true,
     error: false,
     registered: false,
-    registerLoading: false,
   });
 
   let uid, filePath, token, signedURL, userId;
@@ -125,7 +123,8 @@ const VoiceContextProvider = (props) => {
           content: 1,
           head: "Registration unsucessfull",
           message: "you are not registered,check your internet connection and try again...",
-          btnLabel: "register again"
+          btnLabel: "register again",
+          registered:false
         }
       )
     }
@@ -217,7 +216,8 @@ const VoiceContextProvider = (props) => {
           content: 2,
           head: "Audio not supported",
           message: "your audio format is invalid,please re record your voice and try again...",
-          btnLabel: "record again"
+          btnLabel: "record again",
+          registered:true
         });
       }
     }
@@ -228,7 +228,8 @@ const VoiceContextProvider = (props) => {
         content: 2,
         head: "Audio not uploaded",
         message: "Something went wrong!  Please record your voice again...",
-        btnLabel: "record again"
+        btnLabel: "record again",
+        registered:true
       });
     }
   };
@@ -246,6 +247,13 @@ const VoiceContextProvider = (props) => {
       message: "To use AI powered Stress Assistant,we recommend using the latest version of Chrome,Firefox,Safari or Microsoft Edge.",
       btnLabel: "record again",
       hideButton: true
+    }),
+    failAuth:()=>dispatchVoiceFeatures({
+      type: "error",
+      content: 1,
+      head: "Authentication failed.",
+      message: "You are not registered,click here to continue as a visitor",
+      btnLabel: "continue as a visitor",
     })
   };
   return (
