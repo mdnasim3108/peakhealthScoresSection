@@ -138,7 +138,7 @@ const GetDetails = (props) => {
           </p>
 
         </div>
-        <div className="w-[50%]">
+        <div className="md:w-[50%]">
           <form className="mt-10" onSubmit={getSubmitHandler}>
             {/* <input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
