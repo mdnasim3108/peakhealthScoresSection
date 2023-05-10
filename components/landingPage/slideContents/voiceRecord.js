@@ -109,7 +109,7 @@ const VoiceRecord = (props) => {
               </button>
               <p className="text-lg text-gray-500 mt-4">
                 {voiceState.voiceFeatures.registered ? "click to record" :
-                  <DynamicText texts={["getting things ready","almost there...","read these instructions"]} classes="text-sm" />}
+                  <DynamicText texts={["getting things ready","almost there...","read these instructions"]} classes="text-lg" />}
               </p>
             </div>
           )}

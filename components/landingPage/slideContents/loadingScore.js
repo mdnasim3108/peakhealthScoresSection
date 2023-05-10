@@ -35,6 +35,7 @@ const loadingScore = () => {
           "computing your stress level",
           "generating your stress report",
         ]}
+        classes="sm:text-2xl text-lg"
       />
       <h1 className="sm:text-2xl text-lg font-sans font-bold mt-[5rem] mb-5">
         Can you guess, what's your stress level!!!

@@ -78,12 +78,11 @@ const YoutubeComp = (props) => {
 
       <div className='flex flex-col  justify-center'>
 
-
         <div className='sm:flex hidden justify-between  relative top-[0.7rem] h-0'>
-          {showText.great && !activeIcons.thumbsUp && <p className='text-[0.7rem] popText relative left-4  text-gray-600  text-center'>great</p>}
-          {showText.interesting && !activeIcons.light && <p className='text-[0.7rem] popText relative left-[2.8rem]  text-gray-500 text-center'>interesting</p>}
-          {showText.like && !activeIcons.heart && <p className='text-[0.7rem] popText relative left-[5.9rem]  text-gray-500 text-center'>like</p>}
-          {showText.dislike && !activeIcons.thumbsDown && <p className='text-[0.7rem] popText relative left-[8rem]  text-gray-500 text-center'>dislike</p>}
+          {showText.great && !activeIcons.thumbsUp && <p className='text-[0.7rem] popText relative left-4  text-gray-600  text-center bottom-1'>Like</p>}
+          {showText.interesting && !activeIcons.light && <p className='text-[0.7rem] popText relative left-[2.8rem]  text-gray-500 text-center bottom-1'>interesting</p>}
+          {showText.like && !activeIcons.heart && <p className='text-[0.7rem] popText relative left-[5.8rem]  text-gray-500 text-center bottom-1'>lovely</p>}
+          {showText.dislike && !activeIcons.thumbsDown && <p className='text-[0.7rem] popText relative left-[8rem]  text-gray-500 text-center bottom-1'>dislike</p>}
         </div>
 
         <div className='  px-4 relative border shadow-lg h-[3.6rem] mt-2 flex items-center rounded-full '>
