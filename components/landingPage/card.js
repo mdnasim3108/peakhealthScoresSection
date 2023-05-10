@@ -18,18 +18,17 @@ import ContentContext from "./contextStrore/contentContext";
 import { faMagnifyingGlassChart } from "@fortawesome/free-solid-svg-icons";
 import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import Auth from "./slideContents/auth";
 const Card = () => {
   const content = useContext(ContentContext)
-  const [comp, setComp] = useState(false)
+  const [showAuth, setShowAuth] = useState({auth:false,signUp:false})
   const nextPartHandler = () => {
     setProgressBarState(
       { contentNumber: 0, contentArray: contentArray2 }
     )
   };
   const moveToNext = () => {
-    setTimeout(() => {
-      setComp(true)
-    }, 3000)
+    
   };
   useEffect(() => {
     setProgressBarState((prev) => {
@@ -70,7 +69,7 @@ const Card = () => {
     contentNumber: 0,
     contentArray: [
       {
-        com:<GetStarted move={moveHandler}/>,
+        com:<GetStarted move={moveHandler} onclick={()=>setShowAuth({auth:true,signUp:false})} />,
         working: true,
         completed: false,
         animate: true,
@@ -103,7 +102,7 @@ const Card = () => {
         icon: faMagnifyingGlassChart,
       },
       {
-        com: <Recommendations move={() => console.log("finished")} />,
+        com: <Recommendations move={() => console.log("finished")} onclick={()=>setShowAuth({auth:true,signUp:true})} />,
         working: false,
         completed: false,
         animate: false,
@@ -171,7 +170,7 @@ const Card = () => {
               classNames='fade'
               timeout={300}
             >
-              {progressBarState.contentArray[content.contentNumber].com}
+              {!showAuth.auth ? progressBarState.contentArray[content.contentNumber].com:<Auth confirm={()=>setShowAuth({auth:false,signUp:false})} signUp={showAuth.signUp}/>}
             </CSSTransition>
           </SwitchTransition>
 
