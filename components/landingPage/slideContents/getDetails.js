@@ -76,7 +76,6 @@ const GetDetails = (props) => {
 
   const auth = getAuth(app)
  
-
   const handleClick = () => {
     signInWithPopup(auth, provider).then(async(result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -97,6 +96,13 @@ const GetDetails = (props) => {
       console.log(userId);
     }).catch((error) => console.log(error))
 
+  }
+
+  const signInWithGoogleClick = () =>{
+      console.log("Button Clicked")
+      signInWithPopup(auth,provider).then((result)=>{
+        console.log(result);
+      }).catch((error) => console.log(error))
   }
 
   const emailSubmit = (e) => {
@@ -218,7 +224,7 @@ const GetDetails = (props) => {
               <GoogleButton
                 type="light"
                 className="w-full rounded"
-                onClick={handleClick}
+                onClick={signInWithGoogleClick}
               />
             </div>
           </form>
