@@ -20,7 +20,7 @@ import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Image from "next/image";
 import Auth from "./slideContents/auth";
-import logoImg from "../../public/peakLogo.png"
+import logoImg from "../../public/logo2.png"
 const Card = () => {
   const content = useContext(ContentContext)
   const [showAuth, setShowAuth] = useState({ auth: false, signUp: false })
@@ -161,7 +161,7 @@ const Card = () => {
         <div className="lg:flex-[1] flex lg:flex-col py-5 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
           <Image
             src={logoImg}
-            className="md:w-[2rem] relative md:bottom-[3rem] right-[2rem]"  
+            className="md:w-[2rem] w-[1.7rem] relative md:bottom-[5vh] bottom-[1vh] right-[13%]"  
           />
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />
