@@ -41,7 +41,7 @@ const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [yearIsValid, setYearIsValid] = useState(true);
   const [email, setEmail] = useState("")
-  // const [value,setValue]=useState("")
+
   const [infoMsg, setInfoMsg] = useState("")
   const [details, setDetails] = useState({
     gender: "",
@@ -72,62 +72,7 @@ const GetDetails = (props) => {
   provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
   const auth = getAuth(app)
   
- 
-  const handleClick = () => {
-    signInWithPopup(auth, provider).then(async(result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const userId = result.user;
-      // const service = google.people({version: 'v1', auth})
-      // const res = await service.people.connections.list({
-      //   resourceName: 'people/me',
-      //   pageSize: 10,
-      //   personFields: 'names,emailAddresses',
-      // });
-      
-      // const res1 = await people.people.get({
-      //   personFields: 'birthdays,genders',
-      //   'requestMask.includeField': 'person.names',
-      //   resourceName: 'people/117044242738047874308',
-      //   sources: 'placeholder-value',
-      // });
-      var profile = result.additionalUserInfo;
-      console.log(profile)
-      const add=getAdditionalUserInfo(result)
-      console.log(add)
-      console.log(userId);
-    }).catch((error) => console.log(error))
-
-  }
-
-  const signInWithGoogleClick = () =>{
-      console.log("Button Clicked")
-      signInWithPopup(auth,provider).then((result)=>{
-        console.log(result);
-      }).catch((error) => console.log(error))
-  }
-
-  const emailSubmit = (e) => {
-    e.preventDefault();
-    sendSignInLinkToEmail(auth, email, {
-      url: "https://check.peakhealth.tech/",
-      handleCodeInApp: true
-    }).then(
-      (result) => {
-        console.log("Successfull")
-        console.log(result)
-        setInfoMsg("Please check Your Inbox for authentication")
-      }
-    ).catch((error) => {
-      console.log(error.message)
-    })
   
-  }
-  
-
-
-
-    
-    
   return (
     <>
       <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
