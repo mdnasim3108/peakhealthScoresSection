@@ -21,7 +21,7 @@ const dynamicText = (props) => {
 
 
   return (
-    <h1 className={"sm:text-2xl text-lg font-sans status "+props.classes}>
+    <h1 className={" font-sans status "+props.classes}> 
       {props.texts[status]}
     </h1>
   );

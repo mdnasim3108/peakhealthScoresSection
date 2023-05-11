@@ -1,6 +1,5 @@
 import Image from "next/image"
 import authImage from "../../../public/auth.jpg";
-import GoogleButton from 'react-google-button'
 import { GoogleAuthProvider, signInWithPopup, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
 import app from "../../../firebase.config";
 import googleImage from "../../../public/googleIcon.svg";
@@ -183,7 +182,7 @@ const Auth = (props) => {
                     src={googleImage}
                     className="mr-3 rounded md:w-[2rem] sm:w-[1.8rem] w-[1.5rem]"
                 />
-                <p className="text-lg  text-white ">continue with google</p>
+                <p className="text-lg  text-white ">continue with Google</p>
             </button>
             <div className="flex items-center mt-4 md:w-[70%] w-full">
                 <div className="bg-gray-300 w-[48%] h-[1px]" />
@@ -204,7 +203,7 @@ const Auth = (props) => {
                         }}
                     />
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!value.isValid ? "visible" : "invisible"}`}>Enter a valid email</p>
-                    <label className="text-lg text-left ">Password</label>
+                    <label className="text-lg text-left ">{!props.signUp?"Password":"set password"}</label>
                     <input
                         className={`border-[1.5px] mt-1  rounded shadow appearance-none ${pass.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
                         placeholder="Your Password"
@@ -218,7 +217,7 @@ const Auth = (props) => {
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!pass.isValid ? "visible" : "invisible"}`}>Enter atleast 6 characters</p>
                     <button
                         type="submit"
-                        className="bg-[#5c5c6b] mt-4 text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
+                        className="border border-violet-500 text-lg bg-violet-500 hover:bg-violet-600 text-white  mt-4 w-full py-3 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
                     >
                         {props.signUp ? "sign up" : "sign in"}
                     </button>
