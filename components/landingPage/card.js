@@ -168,7 +168,6 @@ const Card = () => {
             })}
         </div>
 
-
         <div className=" w-full   px-5 rounded lg:m-0 mt-5 ">
           <SwitchTransition >
             <CSSTransition
