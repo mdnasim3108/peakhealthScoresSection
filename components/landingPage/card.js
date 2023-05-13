@@ -161,11 +161,11 @@ const Card = () => {
         <div className="lg:flex-[1] flex lg:flex-col py-5 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
           <Image
             src={logoImg}
-            className="md:w-[2rem] w-[1.7rem] relative md:bottom-[5vh] bottom-[1vh] right-[13%]"  
+            className="md:w-[2rem] w-[1.7rem] md:relative md:bottom-[5vh] mr-10 sm:m-0"
           />
-          {progressBarState.contentArray.map((el) => {
-            return <ProgressPoint icon={el.icon} progress={el} />
-          })}
+            {progressBarState.contentArray.map((el) => {
+              return <ProgressPoint icon={el.icon} progress={el}  />   
+            })}
         </div>
 
 

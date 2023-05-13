@@ -7,7 +7,7 @@ const progressPoint = (props) => {
   const classes = `${props.progress.working || props.progress.completed ? "text-[#6ed1f9]" : "text-gray-400"
     }`;
   return (
-    <div className="flex flex-col lg:flex-row w-full relative right-6 md:right-0">
+    <div className={`flex flex-col lg:flex-row  w-full relative right-6 md:right-0`}>
       <div className="hidden lg:flex lg:flex-row flex-col w-full justify-between">
         {props.icon === "voice" && props.progress.mate && <RecordVoiceOver className={`text-2xl mt-2  ${classes} transition-all duration-300 ease-linear`}
         />}

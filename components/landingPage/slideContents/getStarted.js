@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 const GetStarted = (props) => {
-  const [showArrow, setShowArrow] = useState(true);
   const content = useContext(ContentContext)
   const nodeRef = useRef(null);
   return (
@@ -20,7 +19,7 @@ const GetStarted = (props) => {
         <div className="flex flex-col items-center">
           <Image
             src={getStartImage}
-            className="xl:w-[20rem] md:w-[16rem] sm:w-[12rem] mb-4"
+            className="xl:w-[20rem] md:w-[16rem] w-[15rem]  mb-4"
             alt="getStart"
           />
           <p className="font-sans text-lg mb-5 text-center text-gray-500">
