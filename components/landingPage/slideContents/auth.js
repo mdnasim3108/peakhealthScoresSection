@@ -140,8 +140,26 @@ const Auth = (props) => {
             setPass({ ...pass, isValid: false })
             return
         }
-        setHideSign(true)
-
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(
+                auth,
+                value.value,
+                pass.value
+            );
+            const user = userCredentials.user;
+            console.log(user)
+            await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: user.email })
+            toastifySuccess("sign up sucessfull!")
+            setTimeout(() => {
+                content.hideSignUp()
+                props.confirm()
+            }, 3000)
+        }
+        catch {
+            toastifyFailure("user already exists!")
+        }
+        // setHideSign(true)
+    
     }
     const forgotSubmitHandler = async (e) => {
         e.preventDefault()
