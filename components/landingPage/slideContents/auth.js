@@ -146,10 +146,11 @@ const Auth = (props) => {
             toastifyFailure("user already exits!!")
             return
         }
-        const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
-        console.log(res1)
-        setHideSign(true)
-    
+        if(!res.data.audio){
+            const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
+            console.log(res1)
+            setHideSign(true)
+        }
     }
     const forgotSubmitHandler = async (e) => {
         e.preventDefault()
