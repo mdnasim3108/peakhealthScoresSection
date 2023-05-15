@@ -141,12 +141,13 @@ const Auth = (props) => {
             return
         }
         const res = await axios.post("/api/isAuth", { email: value.value })
+        console.log(res)
         if(res.data.audio){
             toastifyFailure("user already exits!!")
             return
         }
         const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
-        console.log(res)
+        console.log(res1)
         setHideSign(true)
     
     }
