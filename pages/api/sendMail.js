@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         await sendgrid.send(emailData);
         res.status(200).json({ message: 'Email sent successfully' });
       } catch (error) {
-        res.status(500).json({ message: 'Failed to send email' });
+        res.json({ message:error });
         console.log(error)
       }
     } else {
