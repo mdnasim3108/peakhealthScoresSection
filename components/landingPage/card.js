@@ -175,8 +175,8 @@ const Card = () => {
               classNames='fade'
               timeout={300}
             >
-              {/* {!showAuth.auth ? progressBarState.contentArray[content.contentNumber].com : <Auth confirm={() => setShowAuth({ auth: false, signUp: false })} signUp={showAuth.signUp} />} */}
-              <Auth signUp={true}/>
+              {!showAuth.auth ? progressBarState.contentArray[content.contentNumber].com : <Auth confirm={() => setShowAuth({ auth: false, signUp: false })} signUp={showAuth.signUp} />}
+              {/* <Auth signUp={true}/> */}
             </CSSTransition>
           </SwitchTransition>
 
