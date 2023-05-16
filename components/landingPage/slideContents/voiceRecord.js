@@ -10,9 +10,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { WavRecorder } from "webm-to-wav-converter";
 import DynamicText from "./dynamicText";
+import { isMicrophoneInUse } from "@/utils/micCheck";
 const VoiceRecord = (props) => {
-  const toastifyFailure = () => {
-    toast.error("Enable microphone access in your browser to record", {
+  const toastifyFailure = (str) => {
+    toast.error(str, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -47,6 +48,10 @@ const VoiceRecord = (props) => {
 
   }, [])
   const voiceClickHandler = async () => {
+    // if(isMicrophoneInUse()){
+    //   toastifyFailure("your mic is currently in use by other apps..")
+    //   return
+    // }
     await navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
@@ -54,7 +59,7 @@ const VoiceRecord = (props) => {
         ref.current.start()
       })
       .catch((err) => {
-        toastifyFailure();
+        toastifyFailure("Enable microphone access in your browser to record");
       });
   };
   return (
