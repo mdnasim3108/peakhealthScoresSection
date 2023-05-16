@@ -6,7 +6,9 @@ import sendgrid from '@sendgrid/mail';
  */
 
 export default async function handler(req, res) {
+  try{
 
+ 
     if (req.method === 'POST') {
       const { to,otp } = req.body;
       
@@ -18,7 +20,7 @@ export default async function handler(req, res) {
         subject:"OTP verification",
         text: `The OTP for authentication is ${otp}`,
       };
-  
+      
       try {
         await sendgrid.send(emailData);
         res.status(200).json({ message: 'Email sent successfully' });
@@ -29,4 +31,8 @@ export default async function handler(req, res) {
     } else {
       res.status(405).json({ message: 'Method not allowed' });
     }
+  }
+  catch(er){
+    res.json(er)
+  }
   }

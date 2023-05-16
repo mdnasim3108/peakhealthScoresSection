@@ -1,11 +1,12 @@
 import navigator from 'navigator';
 export const isMicrophoneInUse = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      stream.getTracks().forEach((track) => track.stop());
-      return true;
-    } catch (error) {
-      
-      return false;
-    }
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const audioInputs = devices.filter((device) => device.kind === 'audioinput');
+    
+        const microphoneInUse = audioInputs.some((input) => input.label !== '');
+        return microphoneInUse;
+      } catch (error) {
+        return false;
+      }
   };

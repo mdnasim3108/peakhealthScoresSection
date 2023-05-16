@@ -48,7 +48,7 @@ const VoiceRecord = (props) => {
 
   }, [])
   const voiceClickHandler = async () => {
-    // if(isMicrophoneInUse()){
+    // if(await isMicrophoneInUse()){
     //   toastifyFailure("your mic is currently in use by other apps..")
     //   return
     // }
