@@ -143,7 +143,7 @@ const Auth = (props) => {
         const res = await axios.post("/api/isAuth", { email: value.value })
         console.log(res)
         if(res.data.audio){
-            toastifyFailure("user already exits!!")
+            toastifyFailure("user already exists!!")
             return
         }
 
