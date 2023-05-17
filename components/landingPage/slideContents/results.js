@@ -83,7 +83,7 @@ const results = (props) => {
           <p className="sm:text-lg text-sm text-gray-400">High Stress</p>
         </div>
       </div>
-      <div className="flex justify-center items-center md:justify-around md:flex-row flex-col mt-[3rem]">
+      <div className="flex justify-center items-center md:justify-around md:flex-row flex-col">
         <div className="">
           <ReactSpeedometer
             value={
@@ -119,7 +119,8 @@ const results = (props) => {
           />
         </div>
       </div>
-      <div className="relative bottom-20">
+      
+      <div className="relative bottom-[3.5rem]">
         <button
           id="personalizedRecommendation"
           className="rounded border-violet-500 bg-violet-500 hover:bg-violet-600 mt-3 p-2 text-white sm:text-lg text-sm font-sans"
@@ -127,9 +128,12 @@ const results = (props) => {
         >
           Check my personalized recommendations
         </button>
-        <p className="translate-y-5">Important Disclaimer:<p className="text-gray-400 inline">
-          Please note that this stress score is only intended to provide a general indication of your job stress levels and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. If you have any concerns about your stress levels or overall health, please consult with a doctor or a qualified healthcare professional
-        </p></p>
+        <div className="sm:m-0 mt-8">
+          <p className="text-center sm:text-left">Important Disclaimer:</p>
+          <p className="text-gray-400 text-left">
+            Please note that this stress score is only intended to provide a general indication of your job stress levels and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. If you have any concerns about your stress levels or overall health, please consult with a doctor or a qualified healthcare professional
+          </p>
+        </div>
       </div>
 
     </div>

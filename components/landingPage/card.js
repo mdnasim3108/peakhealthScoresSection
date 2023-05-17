@@ -21,6 +21,7 @@ import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Image from "next/image";
 import Auth from "./slideContents/auth";
 import logoImg from "../../public/logo2.png"
+import Results from "./slideContents/results";
 const Card = () => {
   const content = useContext(ContentContext)
   const [showAuth, setShowAuth] = useState({ auth: false, signUp: false })
@@ -177,6 +178,7 @@ const Card = () => {
             >
               {!showAuth.auth ? progressBarState.contentArray[content.contentNumber].com : <Auth confirm={() => setShowAuth({ auth: false, signUp: false })} signUp={showAuth.signUp} />}
               {/* <Auth signUp={true}/> */}
+              {/* <Results/> */}
             </CSSTransition>
           </SwitchTransition>
 
