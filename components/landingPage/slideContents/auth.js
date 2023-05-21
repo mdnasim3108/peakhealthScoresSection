@@ -10,6 +10,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 const Auth = (props) => {
+    const [secret, setSecret] = useState(Math.floor(Math.random() * 1000000))
+    const [otp, setOtp] = useState("")
+    const [otpValid, setOtpValid] = useState(true)
     const toastifySuccess = (msg) => {
         toast.success(msg, {
             position: "top-center",
@@ -40,8 +43,8 @@ const Auth = (props) => {
     const auth = getAuth(app)
     const [value, setValue] = useState({ value: "", isValid: true })
     const [pass, setPass] = useState({ value: "", isValid: true })
-    const [showForgot, setShowForgot] = useState(false)
-    const [email,setEmail]=useState("")
+    const [hideSign, setHideSign] = useState(false)
+    const [email, setEmail] = useState("")
     const signInHandleClick = async () => {
         signInWithPopup(auth, provider).then(async (result) => {
             console.log(result.user.email)
@@ -70,6 +73,12 @@ const Auth = (props) => {
     const signUpHandleClick = () => {
         signInWithPopup(auth, provider).then(async (result) => {
             console.log(result.user.email)
+            const res = await axios.post("/api/isAuth", { email: result.user.email })
+            console.log(res.data)
+            if (res.data.audio) {
+                toastifyFailure("user already exists!")
+                return
+            }
             await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: result.user.email })
             toastifySuccess("sign up sucessfull!")
             setTimeout(() => {
@@ -131,37 +140,100 @@ const Auth = (props) => {
             setPass({ ...pass, isValid: false })
             return
         }
-        try {
-            const userCredentials = await createUserWithEmailAndPassword(
-                auth,
-                value.value,
-                pass.value
-            );
-            const user = userCredentials.user;
-            console.log(user)
-            await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: user.email })
-            toastifySuccess("sign up sucessfull!")
-            setTimeout(() => {
-                content.hideSignUp()
-                props.confirm()
-            }, 3000)
-        }
-        catch {
-            toastifyFailure("user already exists!")
+        const res = await axios.post("/api/isAuth", { email: value.value })
+        console.log(res)
+        if(res.data.audio){
+            toastifyFailure("user already exists!!")
+            return
         }
 
+        const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
+        console.log(res1)
+        setHideSign(true)
+    
     }
-    const forgotSubmitHandler =async (e) => {
+    const forgotSubmitHandler = async (e) => {
         e.preventDefault()
         try {
-          const userCredentials = await sendPasswordResetEmail(auth, email);
-          toastifySuccess("password reset link sent to the registered email")
-          setValue({value:email,isValid:true})
-          setShowForgot(false)
-        } catch  {
-          toastifyFailure("The email is not registered!")
+            const userCredentials = await sendPasswordResetEmail(auth, email);
+            toastifySuccess("password reset link sent to the registered email")
+            setValue({ value: email, isValid: true })
+            setHideSign(false)
+        } catch {
+            toastifyFailure("The email is not registered!")
         }
     }
+    const otpSubmitHandler = async (e) => {
+        e.preventDefault()
+        if (secret === +otp) {
+            try {
+                const userCredentials = await createUserWithEmailAndPassword(
+                    auth,
+                    value.value,
+                    pass.value
+                );
+                const user = userCredentials.user;
+                console.log(user)
+                await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: user.email })
+                toastifySuccess("sign up sucessfull!")
+                setTimeout(() => {
+                    content.hideSignUp()
+                    props.confirm()
+                }, 3000)
+            }
+            catch {
+                toastifyFailure("user already exists!")
+            }
+        }
+        else {
+            setOtpValid(false)
+        }
+    }
+    const signInHideContent = <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
+        <div className="md:w-[70%] w-full text-center">
+            <form onSubmit={forgotSubmitHandler} className="text-center" >
+                <label className="text-lg text-center my-4">Enter the registered Email</label>
+                <input
+                    className={`border-[1.5px] my-4  rounded shadow appearance-none border-gray-400 focus:border-gray-600    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
+                    placeholder="Email"
+                    type="email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                    type="submit"
+                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
+                >
+                    send password reset link
+                </button>
+            </form>
+        </div>
+    </div>
+
+    const signUpHideContent = <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
+        <div className="md:w-[70%] w-full text-center">
+            <form onSubmit={otpSubmitHandler} className="text-center" >
+                <label className="text-lg text-center my-4">{`Enter the OTP sent to ${value.value}`}</label>
+                <input
+                    className={`border-[1.5px] my-4  rounded shadow appearance-none ${!otpValid ? "border-red-400 focus:border-red-600" : "border-gray-400 focus:border-gray-600"}      text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
+                    placeholder="OTP"
+                    type="number"
+                    required
+                    onChange={(e) => setOtp(e.target.value)}
+                />
+                <p className={`text-sm mb-3 ml-2 text-red-500  ${!otpValid ? "visible" : "invisible"}`}>The OTP is inCorrect</p>
+                <button
+                    type="submit"
+                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
+                >
+                    Verify
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+
 
     const submitHandler = props.signUp ? signUpSubmitHandler : signInSubmitHandler
 
@@ -173,7 +245,7 @@ const Auth = (props) => {
                 className="md:w-full w-[80%]"
             />
         </div>
-        {!showForgot ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
+        {!hideSign ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
             <button
                 className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2  rounded flex items-center justify-center transition-all duration-75 ease-linear"
                 onClick={handleClick}
@@ -203,7 +275,7 @@ const Auth = (props) => {
                         }}
                     />
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!value.isValid ? "visible" : "invisible"}`}>Enter a valid email</p>
-                    <label className="text-lg text-left ">{!props.signUp?"Password":"set password"}</label>
+                    <label className="text-lg text-left ">{!props.signUp ? "Password" : "set password"}</label>
                     <input
                         className={`border-[1.5px] mt-1  rounded shadow appearance-none ${pass.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
                         placeholder="Your Password"
@@ -223,7 +295,7 @@ const Auth = (props) => {
                     </button>
                     {!props.signUp && <p
                         className="mt-3 text-center cursor-pointer underline"
-                        onClick={() => setShowForgot(true)}
+                        onClick={() => setHideSign(true)}
                     >
                         forgot password
                     </p>}
@@ -232,26 +304,7 @@ const Auth = (props) => {
                 </p>
             </div>
         </div> :
-            <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
-                <div className="md:w-[70%] w-full text-center">
-                    <form onSubmit={forgotSubmitHandler} className="text-center" >
-                        <label className="text-lg text-center my-4">Enter Your Registered email</label>
-                        <input
-                            className={`border-[1.5px] my-4  rounded shadow appearance-none border-gray-400 focus:border-gray-600    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
-                            placeholder="Email"
-                            type="email"
-                            required
-                            onChange={(e)=>setEmail(e.target.value)}
-                        />
-                        <button
-                            type="submit"
-                            className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
-                        >
-                            send password reset link
-                        </button>
-                    </form>
-                </div>
-            </div>
+            !props.signUp ? signInHideContent : signUpHideContent
         }
     </div>
 
