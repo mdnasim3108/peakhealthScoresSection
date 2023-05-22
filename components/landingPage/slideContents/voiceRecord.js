@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { WavRecorder } from "webm-to-wav-converter";
 import DynamicText from "./dynamicText";
-import { isMicrophoneInUse } from "@/utils/micCheck";
+// import checkMicrophoneConflict from "@/utils/micCheck";
 const VoiceRecord = (props) => {
   const toastifyFailure = (str) => {
     toast.error(str, {
@@ -43,6 +43,9 @@ const VoiceRecord = (props) => {
   function simulateClick() {
     buttonRef.current.click()
   }
+  // useEffect(()=>{
+  //   checkMicrophoneConflict()
+  // })
   useEffect(() => {
     ref.current = new WavRecorder()
 
