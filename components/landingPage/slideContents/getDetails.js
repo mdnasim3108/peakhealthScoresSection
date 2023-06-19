@@ -10,6 +10,9 @@ import voiceContext from "../contextStrore/voiceContext";
 import ContentContext from "../contextStrore/contentContext";
 
 
+import GoogleButton from 'react-google-button'
+import dynamic from "next/dynamic";
+import generateRandomEmail from "@/utils/randomEmail";
 // import { google } from "googleapis";
 // const google = dynamic(() => import(('googleapis')))
 const GetDetails = (props) => {
@@ -56,10 +59,12 @@ const GetDetails = (props) => {
   const getSubmitHandler = async (e) => {
     e.preventDefault();
     if (yearIsValid) {
+      const randomEmail=generateRandomEmail()
       props.move()
       voiceState.registerUser({
         gender: details.gender,
         year: details.year,
+        email:randomEmail
       });
       
     }

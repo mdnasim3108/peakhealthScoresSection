@@ -9,8 +9,7 @@ export default async function createUser(req, res) {
     const {email,gender,year,ip}=req.body.details;
     let userData
     await connectMongo();
-    if(email)     userData=await new peakHealthUsers({gender,year,ip,email});
-    else userData=await new peakHealthUsers({gender,year,ip});
+    userData=await new peakHealthUsers({gender,year,ip,email});
     await userData.save();
     res.json(userData._id.valueOf())
 }
