@@ -17,8 +17,8 @@ const videoCard = (props) => {
       <Image
         src={props.thumbnail}
         // src="https://i.ytimg.com/vi/t1rRo6cgM_E/hqdefault.jpg"
-        width={300}
-        height={300}
+        width={400}
+        height={400}
         className=" sm:w-[22%] w-full mr-[3%] sm:h-[7rem] h-[11rem]  inline object-cover rounded-lg"
         alt="getStart"
       />
