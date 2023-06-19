@@ -1,15 +1,14 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import app from "../../../firebase.config";
-import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail, getAdditionalUserInfo } from "firebase/auth"
+import { GoogleAuthProvider, getAuth  } from "firebase/auth"
 // import { useAuthState } from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 // import { Check } from "@mui/icons-material";
 // import { data } from "autoprefixer";
 import ContentContext from "../contextStrore/contentContext";
-import GoogleButton from 'react-google-button'
-import dynamic from "next/dynamic";
+
 
 // import { google } from "googleapis";
 // const google = dynamic(() => import(('googleapis')))
