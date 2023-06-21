@@ -16,7 +16,7 @@ const authModal = (props) => {
     }
     const OverLay = (props) => {
         return (
-            <div className="authModal top-[10vh] sm:top-0 relative   sm:pb-10 p-4 sm:px-0 sm:pt-0  w-[70rem] max-w-[90%] bg-white rounded shadow-lg z-30">
+            <div className="authModal top-[5vh] sm:top-0 relative   sm:pb-10 p-4 sm:px-0 sm:pt-0  w-[70rem] max-w-[90%] bg-white rounded shadow-lg z-30">
                 <div className="w-full cursor-pointer flex justify-end ">
                     <div
                      className="rounded-full w-[25px] h-[25px] bg-violet-500 hover:bg-red-500 pl-[0.3rem] cursor-pointer transition-all duration-100 ease-linear relative sm:left-3 sm:bottom-3 left-5 bottom-5"
