@@ -4,7 +4,6 @@ import { useState, useContext, useRef } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import ContentContext from "../contextStrore/contentContext";
 import generateRandomEmail from "@/utils/randomEmail";
-
 const GetDetails = (props) => {
   const voiceState = useContext(voiceContext);
   const [showText,setShowText]=useState(false)

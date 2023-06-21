@@ -36,7 +36,7 @@ export default async function createUser(req, res) {
 
     const channelTitle = responseData.data.items[0].snippet.channelTitle
     const publishedAt = responseData.data.items[0].snippet.publishedAt.split("T")[0]
-    const thumbnailUrl = responseData.data.items[0].snippet.thumbnails.default.url
+    const thumbnailUrl = responseData.data.items[0].snippet.thumbnails.high.url
     const categoryId = responseData.data.items[0].snippet.categoryId
     const tag = responseData.data.items[0].snippet.tags
     const views = responseData.data.items[0].statistics.viewCount
