@@ -24,7 +24,7 @@ const modal = (props) => {
                 </div>
                 <div className="text-center p-10">
                     <h1 className="text-2xl font-sans mb-5">{props.head}</h1>
-                    <p className="text-gray-400 text-lg mb-5">{props.message}</p> 
+                    <p className="text-gray-400 text-lg mb-5">{props.message}</p>  
                     {!props.hideButton && <button
                     className="rounded-full p-2 px-5  text-white bg-violet-400 hover:bg-violet-600 transition-all ease-linear duration-200"
                     onClick={()=>{

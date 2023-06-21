@@ -41,7 +41,7 @@ const GetStarted = (props) => {
             Start My 1 Min Stress Check
           </button>
           <button
-            className="border mt-4 tracking-wide text-lg bg-violet-500 border-violet-500 text-white  hover:bg-violet-600  font-bold sm:px-[3.9rem] sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            className="border lg:hidden block mt-4 tracking-wide text-lg bg-violet-500 border-violet-500 text-white  hover:bg-violet-600  font-bold sm:px-[3.9rem] sm:py-3 px-4 py-2 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             onClick={props.onclick}
           >
             Existing user? sign in

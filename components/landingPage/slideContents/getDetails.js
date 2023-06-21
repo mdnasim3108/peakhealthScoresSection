@@ -1,50 +1,16 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import app from "../../../firebase.config";
-import { GoogleAuthProvider, signInWithPopup, getAuth, sendSignInLinkToEmail, getAdditionalUserInfo } from "firebase/auth"
-// import { useAuthState } from "react-firebase-hooks/auth"
 import processing from "../../../public/processing1.json";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useRef } from "react";
 import voiceContext from "../contextStrore/voiceContext";
-// import { Check } from "@mui/icons-material";
-// import { data } from "autoprefixer";
 import ContentContext from "../contextStrore/contentContext";
-import GoogleButton from 'react-google-button'
-import dynamic from "next/dynamic";
 import generateRandomEmail from "@/utils/randomEmail";
-// import { google } from "googleapis";
-// const google = dynamic(() => import(('googleapis')))
+
 const GetDetails = (props) => {
-  // const people = google.people('v1');
-  // const gapiauth = new google.auth.GoogleAuth({
-  //   scopes: [
-  //     'https://www.googleapis.com/auth/contacts',
-  //     'https://www.googleapis.com/auth/contacts.readonly',
-  //     'https://www.googleapis.com/auth/directory.readonly',
-  //     'https://www.googleapis.com/auth/user.addresses.read',
-  //     'https://www.googleapis.com/auth/user.birthday.read',
-  //     'https://www.googleapis.com/auth/user.emails.read',
-  //     'https://www.googleapis.com/auth/user.gender.read',
-  //     'https://www.googleapis.com/auth/user.organization.read',
-  //     'https://www.googleapis.com/auth/user.phonenumbers.read',
-  //     'https://www.googleapis.com/auth/userinfo.email',
-  //     'https://www.googleapis.com/auth/userinfo.profile',
-  //   ],
-  // });
-  // const initClient=async()=>{
-  //   const authClient = await gapiauth.getClient();
-  //   google.options({auth: authClient});
-  // }
-  // useEffect(async()=>{
-  //     initClient()
-  // },[])
-  
   const voiceState = useContext(voiceContext);
+  const [showText,setShowText]=useState(false)
   const [yearIsValid, setYearIsValid] = useState(true);
-  const [email, setEmail] = useState("")
-  // const [value,setValue]=useState("")
-  const [infoMsg, setInfoMsg] = useState("")
   const [details, setDetails] = useState({
-    gender: "",
+    gender: null,
     year: "",
   });
   const content = useContext(ContentContext)
@@ -56,80 +22,34 @@ const GetDetails = (props) => {
   };
   const getSubmitHandler = async (e) => {
     e.preventDefault();
-    if (yearIsValid) {
-      const randomEmail=generateRandomEmail()
+    
+    if(!details.gender){
+      setShowText(true)
+      return
+    } 
+
+    if (yearIsValid && details.gender) {
+      const randomEmail = generateRandomEmail()
       props.move()
       voiceState.registerUser({
         gender: details.gender,
         year: details.year,
-        email:randomEmail
+        email: randomEmail
       });
-      
+
     }
   };
 
-  const provider = new GoogleAuthProvider();
-  provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
-  provider.addScope("https://www.googleapis.com/auth/user.gender.read")
-  provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
-  const auth = getAuth(app)
-  
- 
-  const handleClick = () => {
-    signInWithPopup(auth, provider).then(async(result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const userId = result.user;
-      // const service = google.people({version: 'v1', auth})
-      // const res = await service.people.connections.list({
-      //   resourceName: 'people/me',
-      //   pageSize: 10,
-      //   personFields: 'names,emailAddresses',
-      // });
-      
-      // const res1 = await people.people.get({
-      //   personFields: 'birthdays,genders',
-      //   'requestMask.includeField': 'person.names',
-      //   resourceName: 'people/117044242738047874308',
-      //   sources: 'placeholder-value',
-      // });
-      var profile = result.additionalUserInfo;
-      console.log(profile)
-      const add=getAdditionalUserInfo(result)
-      console.log(add)
-      console.log(userId);
-    }).catch((error) => console.log(error))
-
-  }
-
-  const signInWithGoogleClick = () =>{
-      console.log("Button Clicked")
-      signInWithPopup(auth,provider).then((result)=>{
-        console.log(result);
-      }).catch((error) => console.log(error))
-  }
-
-  const emailSubmit = (e) => {
-    e.preventDefault();
-    sendSignInLinkToEmail(auth, email, {
-      url: "https://check.peakhealth.tech/",
-      handleCodeInApp: true
-    }).then(
-      (result) => {
-        console.log("Successfull")
-        console.log(result)
-        setInfoMsg("Please check Your Inbox for authentication")
-      }
-    ).catch((error) => {
-      console.log(error.message)
-    })
-  
-  }
-  
 
 
 
-    
-    
+
+
+
+
+
+
+
   return (
     <>
       <h1 className="sm:text-3xl text-xl  text-center font-bold font-sans relative top-5">
@@ -154,34 +74,36 @@ const GetDetails = (props) => {
         </div>
         <div className="md:w-[50%]">
           <form className="mt-10" onSubmit={getSubmitHandler}>
-            {/* <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
-              id="username"
-              type="text"
-              placeholder="Your Name"
-              onChange={changeHandler}
-              required={true}
-            />
-            <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500"
-              id="email"
-              type="email"
-              placeholder="Your Email"
-              onChange={changeHandler}
-              required={true}
-            /> */}
-            <select
-              id="gender"
-              class=" border  bg-white text-gray-400 text-[17px] shadow focus:outline-none  rounded  focus:border-violet-500 block w-full py-1 px-3 mb-5"
-              required={true}
-              onChange={changeHandler}
-            >
-              <option selected disabled hidden value="">
-                Gender
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
+            <div className="w-full flex justify-between mb-4">
+
+              <div
+               className="flex  items-center  border py-2 px-4  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-violet-500 w-[49%]"
+               >
+                <input id="bordered-radio-1" type="radio" value="male" name="bordered-radio"
+                  className="mr-2 cursor-pointer h-[1.05rem] w-[1.05rem]"
+                  onFocus={(e)=>setDetails((prev)=>{ return {...prev,gender:e.target.value} })}    
+                />
+                <label for="bordered-radio-1" className="cursor-pointer">Male</label>
+              </div>
+
+              <div class="flex items-center  py-2 px-4 border  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-violet-500 w-[49%]"
+              >
+                <input id="bordered-radio-2" type="radio" value="female" name="bordered-radio"
+                  
+                  className="mr-2 cursor-pointer h-[1.05rem] w-[1.05rem]"
+                  onFocus={(e)=>setDetails((prev)=>{ return {...prev,gender:e.target.value} })}    
+                />
+                <label for="bordered-radio-2" className="cursor-pointer">Female</label>  
+              </div>
+
+            </div>
+
+            {showText && (
+              <p className="text-sm text-red-300 relative bottom-3 font-sans text-left">
+                Select any one of the above fields
+              </p>
+            )}
+
             <input
               className={`yearInput shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 ${yearIsValid ? "focus:border-violet-500" : "focus:border-red-500"
                 } `}
@@ -224,26 +146,9 @@ const GetDetails = (props) => {
                   style={{ color: "white" }}
                 />} */}
             </button>
-            {/* <h1 className="text-lg text-center text-gray-500">OR</h1> */}
-            {/* <div className="w-full flex items-center justify-center mt-2">
-              <GoogleButton
-                type="light"
-                className="w-full rounded"
-                onClick={signInWithGoogleClick}
-              />
-            </div> */}
+            
           </form>
-          {/* <form onSubmit={emailSubmit}>
-            <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5 focus:border-violet-500 "
-              type="email"
-              placeholder="Your email"
-              required
-              value={email || ""}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button type="submit">Send Email</button>
-          </form> */}
+        
 
 
 
@@ -251,5 +156,5 @@ const GetDetails = (props) => {
       </div>
     </>
   );
- }
+}
 export default GetDetails;

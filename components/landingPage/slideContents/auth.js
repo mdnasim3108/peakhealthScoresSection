@@ -7,36 +7,12 @@ import { useState, useEffect, useContext } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import ContentContext from "../contextStrore/contentContext";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
+import authContext from "../contextStrore/authContext";
 const Auth = (props) => {
     const [secret, setSecret] = useState(Math.floor(Math.random() * 1000000))
     const [otp, setOtp] = useState("")
     const [otpValid, setOtpValid] = useState(true)
-    const toastifySuccess = (msg) => {
-        toast.success(msg, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    };
-    const toastifyFailure = (msg) => {
-        toast.error(msg, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    };
+    
     const provider = new GoogleAuthProvider();
     const voiceState = useContext(voiceContext)
     const content = useContext(ContentContext)
@@ -45,6 +21,7 @@ const Auth = (props) => {
     const [pass, setPass] = useState({ value: "", isValid: true })
     const [hideSign, setHideSign] = useState(false)
     const [email, setEmail] = useState("")
+    const authState=useContext(authContext)
     const signInHandleClick = async () => {
         signInWithPopup(auth, provider).then(async (result) => {
             console.log(result.user.email)
@@ -52,19 +29,19 @@ const Auth = (props) => {
             console.log(res.data)
             content.hideSignUp()
             if (res.data.audio) {
-                toastifySuccess("sign in sucessfull!")
-                voiceState.registerUser({
-                    gender: res.data.gender,
-                    year: res.data.year,
-                    email: res.data.email
-                });
+                props.toastSuccess("sign in sucessfull!")
                 setTimeout(() => {
-                    props.confirm()
+                    authState.close()
                     content.resetContent(2)
+                    voiceState.registerUser({
+                        gender: res.data.gender,
+                        year: res.data.year,
+                        email: res.data.email
+                    });
                 }, 3000)
             }
             else if (res.data === "not found") {
-                props.confirm()
+                authState.close()
                 voiceState.failAuth()
             }
         }).catch((error) => console.log(error))
@@ -76,20 +53,20 @@ const Auth = (props) => {
             const res = await axios.post("/api/isAuth", { email: result.user.email })
             console.log(res.data)
             if (res.data.audio) {
-                toastifyFailure("user already exists!")
+                props.toastFail("user already exists!")
                 return
             }
             await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: result.user.email })
-            toastifySuccess("sign up sucessfull!")
+            props.toastSuccess("sign up sucessfull!")
             setTimeout(() => {
                 content.hideSignUp()
-                props.confirm()
+                authState.close()
             }, 3000)
 
         }).catch((error) => console.log(error))
     }
 
-    const handleClick = props.signUp ? signUpHandleClick : signInHandleClick
+    const handleClick = !authState.signIn ? signUpHandleClick : signInHandleClick
 
     const signInSubmitHandler = async (e) => {
         e.preventDefault()
@@ -111,21 +88,22 @@ const Auth = (props) => {
             const res = await axios.post("/api/isAuth", { email: user.email })
             content.hideSignUp()
             if (res.data.audio) {
-                voiceState.registerUser({
-                    gender: res.data.gender,
-                    year: res.data.year,
-                    email: res.data.email
-                });
-                toastifySuccess("sign in sucessfull!")
+                props.toastSuccess("sign in sucessfull!")
+                
                 setTimeout(() => {
-                    props.confirm()
+                    authState.close()
                     content.resetContent(2)
+                    voiceState.registerUser({
+                        gender: res.data.gender,
+                        year: res.data.year,
+                        email: res.data.email
+                    });
                 }, 3000)
             }
-            else toastifyFailure("you have not made a stress check before!")
+            else props.toastFail("you have not made a stress check before!")
         }
         catch (er) {
-            toastifyFailure("check your email and password!")
+            props.toastFail("check your email and password!")
         }
 
     }
@@ -143,24 +121,24 @@ const Auth = (props) => {
         const res = await axios.post("/api/isAuth", { email: value.value })
         console.log(res)
         if(res.data.audio){
-            toastifyFailure("user already exists!!")
+            props.toastFail("user already exists!!")
             return
         }
 
         const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
         console.log(res1)
         setHideSign(true)
-    
+        
     }
     const forgotSubmitHandler = async (e) => {
         e.preventDefault()
         try {
             const userCredentials = await sendPasswordResetEmail(auth, email);
-            toastifySuccess("password reset link sent to the registered email")
+            props.toastSuccess("password reset link sent to the registered email")
             setValue({ value: email, isValid: true })
             setHideSign(false)
         } catch {
-            toastifyFailure("The email is not registered!")
+            props.toastFail("The email is not registered!")
         }
     }
     const otpSubmitHandler = async (e) => {
@@ -175,20 +153,21 @@ const Auth = (props) => {
                 const user = userCredentials.user;
                 console.log(user)
                 await axios.post("/api/email", { id: voiceState.voiceFeatures.objId, email: user.email })
-                toastifySuccess("sign up sucessfull!")
+                props.toastSuccess("sign up sucessfull!")
                 setTimeout(() => {
                     content.hideSignUp()
-                    props.confirm()
+                    authState.close()
                 }, 3000)
             }
             catch {
-                toastifyFailure("user already exists!")
+                props.toastFail("user already exists!")
             }
         }
         else {
             setOtpValid(false)
         }
     }
+
     const signInHideContent = <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
         <div className="md:w-[70%] w-full text-center">
             <form onSubmit={forgotSubmitHandler} className="text-center" >
@@ -235,10 +214,10 @@ const Auth = (props) => {
 
 
 
-    const submitHandler = props.signUp ? signUpSubmitHandler : signInSubmitHandler
+
+    const submitHandler = !authState.signIn ? signUpSubmitHandler : signInSubmitHandler
 
     return <div className="flex flex-col md:flex-row">
-        <ToastContainer />
         <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
             <Image
                 src={authImage}
@@ -275,7 +254,7 @@ const Auth = (props) => {
                         }}
                     />
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!value.isValid ? "visible" : "invisible"}`}>Enter a valid email</p>
-                    <label className="text-lg text-left ">{!props.signUp ? "Password" : "set password"}</label>
+                    <label className="text-lg text-left ">{authState.signIn ? "Password" : "set password"}</label>
                     <input
                         className={`border-[1.5px] mt-1  rounded shadow appearance-none ${pass.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
                         placeholder="Your Password"
@@ -291,9 +270,9 @@ const Auth = (props) => {
                         type="submit"
                         className="border border-violet-500 text-lg bg-violet-500 hover:bg-violet-600 text-white  mt-4 w-full py-3 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
                     >
-                        {props.signUp ? "sign up" : "sign in"}
+                        {!authState.signIn ? "sign up" : "sign in"}
                     </button>
-                    {!props.signUp && <p
+                    {authState.signIn && <p
                         className="mt-3 text-center cursor-pointer underline"
                         onClick={() => setHideSign(true)}
                     >
@@ -304,7 +283,7 @@ const Auth = (props) => {
                 </p>
             </div>
         </div> :
-            !props.signUp ? signInHideContent : signUpHideContent
+            !authState.signUp ? signInHideContent : signUpHideContent
         }
     </div>
 

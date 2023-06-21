@@ -44,17 +44,24 @@ const VoiceContextProvider = (props) => {
     registered: false,
   });
 
-  let uid, filePath, token, signedURL, userId;
+  let uid, filePath, token, signedURL, userId,userData;
   const generateToken = async (user) => {
     try {
       dispatchVoiceFeatures({ type: "registering" })
-      const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
-      const ipdata = await Axios.post("/api/ip");
-      const userData = { ...user, ip: ipdata.data };
+      // const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
+      try{
+        const ipdata = await Axios.post("/api/ip");
+        userData = { ...user, ip: ipdata.data };
+      }
+      catch(er){
+        console.log(er)
+        userData={...user,ip:"0.0.0.0"}
+      }
+      
+      
       console.log(userData)
       const uidData = await Axios.post("/api/createUser", { details: userData });
       userId = uidData.data;
-
       const res1 = await Axios.post(
         "https://api.sondeservices.com/platform/v1/oauth2/token",
         {
@@ -165,7 +172,7 @@ const VoiceContextProvider = (props) => {
           },
         }
       );
-
+  
       const jobid = res5.data.jobId;
       console.log("jobid" + jobid);
       let res6;
@@ -211,6 +218,18 @@ const VoiceContextProvider = (props) => {
         dispatchVoiceFeatures({type:"videoData",videoData:videoRes.data})
       }
       if (status === "FAIL") {
+        console.log(res6)
+
+      if(res6.data.result.code==="INVALID_AUDIO_FILE"){
+        dispatchVoiceFeatures({
+          type: "error",
+          content: 2,
+          head: "Invalid Audio",
+          message: "check if microphone is in use by any other application",
+          btnLabel: "record again",
+          registered:true
+        });
+      }
         dispatchVoiceFeatures({
           type: "error",
           content: 2,

@@ -3,7 +3,7 @@ import axios from 'axios';
 import YoutubeComp from './youtube';
 import VideoCard from "./videoCard";
 import SkeletonLoader from "./skeletonLoader";
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import voiceContext from "../contextStrore/voiceContext";
 import ContentContext from "../contextStrore/contentContext";
 const recommendations = (props) => {
@@ -11,6 +11,17 @@ const recommendations = (props) => {
   const content = useContext(ContentContext)
   const [video, setVideo] = useState({ play: false, id: "" })
   const [showSignUp, setShowSignUp] = useState(true)
+  const scrollToTop = () => {
+    if (window) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optional: Adds smooth scrolling animation
+      });
+    }
+  };
+  useEffect(() => {
+    scrollToTop()
+  }, []);
   return (
     !video.play ? <div className="relative sm:bottom-7">
 
@@ -67,6 +78,7 @@ const recommendations = (props) => {
             onClick={() => {
               props.onclick()
               setShowSignUp(false)
+              scrollToTop()
             }}
           >
             Sign Up
