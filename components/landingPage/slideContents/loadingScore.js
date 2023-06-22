@@ -5,21 +5,39 @@ import voiceContext from "../contextStrore/voiceContext";
 import { useContext } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 const loadingScore = () => {
-  const voiceState=useContext(voiceContext)
+  const voiceState = useContext(voiceContext)
   const CustomSlider = createTheme({
     overrides: {
+      root: {
+        color: "#905cf4",
+        height: 8
+      },
+      MuiSlider: {
         root: {
-            color: "#52af77",
-            height: 8
-          },
-        MuiSlider:{
-            thumb: {
-                height: 50,
-                width: 50,
-              },
-        }
+          color:'#8b5cf6' ,
+        },
+        thumb: {
+          height: 50,
+          width: 50,
+        },
+      }
     },
   });
+  const useStyles = makeStyles({
+    thumb: {
+      color: "#3F4FDB",
+      backgroundColor: '#3F4FDB', // Set the desired color here
+    },
+    rail: {
+      color: "#3F4FDB",
+      backgroundColor: '#3F4FDB', // Set the desired color here
+    },
+    track: {
+      color: "#3F4FDB",
+      backgroundColor: '#3F4FDB', // Set the desired color here
+    },
+  });
+  const classes = useStyles();
   //   const CustomSlider = withStyles({
   //     thumb: {
   //       height: 30,
@@ -42,13 +60,19 @@ const loadingScore = () => {
       </h1>
       <p className="relative bottom-5 text-lg">(Slide the marker)</p>
       <div className="sm:w-[70%] w-[90%] mx-auto">
-        <ThemeProvider  theme={CustomSlider}>
-            <Slider 
-            id="slider"
-            className="horizontal-slider"
+        <ThemeProvider>
+          <Slider
+            classes={{
+              thumb: classes.thumb,
+              rail: classes.rail,
+              track: classes.track,
+            }}
+            
             onChange={(e) => voiceState.guessScore(e.target.value)}
-            />
+          />
         </ThemeProvider>
+
+
         <div className="flex justify-between relative bottom-3 text-[0.7rem] sm:text-lg">
           <p>Low Stress</p>
           <p>Medium Stress</p>

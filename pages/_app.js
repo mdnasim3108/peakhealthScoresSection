@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 
-
+import Head from 'next/head';
 import Script from 'next/script'
 import AnswerContextProvider from '../components/landingPage/contextStrore/answerContextProvider';
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
@@ -11,6 +11,9 @@ const App = ({ Component, pageProps, router }) => {
 
   return (
     <>
+       <Head>
+          <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet" />
+        </Head>
 
       <Script>
         {

@@ -67,7 +67,7 @@ const VoiceRecord = (props) => {
   };
   return (
     <>
-      <h1 className="sm:text-3xl text-2xl  sm:relative top-5 sm:top-0 font-bold  font-sans text-center">
+      <h1 className="sm:text-3xl text-2xl  sm:relative top-5 sm:top-0 font-bold  font-rajdhani text-center">
         Question Of The Day
       </h1>
       <div className="voiceRecord flex justify-between md:flex-row flex-col-reverse sm:mt-0 mt-8">
@@ -99,7 +99,7 @@ const VoiceRecord = (props) => {
             } transition-all  duration-[300] lg:ml-[3rem] ease-linear text-center`}
         >
           <p className="mt-5 font-bold sm:text-2xl text-xl">
-            How are you feeling about your workload today?
+            How are you feeling about your work stress today?
           </p>
 
           {status === "" && (
@@ -107,7 +107,7 @@ const VoiceRecord = (props) => {
               <button
                 id="microphone" 
                 onClick={voiceState.voiceFeatures.registered && voiceClickHandler}
-                className={`sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] ${!voiceState.voiceFeatures.registered ? "bg-gray-500" : " bg-violet-500 hover:bg-violet-600 hover:scale-125 onepulse"}   transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto`}
+                className={`sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] ${!voiceState.voiceFeatures.registered ? "bg-gray-500" : " bg-[#3F4FDB] hover:bg-[#3F4FDB] hover:scale-125 onepulse"}   transition-all duration-75 ease-linear  cursor-pointer shadow-2xl rounded-full flex items-center justify-center mt-10 mx-auto`}
                 disabled={!voiceState.voiceFeatures.registered}
               >
                 <FontAwesomeIcon
@@ -116,7 +116,7 @@ const VoiceRecord = (props) => {
                 />
               </button>
               <p className="text-lg text-gray-500 mt-4">
-                {voiceState.voiceFeatures.registered ? "click to record" :
+                {voiceState.voiceFeatures.registered ? "Click to record" :
                   <DynamicText texts={["getting things ready","almost there...","read these instructions"]} classes="text-lg" />}
               </p>
             </div>
@@ -151,7 +151,7 @@ const VoiceRecord = (props) => {
                           ref.current.stop()
                           simulateClick()
                         }}
-                        className="w-[4.2rem] h-[4rem] mr-2 bg-violet-500 hover:bg-violet-600 transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
+                        className="w-[4.2rem] h-[4rem] mr-2 bg-[#3F4FDB] hover:bg-[#3F4FDB] transition-all duration-75 ease-linear  cursor-pointer shadow-lg rounded-full flex items-center justify-center  ml-2"
                       >
                         <FontAwesomeIcon
                           icon={faSquare}

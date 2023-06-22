@@ -217,13 +217,42 @@ const Auth = (props) => {
 
     const submitHandler = !authState.signIn ? signUpSubmitHandler : signInSubmitHandler
 
-    return <div className="flex flex-col md:flex-row">
-        <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
+    return <div className="flex flex-col md:flex-row sm:pl-8">
+        {
+           !authState.signUp? 
+
+            <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
             <Image
                 src={authImage}
                 className="md:w-full w-[80%]"
             />
         </div>
+        :
+        <div className="md:w-[50%] w-full  mb-5 border-2 rounded p-5">
+
+            <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold">
+                Get deep insights to unlock personal
+                growth.
+            </h1>
+            <ul className="text-left list-disc mt-8 text-lg text-gray-500 pl-6">
+                <li className="mb-6">
+                    <p className="">Access comprehensive reports that make sense of
+                        your stress scores and patterns</p>
+                </li>
+                <li className="mb-6">
+                    <p className="">Understand the contextual relevance of your stress
+                        levels in different situations</p>
+                </li>
+                <li className="mb-6">
+                    <p className="">Uncover hidden stress triggers and links to energy,
+                        sleep and productivity,</p>
+                </li>
+
+            </ul>
+
+        </div>
+
+    }
         {!hideSign ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
             <button
                 className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2  rounded flex items-center justify-center transition-all duration-75 ease-linear"
@@ -268,7 +297,7 @@ const Auth = (props) => {
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!pass.isValid ? "visible" : "invisible"}`}>Enter atleast 6 characters</p>
                     <button
                         type="submit"
-                        className="border border-violet-500 text-lg bg-violet-500 hover:bg-violet-600 text-white  mt-4 w-full py-3 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
+                        className=" border-[#3F4FDB] border text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-full py-3 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
                     >
                         {!authState.signIn ? "sign up" : "sign in"}
                     </button>

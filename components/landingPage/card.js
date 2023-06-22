@@ -20,7 +20,8 @@ import { faMagnifyingGlassChart } from "@fortawesome/free-solid-svg-icons";
 import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Image from "next/image";
-import logoImg from "../../public/logo2.png"
+import logoImg from "../../public/phLogo.png"
+import aiText from "../../public/AIText.png"
 const Card = () => {
   const content = useContext(ContentContext)
   const authState = useContext(authContext)
@@ -142,12 +143,12 @@ const Card = () => {
 
 
   return (
-    <div className={`${content.contentNumber<3?"flex-col":"flex"} items-center  lg:h-screen  sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
+    <div className={`${content.contentNumber < 3 ? "flex-col" : "flex"} items-center  lg:h-screen  sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
 
 
       {content.contentNumber === 0 && <div className="w-full flex justify-end">
         <button
-          className="border absolute tracking-wide text-lg bg-violet-500 border-violet-500 text-white  hover:bg-violet-600  font-bold px-2 pb-2 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
+          className="border absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
           onClick={() => authState.change({ showAuth: true, signIn: true })}
         >
           sign in
@@ -156,13 +157,25 @@ const Card = () => {
 
       <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
 
-
-
         <div className="lg:flex-[1] flex lg:flex-col py-3 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
-          <Image
-            src={logoImg}
-            className="md:w-[2rem] w-[1.6rem] md:relative md:bottom-[5vh] -translate-x-10 sm:translate-x-10"
-          />
+
+          <div className="md:relative flex items-center justify-around md:bottom-[5vh] -translate-x-10 sm:translate-x-10">
+            <Image
+              src={logoImg}
+              className="md:w-[3rem] w-[14rem]  mr-3"
+            />
+
+            <span className="text-lg hidden sm:block text-[#ea7f17] font-bold font-rajdhani">
+                    Stress
+            </span>
+            <span className="text-lg hidden sm:block text-[#4855dc] font-bold font-rajdhani">
+                    Sense
+            </span>
+            <span className="text-lg hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
+                    AI
+            </span>
+          </div>
+
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />
           })}
