@@ -1,7 +1,7 @@
 import ContentContext from "./contentContext";
 import { useState } from "react";
 const contentContextProvider=(props)=>{
-    const [contentNumber, setContent] = useState(0)
+    const [contentNumber, setContent] = useState(1)
     const [signUp,showSignUp]=useState(true)
     const moveHandler = () => setContent((prev) => {
         return prev + 1;

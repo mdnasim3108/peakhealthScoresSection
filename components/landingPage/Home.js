@@ -1,8 +1,10 @@
-import { useState, useContext,useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import logoImg from "../../public/phLogo.png"
 import authContext from './contextStrore/authContext';
 import logoText from "../../public/phLogoText.png"
+import getStartImage from "../../public/getStart.jpg"
+
 const home = (props) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const authState = useContext(authContext)
@@ -11,15 +13,15 @@ const home = (props) => {
     };
     const scrollToTop = () => {
         if (window) {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth' 
-          });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
-      };
-      useEffect(() => {
+    };
+    useEffect(() => {
         scrollToTop()
-      }, []);
+    }, []);
 
     return (
         <div>
@@ -56,7 +58,8 @@ const home = (props) => {
                             <button
                                 className="border-2 md:block hidden  tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={() => {
-                                    authState.change({ showAuth: true, signIn: true })}}
+                                    authState.change({ showAuth: true, signIn: true })
+                                }}
                             >
                                 sign in
                             </button>
@@ -81,18 +84,67 @@ const home = (props) => {
                             <a href="#home" onClick={toggleMobileMenu} className="text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                             <a href="#features" onClick={toggleMobileMenu} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Features</a>
                             <a href="#test" onClick={toggleMobileMenu} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
-                            <a onClick={() =>{
+                            <a onClick={() => {
                                 scrollToTop()
-                                authState.change({ showAuth: true, signIn: true })}} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Sign In</a>
+                                authState.change({ showAuth: true, signIn: true })
+                            }} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Sign In</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className='p-7' id="home">
+
+                <div className="flex sm:h-screen sm:mt-0 mt-10 flex-col-reverse sm:w-full md:flex-row justify-around items-center">
+                    <div className="flex sm:w-[50%] flex-col items-center sm:mt-0">
+                        <Image
+                            src={getStartImage}
+                            className="xl:w-[25rem] md:w-[20rem] w-[15rem]"
+                            alt="getStart"
+                        />
+                        <p
+                            className="font-sans text-lg  text-center mt-5 text-gray-500">
+                            Measure your job stress level in minutes
+                            using cutting-edge Voice AI technology.
+                            Take control of your well-being and find
+                            balance in your busy work life.
+                        </p>
+                    </div>
+                    <div className="flex sm:w-[50%] flex-col items-center justify-start">
+
+                        <div>
+                            <span className="text-2xl mr-1  text-[#ea7f17] font-bold font-rajdhani">
+                                Stress
+                            </span>
+                            <span className="text-2xl mr-1  text-[#4855dc] font-bold font-rajdhani">
+                                Sense
+                            </span>
+                            <span className="text-2xl  mr-1  text-[#4855dc] font-bold font-rajdhani">
+                                AI
+                            </span>
+                        </div>
+
+                        <p className="font-sans text-lg mb-5 text-center sm:w-[90%] text-gray-500">
+                            Your personal AI assistant
+                            to measure, understand,
+                            and conquer stress.
+                        </p>
+                        <button
+                            id="startingButton"
+                            className=" border border-[#3F4FDB] tracking-wide text-lg hover:bg-[#3F4FDB] bg-[#3F4FDB] text-white hover:text-white   font-bold sm:px-8 sm:py-3 px-4 py-2 rounded-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            onClick={props.check}
+                        >
+                            Start My 1 Min Stress Check
+                        </button>
+                        <p className="font-sans text-lg mb-5 text-center text-gray-500 mt-3">
+                            Free | No signup required
+                        </p>
+                    </div>
+                </div>
+
                 <div className='flex flex-col items-center justify-center text-center w-full mt-10 sm:mt-20'>
                     <h1 className="font-bold  md:text-5xl text-2xl font-rajdhani  text-center">Take control of your work stress…</h1>
-                    <p className='mdtext-2xl text-xl leading-loose'>
+                    <p className='md:text-2xl text-xl sm:leading-3 leading-loose mt-5'>
                         No more guessing or struggling to understand your stress levels. Quick and
                         easy actions allow you to take control of your stress levels and improve
                         your productivity. Don't let stress hold you back - try Stress Sense AI today.

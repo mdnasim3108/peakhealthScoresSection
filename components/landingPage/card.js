@@ -160,14 +160,14 @@ const Card = () => {
 
       {!homeState.showHome && <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
 
-        <div className="lg:flex-[1] flex lg:flex-col py-2 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
+        <div className="lg:flex-[1] flex lg:flex-col py-3 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
 
           <div className="md:relative cursor-pointer flex items-center justify-around md:bottom-[5vh] -translate-x-10 sm:translate-x-10"
           onClick={()=>homeState.setShowHome(true)}
           >
             <Image
               src={logoImg}
-              className="md:w-[3rem] w-[14rem]  mr-3"
+              className="md:w-[3rem] w-[10rem]  mr-3"
             />
 
             <span className="text-lg hidden sm:block text-[#ea7f17] font-bold font-rajdhani">
