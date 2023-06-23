@@ -7,6 +7,19 @@ const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), {
   ssr: false,
 });
 const results = (props) => {
+
+  const scrollToTop = () => {
+    if (window) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+  useEffect(() => {
+    scrollToTop()
+  }, []);
+
   const useMediaQuery = (width) => {
     const [targetReached, setTargetReached] = useState(false);
 
@@ -125,13 +138,16 @@ const results = (props) => {
       <div className="relative bottom-[3.5rem]">
         <div className="sm:flex-row flex-col justify-center mb-3">
           <button
-            onClick={() => authState.change({ showAuth: true, signUp: true })}
-            className="rounded sm:mr-5 border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white mt-3 py-2 sm:px-2 px-[5rem] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans">
+            onClick={() =>{ 
+              authState.change({ showAuth: true, signUp: true })
+              scrollToTop() 
+          }}
+            className="rounded-lg sm:mr-5 border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white mt-3 py-2 sm:px-2 px-[5rem] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans">
             Get Detailed Report
           </button>
           <button
             id="personalizedRecommendation"
-            className="rounded border border-[#3F4FDB] hover:bg-[#3F4FDB] hover:text-white mt-3 p-2 text-[#3F4FDB] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans"
+            className="rounded-lg border-2 border-[#3F4FDB] hover:bg-[#3F4FDB] hover:text-white mt-3 p-2 text-[#3F4FDB] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans"
             onClick={props.move}
           >
             Check my personalized recommendations

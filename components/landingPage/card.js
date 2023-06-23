@@ -22,18 +22,21 @@ import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Image from "next/image";
 import logoImg from "../../public/phLogo.png"
 import aiText from "../../public/AIText.png"
+import Home from "./Home";
+import homeContext from "./contextStrore/homeContext";
 const Card = () => {
   const content = useContext(ContentContext)
   const authState = useContext(authContext)
   const [showAuth, setShowAuth] = useState({ auth: false, signUp: false })
+  const [showHome,setShowHome]=useState(true)
   const nextPartHandler = () => {
     setProgressBarState(
       { contentNumber: 0, contentArray: contentArray2 }
     )
   };
-  const moveToNext = () => {
+  const homeState=useContext(homeContext)
+  const moveToNext=()=>{}
 
-  };
   useEffect(() => {
     setProgressBarState((prev) => {
       const updated = [...prev.contentArray];
@@ -143,23 +146,25 @@ const Card = () => {
 
 
   return (
-    <div className={`${content.contentNumber < 3 ? "flex-col" : "flex"} items-center  lg:h-screen  sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
+    <div className={`${content.contentNumber < 3 ? "flex-col" : "flex"} items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
 
-
-      {content.contentNumber === 0 && <div className="w-full flex justify-end">
+      {homeState.showHome && <Home check={()=>homeState.setShowHome(false)}/>}
+      {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
         <button
-          className="border absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
+          className="border-2 absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
           onClick={() => authState.change({ showAuth: true, signIn: true })}
         >
           sign in
         </button>
       </div>}
 
-      <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
+      {!homeState.showHome && <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
 
-        <div className="lg:flex-[1] flex lg:flex-col py-3 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
+        <div className="lg:flex-[1] flex lg:flex-col py-2 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
 
-          <div className="md:relative flex items-center justify-around md:bottom-[5vh] -translate-x-10 sm:translate-x-10">
+          <div className="md:relative cursor-pointer flex items-center justify-around md:bottom-[5vh] -translate-x-10 sm:translate-x-10"
+          onClick={()=>homeState.setShowHome(true)}
+          >
             <Image
               src={logoImg}
               className="md:w-[3rem] w-[14rem]  mr-3"
@@ -194,6 +199,7 @@ const Card = () => {
 
         </div>
       </div>
+      }
     </div>
   );
 };

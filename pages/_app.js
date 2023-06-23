@@ -5,7 +5,7 @@ import Script from 'next/script'
 import AnswerContextProvider from '../components/landingPage/contextStrore/answerContextProvider';
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
 import AuthContextProvider from '@/components/landingPage/contextStrore/authContextProvider';
-
+import HomeContextProvider from '@/components/landingPage/contextStrore/homeContextProvider';
 const App = ({ Component, pageProps, router }) => {
 
 
@@ -65,6 +65,7 @@ const App = ({ Component, pageProps, router }) => {
       {/* <!-- End Google Tag Manager --> */}
 
       {/* <GoogleAnalytics gaMeasurementId='G-64VSBXJZV4' /> */}
+      <HomeContextProvider>
       <AuthContextProvider>
         <VoiceContextProvider>
           <AnswerContextProvider>
@@ -72,7 +73,7 @@ const App = ({ Component, pageProps, router }) => {
           </AnswerContextProvider>
         </VoiceContextProvider>
       </AuthContextProvider>
-
+      </HomeContextProvider>
     </>
   )
 }

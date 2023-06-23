@@ -8,11 +8,13 @@ import voiceContext from "../contextStrore/voiceContext";
 import ContentContext from "../contextStrore/contentContext";
 import axios from "axios";
 import authContext from "../contextStrore/authContext";
+import homeContext from "../contextStrore/homeContext";
 const Auth = (props) => {
     const [secret, setSecret] = useState(Math.floor(Math.random() * 1000000))
+    const homeState=useContext(homeContext)
     const [otp, setOtp] = useState("")
     const [otpValid, setOtpValid] = useState(true)
-    
+
     const provider = new GoogleAuthProvider();
     const voiceState = useContext(voiceContext)
     const content = useContext(ContentContext)
@@ -21,7 +23,7 @@ const Auth = (props) => {
     const [pass, setPass] = useState({ value: "", isValid: true })
     const [hideSign, setHideSign] = useState(false)
     const [email, setEmail] = useState("")
-    const authState=useContext(authContext)
+    const authState = useContext(authContext)
     const signInHandleClick = async () => {
         signInWithPopup(auth, provider).then(async (result) => {
             console.log(result.user.email)
@@ -38,6 +40,7 @@ const Auth = (props) => {
                         year: res.data.year,
                         email: res.data.email
                     });
+                    homeState.setShowHome(false)
                 }, 3000)
             }
             else if (res.data === "not found") {
@@ -89,7 +92,7 @@ const Auth = (props) => {
             content.hideSignUp()
             if (res.data.audio) {
                 props.toastSuccess("sign in sucessfull!")
-                
+
                 setTimeout(() => {
                     authState.close()
                     content.resetContent(2)
@@ -98,6 +101,7 @@ const Auth = (props) => {
                         year: res.data.year,
                         email: res.data.email
                     });
+                    homeState.setShowHome(false)
                 }, 3000)
             }
             else props.toastFail("you have not made a stress check before!")
@@ -120,15 +124,15 @@ const Auth = (props) => {
         }
         const res = await axios.post("/api/isAuth", { email: value.value })
         console.log(res)
-        if(res.data.audio){
+        if (res.data.audio) {
             props.toastFail("user already exists!!")
             return
         }
 
-        const res1=await axios.post("/api/sendMail",{to:value.value,otp:secret});
+        const res1 = await axios.post("/api/sendMail", { to: value.value, otp: secret });
         console.log(res1)
         setHideSign(true)
-        
+
     }
     const forgotSubmitHandler = async (e) => {
         e.preventDefault()
@@ -181,7 +185,7 @@ const Auth = (props) => {
                 />
                 <button
                     type="submit"
-                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
+                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
                     send password reset link
                 </button>
@@ -203,7 +207,7 @@ const Auth = (props) => {
                 <p className={`text-sm mb-3 ml-2 text-red-500  ${!otpValid ? "visible" : "invisible"}`}>The OTP is inCorrect</p>
                 <button
                     type="submit"
-                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded  transition-all duration-75 ease-linear"
+                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
                     Verify
                 </button>
@@ -219,43 +223,47 @@ const Auth = (props) => {
 
     return <div className="flex flex-col md:flex-row sm:pl-8">
         {
-           !authState.signUp? 
+            !authState.signUp ?
 
-            <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
-            <Image
-                src={authImage}
-                className="md:w-full w-[80%]"
-            />
-        </div>
-        :
-        <div className="md:w-[50%] w-full  mb-5 border-2 rounded p-5">
+                <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
+                    <Image
+                        src={authImage}
+                        className="md:w-full w-[80%]"
+                    />
+                </div>
+                :
+                <div className="md:w-[50%] w-full  mb-5 border-2 rounded p-5">
 
-            <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold">
-                Get deep insights to unlock personal
-                growth.
-            </h1>
-            <ul className="text-left list-disc mt-8 text-lg text-gray-500 pl-6">
-                <li className="mb-6">
-                    <p className="">Access comprehensive reports that make sense of
-                        your stress scores and patterns</p>
-                </li>
-                <li className="mb-6">
-                    <p className="">Understand the contextual relevance of your stress
-                        levels in different situations</p>
-                </li>
-                <li className="mb-6">
-                    <p className="">Uncover hidden stress triggers and links to energy,
-                        sleep and productivity,</p>
-                </li>
+                    <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold">
+                        Get deep insights to unlock personal
+                        growth.
+                    </h1>
+                    <ul className="text-left list-disc mt-8 text-lg text-gray-500 pl-6">
+                        <li className="mb-6">
+                            <p className="">Access comprehensive reports that make sense of
+                                your stress scores and patterns</p>
+                        </li>
+                        <li className="mb-6">
+                            <p className="">Understand the contextual relevance of your stress
+                                levels in different situations</p>
+                        </li>
+                        <li className="mb-6">
+                            <p className="">Uncover hidden stress triggers and links to energy,
+                                sleep and productivity,</p>
+                        </li>
 
-            </ul>
+                    </ul>
 
-        </div>
+                    <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold text-center">
+                        Sign up for free!
+                    </h1>
 
-    }
+                </div>
+
+        }
         {!hideSign ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
             <button
-                className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2  rounded flex items-center justify-center transition-all duration-75 ease-linear"
+                className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2  rounded-lg flex items-center justify-center transition-all duration-75 ease-linear"
                 onClick={handleClick}
             >
                 <Image
@@ -297,7 +305,7 @@ const Auth = (props) => {
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!pass.isValid ? "visible" : "invisible"}`}>Enter atleast 6 characters</p>
                     <button
                         type="submit"
-                        className=" border-[#3F4FDB] border text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-full py-3 rounded outline-none focus:outline-none  ease-linear transition-all duration-150"
+                        className=" border-[#3F4FDB] border-2 text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-full py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                     >
                         {!authState.signIn ? "sign up" : "sign in"}
                     </button>
