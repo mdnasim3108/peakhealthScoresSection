@@ -11,7 +11,7 @@ import authContext from "../contextStrore/authContext";
 import homeContext from "../contextStrore/homeContext";
 const Auth = (props) => {
     const [secret, setSecret] = useState(Math.floor(Math.random() * 1000000))
-    const homeState=useContext(homeContext)
+    const homeState = useContext(homeContext)
     const [otp, setOtp] = useState("")
     const [otpValid, setOtpValid] = useState(true)
 
@@ -185,9 +185,9 @@ const Auth = (props) => {
                 />
                 <button
                     type="submit"
-                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded-lg  transition-all duration-75 ease-linear"
+                    className="bg-[#4285f4]  text-white  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
-                    send password reset link
+                    Send password reset link
                 </button>
             </form>
         </div>
@@ -207,7 +207,7 @@ const Auth = (props) => {
                 <p className={`text-sm mb-3 ml-2 text-red-500  ${!otpValid ? "visible" : "invisible"}`}>The OTP is inCorrect</p>
                 <button
                     type="submit"
-                    className="bg-[#5c5c6b]  text-white hover:bg-[#2b2b30] w-full py-3  rounded-lg  transition-all duration-75 ease-linear"
+                    className="bg-[#4285f4]  text-white  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
                     Verify
                 </button>
@@ -279,7 +279,7 @@ const Auth = (props) => {
             </div>
             <div className="md:w-[70%] w-full mt-4">
                 <form className="" onSubmit={submitHandler}>
-                    <label className="text-lg text-left">Email</label>
+                    {/* <label className="text-lg text-left">Email</label> */}
                     <input
                         className={`border-[1.5px] my-2  rounded shadow appearance-none ${value.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
                         placeholder="Your Email Address"
@@ -291,7 +291,7 @@ const Auth = (props) => {
                         }}
                     />
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!value.isValid ? "visible" : "invisible"}`}>Enter a valid email</p>
-                    <label className="text-lg text-left ">{authState.signIn ? "Password" : "set password"}</label>
+                    {/* <label className="text-lg text-left ">{authState.signIn ? "Password" : "set password"}</label> */}
                     <input
                         className={`border-[1.5px] mt-1  rounded shadow appearance-none ${pass.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
                         placeholder="Your Password"
@@ -303,17 +303,20 @@ const Auth = (props) => {
                         }}
                     />
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!pass.isValid ? "visible" : "invisible"}`}>Enter atleast 6 characters</p>
-                    <button
-                        type="submit"
-                        className=" border-[#3F4FDB] border-2 text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-full py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
-                    >
-                        {!authState.signIn ? "sign up" : "sign in"}
-                    </button>
+                    <div className="text-center">
+                        <button
+                            type="submit"
+                            className=" border-[#3F4FDB] border-2 text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                        >
+                            {!authState.signIn ? "sign up" : "sign in"}
+                        </button>
+                    </div>
+
                     {authState.signIn && <p
                         className="mt-3 text-center cursor-pointer underline"
                         onClick={() => setHideSign(true)}
                     >
-                        forgot password
+                        Forgot password
                     </p>}
                 </form>
                 <p className="text-sm text-gray-800 mt-4">By continuing, you agree to the Terms of use and Privacy Policy of Peak Health Technologies.

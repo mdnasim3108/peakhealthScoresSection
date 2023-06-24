@@ -36,7 +36,7 @@ const videoCard = (props) => {
             />
             <p className={`${!cardState.card1 ? "text-gray-600" : "text-white"}`}>{props.channelTitle}</p>
           </div>
-          <div className='sm:w-[18%] block sm:hidden  text-center'>
+          <div className='sm:w-[18%] block sm:hidden  text-right'>
             <h1 className='text-lg'>{props.category}</h1>
           </div>
         </div>
@@ -47,7 +47,7 @@ const videoCard = (props) => {
       </div>
 
       <div className='w-full sm:w-[20%] flex justify-between'>
-        <div className={` sm:w-full rounded-xl h-max px-2 sm:m-0 mt-3 ml-3   ${props.color} text-center text-white`}>
+        <div className={` sm:w-full rounded-xl h-max px-2 sm:m-0 mt-3 ml-3  ${props.color} text-center text-white`}>
           <h1 className='  text-lg text-center'>{props.type}</h1>
         </div>
         <div className='sm:hidden visible mt-2   text-center'>

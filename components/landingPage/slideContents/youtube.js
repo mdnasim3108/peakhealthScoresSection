@@ -152,7 +152,7 @@ const YoutubeComp = (props) => {
           }
 
         </div>
-        <button className="border text-lg  rounded-full text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3  py-3 px-5 outline-none focus:outline-none ease-linear transition-all duration-150"
+        <button className="border text-lg  rounded-lg text-center border-violet-500 bg-violet-500 hover:bg-violet-600 text-white font-bold  mt-3 ml-2  py-3 px-[40px] w-max outline-none focus:outline-none ease-linear transition-all duration-150"
           onClick={() => {
             props.back()
             console.log(activeIcons)

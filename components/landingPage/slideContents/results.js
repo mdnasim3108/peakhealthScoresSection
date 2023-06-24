@@ -55,14 +55,14 @@ const results = (props) => {
   });
   const labels = [
     {
-      text: "Bad",
+      text: "Poor",
       position: "INSIDE",
       color: "#555",
       fontSize: "13px"
     },
     {
       text: "Good",
-      position: "INSIDE",
+      position: "INSIDE", 
       color: "#555",
       fontSize: "13px"
     },
@@ -81,12 +81,12 @@ const results = (props) => {
     },
   ];
   return (
-    <div className=" px-0 md:px-10 recording md:relative text-center">
-      <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold">
+    <div className=" px-0 md:px-10 recording md:relative text-center top-[5vh]">
+      <h1 className="xl:text-[40px] lg:text-[40px] font-rajdhani text-xl font-bold">
         Your Work Stress Score for today
       </h1>
       <div className="xl:w-full lg:w-[90%]">
-        <div className="bg-gradient-to-r mt-10 rounded flex justify-end from-green-600 via-orange-500 to-red-500 scoreFill  sm:h-8 h-5 transition-all duration-500 ease-linear ">
+        <div className="bg-gradient-to-r mt-10 rounded flex justify-end from-[#00C57E] via-[#F2965A] to-[#F25A5A] scoreFill  sm:h-8 h-5 transition-all duration-500 ease-linear ">
           <div
             className="h-full bg-gray-200  overlay rounded-r"
             style={{ width: `${voiceState.voiceFeatures.score}%` }}
@@ -98,7 +98,7 @@ const results = (props) => {
           <p className="sm:text-lg text-sm text-gray-400">High Stress</p>
         </div>
       </div>
-      <div className="flex justify-center items-center md:justify-around md:flex-row flex-col">
+      <div className="flex justify-center relative top-[3vh] items-center md:justify-around md:flex-row flex-col">
         <div className="">
           <ReactSpeedometer
             value={
@@ -111,8 +111,8 @@ const results = (props) => {
             segments={4}
             currentValueText="Energy"
             customSegmentLabels={labels}
-            segmentColors={["#ff927e", "#17ffec", "#bee74b", "#7bda40"]}
-            width={!isBreakpoint ? 330 : 300}
+            segmentColors={["#F2965A", "#B0F25A", "#57DD6B", "#00C57E"]}
+            width={!isBreakpoint ? 300 : 300}
             ringWidth={40}
           />
         </div>
@@ -128,29 +128,29 @@ const results = (props) => {
             segments={4}
             currentValueText="Liveliness"
             customSegmentLabels={labels}
-            segmentColors={["#ff927e", "#17ffec", "#bee74b", "#7bda40"]}
-            width={!isBreakpoint ? 350 : 300}
+            segmentColors={["#F2965A", "#B0F25A", "#57DD6B", "#00C57E"]}
+            width={!isBreakpoint ? 300 : 300}
             ringWidth={40}
           />
         </div>
       </div>
 
-      <div className="relative bottom-[3.5rem]">
-        <div className="sm:flex-row flex-col justify-center mb-3">
+      <div className="relative bottom-[3.5rem] w-full">
+        <div className="sm:flex-row w-full flex-col justify-between mb-3">
           <button
             onClick={() =>{ 
               authState.change({ showAuth: true, signUp: true })
               scrollToTop() 
           }}
-            className="rounded-lg sm:mr-5 border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white mt-3 py-2 sm:px-2 px-[5rem] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans">
+            className="rounded-lg sm:relative right-[10%] border-[#3F4FDB] bg-[#3F4FDB] w-max hover:bg-[#3F4FDB] text-white  py-2 sm:px-[20px]  px-10 sm:text-lg text-sm ease-linear transition-all duration-150 font-sans">
             Get Detailed Report
           </button>
           <button
             id="personalizedRecommendation"
-            className="rounded-lg border-2 border-[#3F4FDB] hover:bg-[#3F4FDB] hover:text-white mt-3 p-2 text-[#3F4FDB] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans"
+            className="rounded-lg border-2 sm:mt-0 mt-4 sm:relative left-[13.5%] border-[#3F4FDB] hover:bg-[#3F4FDB] hover:text-white  py-2 px-[20px] w-max text-[#3F4FDB] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans"
             onClick={props.move}
           >
-            Check my personalized recommendations
+            Check recommendations
           </button>
         </div>
 

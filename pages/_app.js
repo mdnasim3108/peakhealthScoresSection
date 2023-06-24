@@ -13,6 +13,7 @@ const App = ({ Component, pageProps, router }) => {
     <>
        <Head>
           <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
         </Head>
 
       <Script>

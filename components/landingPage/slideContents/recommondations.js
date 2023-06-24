@@ -25,7 +25,7 @@ const recommendations = (props) => {
   return (
     !video.play ? <div className="relative">
 
-      <h1 className="sm:text-3xl sm:m-0 mb-2 text-xl font-rajdhani text-center font-[500]">For your current stress level, here are few things you can do…</h1>
+      <h1 className="sm:text-[40px] text-[30px] sm:m-0 mb-2  font-rajdhani text-center font-[500]">Your stress solutions...</h1>
 
       <div className="sm:flex w-full hidden  p-5  text-gray-500">
         <div
@@ -74,7 +74,7 @@ const recommendations = (props) => {
         <div className="w-full flex items-center justify-center">
           <button
             id="stressCheck"
-            className="border border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold relative top-[2rem] w-[30%] py-3 rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+            className="border border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold relative top-[2rem] w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150"
             onClick={() => {
               props.onclick()
               setShowSignUp(false)

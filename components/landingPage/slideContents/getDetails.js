@@ -42,7 +42,7 @@ const GetDetails = (props) => {
   return (
     <>
       <div className="flex items-center justify-center w-full">
-        <h1 className="sm:text-3xl text-xl sm:w-[50%] text-center font-bold font-rajdhani relative top-5">
+        <h1 className="sm:text-[40px] text-xl sm:w-[70%]  text-center leading-[1] font-bold font-rajdhani">
           Your details for AI to measure your stress level accurately
         </h1>
       </div>
@@ -72,7 +72,7 @@ const GetDetails = (props) => {
                 className="flex  items-center  border py-2 px-4  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-[#3F4FDB] w-[49%]"
               >
 
-                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px] pl-[0.5px] flex items-center justify-center  rounded-full w-[20px] h-[20px]">
+                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px] pb-[0.5px] pl-[0.5px] flex items-center justify-center  rounded-full w-[20px] h-[20px]">
                   <input id="bordered-radio-1" type="radio" value="male" name="bordered-radio"
                     className=" cursor-pointer"
                     onFocus={(e) => setDetails((prev) => { return { ...prev, gender: e.target.value } })}
@@ -84,7 +84,7 @@ const GetDetails = (props) => {
 
               <div className="flex items-center  py-2 px-4 border  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-[#3F4FDB] w-[49%]"
               >
-                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px] pr-[1px] flex items-center justify-center  rounded-full w-[20px] h-[20px]" >
+                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px pb-[0.2px] pr-[1px] flex items-center justify-center  rounded-full w-[20px] h-[20px]" >
                   <input id="bordered-radio-2" type="radio" value="female" name="bordered-radio"
                     className=" cursor-pointer"
                     onFocus={(e) => setDetails((prev) => { return { ...prev, gender: e.target.value } })}
@@ -120,13 +120,14 @@ const GetDetails = (props) => {
                 Enter a valid year and you should be atleast 16 years old.
               </p>
             )}
-            <button
-              id="stressCheck"
-              className="border border-violet-500 bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold  mt-5 w-full py-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="submit"
-            >
-              Check My Stress
-              {/* {
+            <div className="w-full text-center">
+              <button
+                id="stressCheck"
+                className="border border-violet-500 bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold  mt-5 w-max px-[20px]  py-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="submit"
+              >
+                Check My Stress
+                {/* {
                 voiceState.voiceFeatures.registering &&
                 <CircularProgress
                   variant="indeterminate"
@@ -142,7 +143,9 @@ const GetDetails = (props) => {
                   className="relative sm:left-[15%] left-[10%] top-[2px] "
                   style={{ color: "white" }}
                 />} */}
-            </button>
+              </button>
+            </div>
+
 
           </form>
 

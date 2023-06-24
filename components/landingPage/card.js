@@ -28,14 +28,14 @@ const Card = () => {
   const content = useContext(ContentContext)
   const authState = useContext(authContext)
   const [showAuth, setShowAuth] = useState({ auth: false, signUp: false })
-  const [showHome,setShowHome]=useState(true)
+  const [showHome, setShowHome] = useState(true)
   const nextPartHandler = () => {
     setProgressBarState(
       { contentNumber: 0, contentArray: contentArray2 }
     )
   };
-  const homeState=useContext(homeContext)
-  const moveToNext=()=>{}
+  const homeState = useContext(homeContext)
+  const moveToNext = () => { }
 
   useEffect(() => {
     setProgressBarState((prev) => {
@@ -84,7 +84,7 @@ const Card = () => {
         working: false,
         completed: false,
         animate: false,
-        label: "Check your stress score(30sec)",
+        label: "Check your stress",
         icon: "voice",
         mate: true,
       },
@@ -148,7 +148,7 @@ const Card = () => {
   return (
     <div className={`${content.contentNumber < 3 ? "flex-col" : "flex"} items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
 
-      {homeState.showHome && <Home check={()=>homeState.setShowHome(false)}/>}
+      {homeState.showHome && <Home check={() => homeState.setShowHome(false)} />}
       {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
         <button
           className="border-2 absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
@@ -162,8 +162,7 @@ const Card = () => {
 
         <div className="lg:flex-[1] flex lg:flex-col py-3 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
 
-          <div className="md:relative cursor-pointer flex items-center justify-around md:bottom-[5vh] -translate-x-10 sm:translate-x-10"
-          onClick={()=>homeState.setShowHome(true)}
+          {/* <div className="md:relative  flex items-center justify-around "
           >
             <Image
               src={logoImg}
@@ -171,15 +170,37 @@ const Card = () => {
             />
 
             <span className="text-lg hidden sm:block text-[#ea7f17] font-bold font-rajdhani">
-                    Stress
+              Stress
             </span>
             <span className="text-lg hidden sm:block text-[#4855dc] font-bold font-rajdhani">
-                    Sense
+              Sense
             </span>
             <span className="text-lg hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
-                    AI
+              AI
+            </span>
+          </div> */}
+
+          <div
+            onClick={() => homeState.setShowHome(true)}
+
+            className="md:relative md:bottom-[5vh] -translate-x-10 sm:translate-x-10 flex items-center justify-between cursor-pointer">
+            <Image
+              src={logoImg}
+              className="md:w-[3rem] w-[10rem]"
+            />
+
+            <span className="text-[30px] mr-1 hidden sm:block  text-[#ea7f17] font-bold font-rajdhani">
+              Stress
+            </span>
+            <span className="text-[30px] mr-1 hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
+              Sense
+            </span>
+            <span className="text-[30px]  mr-1 hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
+              AI
             </span>
           </div>
+
+
 
           {progressBarState.contentArray.map((el) => {
             return <ProgressPoint icon={el.icon} progress={el} />
