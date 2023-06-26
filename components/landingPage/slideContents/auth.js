@@ -185,7 +185,7 @@ const Auth = (props) => {
                 />
                 <button
                     type="submit"
-                    className="bg-[#4285f4]  text-white  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
+                    className="bg-[#4285f4] text-lg font-bold  text-white  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
                     Send password reset link
                 </button>
@@ -207,7 +207,7 @@ const Auth = (props) => {
                 <p className={`text-sm mb-3 ml-2 text-red-500  ${!otpValid ? "visible" : "invisible"}`}>The OTP is inCorrect</p>
                 <button
                     type="submit"
-                    className="bg-[#4285f4]  text-white  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
+                    className="bg-[#4285f4]  text-white text-lg font-bold  w-max px-[20px] py-3  rounded-lg  transition-all duration-75 ease-linear"
                 >
                     Verify
                 </button>
@@ -263,7 +263,7 @@ const Auth = (props) => {
         }
         {!hideSign ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
             <button
-                className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2  rounded-lg flex items-center justify-center transition-all duration-75 ease-linear"
+                className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2 text-lg font-bold  rounded-lg flex items-center justify-center transition-all duration-75 ease-linear"
                 onClick={handleClick}
             >
                 <Image
@@ -301,12 +301,12 @@ const Auth = (props) => {
                                 value: e.target.value, isValid: e.target.value.length >= 6
                             })
                         }}
-                    />
+                    /> 
                     <p className={`text-sm ml-2 text-red-500 mt-2 ${!pass.isValid ? "visible" : "invisible"}`}>Enter atleast 6 characters</p>
                     <div className="text-center">
                         <button
                             type="submit"
-                            className=" border-[#3F4FDB] border-2 text-lg hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                            className=" border-[#3F4FDB] border-2 text-lg font-bold hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                         >
                             {!authState.signIn ? "sign up" : "sign in"}
                         </button>

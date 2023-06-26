@@ -153,7 +153,7 @@ const home = (props) => {
                         your productivity. Don't let stress hold you back - try Stress Sense AI today.
                     </p>
                     <button
-                        className=" border-[#3F4FDB] border-2 text-lg bg-[#3F4FDB] text-white mt-4 w-max py-3 px-[20px] rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                        className=" border-[#3F4FDB] font-bold border-2 text-lg bg-[#3F4FDB] text-white mt-4 w-max py-3 px-[20px] rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                         onClick={props.check}
                     >
                         Try for Free
@@ -174,7 +174,7 @@ const home = (props) => {
                         <div className='w-full text-center'>
 
                             <button
-                                className=" border-[#3F4FDB] px-[20px] border-2 text-lg bg-[#3F4FDB] text-white mt-4 mr-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                className=" border-[#3F4FDB] px-[20px] border-2 font-bold text-lg bg-[#3F4FDB] text-white mt-4 mr-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
                                 discover Your Stress Level
@@ -209,7 +209,7 @@ const home = (props) => {
 
                         <div className='w-full text-center'>
                             <button
-                                className=" border-[#3F4FDB] px-[20px] border-2 text-lg bg-[#3F4FDB] text-white mt-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                className=" border-[#3F4FDB] px-[20px] border-2 text-lg font-bold bg-[#3F4FDB] text-white mt-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
                                 Unlock insights now                        </button>
@@ -233,7 +233,7 @@ const home = (props) => {
                         <div className='w-full text-center'>
 
                             <button
-                                className=" border-[#3F4FDB] mx-auto border-2 text-lg bg-[#3F4FDB] text-white mt-4 sm:w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                className=" border-[#3F4FDB] mx-auto border-2 text-lg font-bold bg-[#3F4FDB] text-white mt-4 sm:w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
                                 Try now

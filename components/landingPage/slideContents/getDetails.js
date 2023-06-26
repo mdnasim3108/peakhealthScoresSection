@@ -123,7 +123,7 @@ const GetDetails = (props) => {
             <div className="w-full text-center">
               <button
                 id="stressCheck"
-                className="border border-violet-500 bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold  mt-5 w-max px-[20px]  py-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                className="border border-violet-500 bg-[#3F4FDB] text-lg hover:bg-[#3F4FDB] text-white font-bold  mt-5 w-max px-[20px]  py-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="submit"
               >
                 Check My Stress

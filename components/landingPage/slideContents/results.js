@@ -142,12 +142,12 @@ const results = (props) => {
               authState.change({ showAuth: true, signUp: true })
               scrollToTop() 
           }}
-            className="rounded-lg sm:relative right-[10%] border-[#3F4FDB] bg-[#3F4FDB] w-max hover:bg-[#3F4FDB] text-white  py-2 sm:px-[20px]  px-10 sm:text-lg text-sm ease-linear transition-all duration-150 font-sans">
+            className="rounded-lg sm:relative right-[10%] border-[#3F4FDB] bg-[#3F4FDB] w-max font-bold hover:bg-[#3F4FDB]  text-white  py-2 sm:px-[20px]  px-10 text-lg  ease-linear transition-all duration-150 font-sans">
             Get Detailed Report
           </button>
           <button
             id="personalizedRecommendation"
-            className="rounded-lg border-2 sm:mt-0 mt-4 sm:relative left-[13.5%] border-[#3F4FDB] hover:bg-[#3F4FDB] hover:text-white  py-2 px-[20px] w-max text-[#3F4FDB] sm:text-lg text-sm ease-linear transition-all duration-150 font-sans"
+            className="rounded-lg border-2 sm:mt-0 mt-4 sm:relative left-[13.5%] border-[#3F4FDB] font-bold hover:bg-[#3F4FDB] hover:text-white   py-2 px-[20px] w-max text-[#3F4FDB] text-lg ease-linear transition-all duration-150 font-sans"
             onClick={props.move}
           >
             Check recommendations

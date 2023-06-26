@@ -74,7 +74,7 @@ const recommendations = (props) => {
         <div className="w-full flex items-center justify-center">
           <button
             id="stressCheck"
-            className="border border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB] text-white font-bold relative top-[2rem] w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+            className="border border-[#3F4FDB] bg-[#3F4FDB] hover:bg-[#3F4FDB]  text-lg text-white font-bold relative top-[2rem] w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150"
             onClick={() => {
               props.onclick()
               setShowSignUp(false)
