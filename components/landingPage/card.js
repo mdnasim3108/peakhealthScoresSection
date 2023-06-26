@@ -144,19 +144,18 @@ const Card = () => {
   ];
 
 
-
   return (
-    <div className={`${content.contentNumber < 3 ? "flex-col" : "flex"} items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
+    <div className={` flex-col items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
 
       {homeState.showHome && <Home check={() => homeState.setShowHome(false)} />}
-      {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
+      {/* {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
         <button
           className="border-2 absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
           onClick={() => authState.change({ showAuth: true, signIn: true })}
         >
           sign in
         </button>
-      </div>}
+      </div>} */}
 
       {!homeState.showHome && <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
 
@@ -179,11 +178,11 @@ const Card = () => {
               AI
             </span>
           </div> */}
-
+      
           <div
             onClick={() => homeState.setShowHome(true)}
 
-            className="md:relative md:bottom-[5vh] -translate-x-10 sm:translate-x-10 flex items-center justify-between cursor-pointer">
+            className="md:relative md:bottom-[5vh] -translate-x-10 sm:-translate-x-[5%] flex items-center justify-between cursor-pointer">
             <Image
               src={logoImg}
               className="md:w-[3rem] w-[10rem]"

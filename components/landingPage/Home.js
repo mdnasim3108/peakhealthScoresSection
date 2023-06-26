@@ -26,7 +26,7 @@ const home = (props) => {
     return (
         <div>
             <div className="fixed top-0 sm:w-[80%] w-full z-10 lg:py-3  bg-white" >
-                <div className="   px-4 sm:px-6 lg:px-8 " >
+                <div className="   px-4 sm:px-0 " >
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center justify-between w-full">
 
@@ -56,7 +56,7 @@ const home = (props) => {
                             </div>
 
                             <button
-                                className="border-2 md:block hidden  tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2  rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                className="border-2 md:block hidden  tracking-wide text-lg py-2   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-[20px] w-max  rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={() => {
                                     authState.change({ showAuth: true, signIn: true })
                                 }}
@@ -268,7 +268,7 @@ const home = (props) => {
                     </div>
                 </div>
 
-                <div className='relative sm:bottom-[1rem] top-[1rem]'>
+                <div className='relative  top-[1rem] sm:top-[-1rem]'>
                     <p className='text-white mt-3'>Privacy Policy</p>
                     <p className='text-white mt-3'>Terms of Use</p>
                     <p className='text-white mt-3'>Contact Us</p>

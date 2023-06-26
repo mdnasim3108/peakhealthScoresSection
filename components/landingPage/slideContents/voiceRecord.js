@@ -72,7 +72,7 @@ const VoiceRecord = (props) => {
       </h1>
       <div className="voiceRecord flex justify-between md:flex-row flex-col-reverse sm:mt-0 mt-8">
         <ToastContainer />
-        <div className="px-10 py-10 mt-20 sm:w-[80%] h-max   border-2 rounded shadow-lg">
+        <div className="px-10 py-10 mt-10 sm:w-[80%] h-max   border-2 rounded shadow-lg">
           <div className="">
             <h1 className="text-xl font-bold tracking-wide text-center">INSTRUCTIONS</h1>
             <ul className="text-left list-disc mt-8 text-lg text-gray-500 ">
@@ -95,10 +95,10 @@ const VoiceRecord = (props) => {
           </div>
         </div>
         <div
-          className={`${status === "mt-[2rem]" ? "" : "sm:mt-[6rem]"
+          className={`${status === "mt-[2rem]" ? "" : "sm:mt-[3rem]"
             } transition-all  duration-[300] lg:ml-[3rem] ease-linear text-center`}
         >
-          <p className="mt-5 sm:text-[36px] text-[30px] sm:leading-loose leading-1">
+          <p className="mt-5 sm:text-[36px] text-[30px] ">
             How are you feeling about your work stress today?
           </p>
 
