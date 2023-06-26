@@ -83,7 +83,7 @@ const results = (props) => {
   return (
     <div className=" px-0 md:px-10 recording md:relative text-center top-[5vh]">
       <h1 className="xl:text-[40px] lg:text-[40px] font-rajdhani text-xl font-bold">
-        Your Work Stress Score for today
+        Your Work Stress Score for Today
       </h1>
       <div className="xl:w-full lg:w-[90%]">
         <div className="bg-gradient-to-r mt-10 rounded flex justify-end from-[#00C57E] via-[#F2965A] to-[#F25A5A] scoreFill  sm:h-8 h-5 transition-all duration-500 ease-linear ">

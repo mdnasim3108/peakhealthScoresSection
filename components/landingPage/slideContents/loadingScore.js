@@ -56,7 +56,7 @@ const loadingScore = () => {
         classes="sm:text-2xl text-lg"
       />
       <h1 className="sm:text-2xl text-lg font-sans font-bold mt-[5rem] mb-5">
-        Can you guess, what's your stress level!!!
+        Can you guess, what's your stress level?
       </h1>
       <p className="relative bottom-5 text-lg">(Slide the marker)</p>
       <div className="sm:w-[70%] w-[90%] mx-auto">

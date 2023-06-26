@@ -25,9 +25,9 @@ const recommendations = (props) => {
   return (
     !video.play ? <div className="relative">
 
-      <h1 className="sm:text-[40px] text-[30px] sm:m-0 mb-2  font-rajdhani text-center font-[500]">Your stress solutions...</h1>
+      <h1 className="sm:text-[40px] text-[30px] sm:m-0 mb-2  font-rajdhani text-center font-bold">Your Stress Solutions</h1>
 
-      <div className="sm:flex w-full hidden  p-5  text-gray-500">
+      <div className="sm:flex w-full hidden  px-5 py-2  text-gray-500">
         <div
           className=" sm:w-[25%]"
         />

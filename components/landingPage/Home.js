@@ -66,7 +66,7 @@ const home = (props) => {
 
                         </div>
 
-                        <div className="md:hidden">
+                        <div className={`md:hidden`}>
                             <button
                                 type="button"
                                 className="text-gray-700 focus:outline-none "
@@ -79,7 +79,7 @@ const home = (props) => {
                         </div>
                     </div>
 
-                    <div className={`md:hidden ${isMobileMenuOpen ? '' : 'hidden'}`}>
+                    {isMobileMenuOpen && <div className="nav-fade-in">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3  bg-gray-200">
                             <a href="#home" onClick={toggleMobileMenu} className="text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                             <a href="#features" onClick={toggleMobileMenu} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Features</a>
@@ -90,6 +90,7 @@ const home = (props) => {
                             }} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Sign In</a>
                         </div>
                     </div>
+}
                 </div>
             </div>
 
@@ -177,7 +178,7 @@ const home = (props) => {
                                 className=" border-[#3F4FDB] px-[20px] border-2 font-bold text-lg bg-[#3F4FDB] text-white mt-4 mr-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
-                                discover Your Stress Level
+                                Discover Your Stress Level
                             </button>
                         </div>
                     </div>
@@ -212,7 +213,7 @@ const home = (props) => {
                                 className=" border-[#3F4FDB] px-[20px] border-2 text-lg font-bold bg-[#3F4FDB] text-white mt-4 sm:w-max py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
-                                Unlock insights now                        </button>
+                                Unlock Insights Now                        </button>
                         </div>
 
                     </div>
@@ -236,7 +237,7 @@ const home = (props) => {
                                 className=" border-[#3F4FDB] mx-auto border-2 text-lg font-bold bg-[#3F4FDB] text-white mt-4 sm:w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={props.check}
                             >
-                                Try now
+                                Try Now
                             </button>
                         </div>
 
