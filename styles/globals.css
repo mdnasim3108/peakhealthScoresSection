@@ -383,7 +383,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-@media screen and (min-width:645px){
+@media screen and (min-width:45px){
     .bg-image{
         background-image: url('/SSAIBgImage.jpg');
         background-size: cover;

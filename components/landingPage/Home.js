@@ -96,7 +96,7 @@ const home = (props) => {
 
             <div className='p-7' id="home">
 
-                <div className="flex sm:h-screen bg-image  sm:mt-0 mt-10  flex-col-reverse sm:w-full md:flex-row justify-around items-center">
+                <div className="flex h-screen bg-image  sm:mt-0 mt-10 rounded  flex-col-reverse sm:w-full md:flex-row justify-around items-center">
                     <div className="flex sm:w-[50%]  flex-col items-center sm:mt-0">
                         {/* <Image
                             src={getStartImage}
