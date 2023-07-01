@@ -96,20 +96,20 @@ const home = (props) => {
 
             <div className='p-7' id="home">
 
-                <div className="flex sm:h-screen sm:mt-0 mt-10  flex-col-reverse sm:w-full md:flex-row justify-around items-center">
+                <div className="flex sm:h-screen bg-image  sm:mt-0 mt-10  flex-col-reverse sm:w-full md:flex-row justify-around items-center">
                     <div className="flex sm:w-[50%]  flex-col items-center sm:mt-0">
-                        <Image
+                        {/* <Image
                             src={getStartImage}
                             className="xl:w-[25rem] md:w-[20rem] w-[15rem] transform scale-x-[-1]"
                             alt="getStart"
-                        />
-                        <p
+                        /> */}
+                        {/* <p
                             className="font-sans text-lg md:w-[27rem]  text-center mt-5 text-gray-500">
                             Measure your job stress level in minutes
                             using cutting-edge Voice AI technology.
                             Take control of your well-being and find
                             balance in your busy work life.
-                        </p>
+                        </p> */}
                     </div>
                     <div className="flex sm:w-[50%] flex-col items-center justify-start">
 
