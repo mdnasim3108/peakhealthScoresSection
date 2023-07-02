@@ -122,12 +122,12 @@ const Auth = (props) => {
             setPass({ ...pass, isValid: false })
             return
         }
-        // const res = await axios.post("/api/isAuth", { email: value.value })
-        // console.log(res)
-        // if (res.data.audio) {
-        //     props.toastFail("user already exists!!")
-        //     return
-        // }
+        const res = await axios.post("/api/isAuth", { email: value.value })
+        console.log(res)
+        if (res.data.audio) {
+            props.toastFail("user already exists!!")
+            return
+        }
 
         const res1 = await axios.post("/api/sendMail", { to: value.value, otp: secret,firstName:value.value.split("@")[0] });
         console.log(res1)
