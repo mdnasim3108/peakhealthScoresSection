@@ -22,11 +22,11 @@ export default async function handler(req, res) {
         
         <p>Thank you for signing up.</p>
         
-        <p>Let's activate your personal Stress Sense AI Assistant.</p>
+        <p>Let's activate your personal <b>Stress Sense AI Assistant</b>.</p>
         
         <p>Please use this One Time Password (OTP) to register your account.</p>
         
-        <p>${otp}</p>
+        <p><b>${otp}</b></p>
         
         <p>This OTP is valid for only 10 minutes.</p>
         
