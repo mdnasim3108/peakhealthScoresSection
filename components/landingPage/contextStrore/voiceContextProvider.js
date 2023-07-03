@@ -158,7 +158,8 @@ const VoiceContextProvider = (props) => {
           infer: [
             {
               type: "Acoustic",
-              version: "v3",
+              version: "v4",
+
             },
           ],
           userIdentifier: voiceFeatures.uid,

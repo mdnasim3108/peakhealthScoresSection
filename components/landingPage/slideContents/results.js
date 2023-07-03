@@ -32,7 +32,9 @@ const results = (props) => {
     }, []);
 
     useEffect(() => {
-      const media = window.matchMedia(`(max-width: ${width}px)`);
+      const media = window.matchMedia(`(
+        
+        max-width: ${width}px)`);
       media.addListener(updateTarget);
 
       // Check on mount (callback is not called until a change occurs)  
@@ -106,8 +108,8 @@ const results = (props) => {
                 ? voiceState.voiceFeatures.energy
                 : 0
             }
-            minValue={0}
-            maxValue={36}
+            minValue={3}
+            maxValue={12}
             segments={4}
             currentValueText="Energy"
             customSegmentLabels={labels}
@@ -120,9 +122,10 @@ const results = (props) => {
           <ReactSpeedometer
             value={
               !voiceState.voiceFeatures.loading
-                ? Number(voiceState.voiceFeatures.live)
+                ? Number(voiceState.voiceFeatures.liveliness)
                 : 0
             }
+            
             minValue={0}
             maxValue={0.45}
             segments={4}
