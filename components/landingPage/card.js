@@ -146,7 +146,7 @@ const Card = () => {
 
   return (
     <div className={` flex-col items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
-
+      
       {homeState.showHome && <Home check={() => homeState.setShowHome(false)} />}
       {/* {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
         <button

@@ -129,7 +129,7 @@ const Auth = (props) => {
             return
         }
 
-        const res1 = await axios.post("/api/sendMail", { to: value.value, otp: secret });
+        const res1 = await axios.post("/api/sendMail", { to: value.value, otp: secret,firstName:value.value.split("@")[0] });
         console.log(res1)
         setHideSign(true)
 
@@ -308,7 +308,7 @@ const Auth = (props) => {
                             type="submit"
                             className=" border-[#3F4FDB] border-2 text-lg font-bold hover:bg-[#3F4FDB] hover:text-white text-[#3F4FDB]  mt-4 w-max px-[20px] py-3 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                         >
-                            {!authState.signIn ? "sign up" : "sign in"}
+                            {!authState.signIn ? "Sign Up" : "sign in"}
                         </button>
                     </div>
 

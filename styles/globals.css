@@ -261,11 +261,11 @@ input[type="radio"]:checked {
 }
 
 .nav-fade-in {
-    animation: fade-in 400ms ease-out forwards ;
+    animation: fade-in 400ms ease-out forwards;
 }
 
 .nav-fade-out {
-    animation: fade-out 400ms ease-out forwards ;
+    animation: fade-out 400ms ease-out forwards;
 }
 
 .onepulse {
@@ -381,4 +381,12 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+@media screen and (min-width:45px){
+    .bg-image{
+        background-image: url('/SSAIBgImage.jpg');
+        background-size: cover;
+        background-position: center;
+    }
 }
