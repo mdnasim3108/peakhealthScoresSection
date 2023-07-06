@@ -4,7 +4,8 @@ import logoImg from "../../public/phLogo.png"
 import authContext from './contextStrore/authContext';
 import logoText from "../../public/phLogoText.png"
 import getStartImage from "../../public/getStart.jpg"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 const home = (props) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const authState = useContext(authContext)
@@ -72,9 +73,12 @@ const home = (props) => {
                                 className="text-gray-700 focus:outline-none "
                                 onClick={toggleMobileMenu}
                             >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                {!isMobileMenuOpen?<svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                                 </svg>
+                                :
+                                <FontAwesomeIcon icon={faClose} className='text-2xl' />
+                                }
                             </button>
                         </div>
                     </div>
