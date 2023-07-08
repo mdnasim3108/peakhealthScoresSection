@@ -37,7 +37,7 @@
     }
 }
 
-input[type="radio"] {
+/* input[type="radio"] {
 
     appearance: none;
     -webkit-appearance: none;
@@ -45,24 +45,24 @@ input[type="radio"] {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-}
+} */
 
-input[type="radio"]:checked {
+/* input[type="radio"]:checked {
     background-color: #905cf4;
-}
+} */
 
 /* input[type="radio"]:focus {
   outline: 2px solid blue;
 } */
 
-@media screen and (max-width:640px) {
+/* @media screen and (max-width:640px) {
     input[type="radio"] {
 
         width: 12px;
         height: 12px;
 
     }
-}
+} */
 
 .hide-scrollbar::-webkit-scrollbar {
     width: 0.5em;
@@ -389,7 +389,7 @@ input::-webkit-inner-spin-button {
     }
 }
 
-@media screen and (max-width:640px){
+@media screen and (max-width:1024px){
     .bg-image{
         background-image: url('/mobileBgImage.jpg');
         background-size: cover;

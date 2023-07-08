@@ -70,9 +70,9 @@ const VoiceRecord = (props) => {
       <h1 className="sm:text-[40px] text-[30px]  sm:relative top-5 sm:top-0 font-bold  font-rajdhani text-center">
         Question Of The Day
       </h1>
-      <div className="voiceRecord flex justify-between md:flex-row flex-col-reverse sm:mt-0 mt-8">
+      <div className="voiceRecord flex justify-between lg:flex-row flex-col-reverse sm:mt-0 mt-8">
         <ToastContainer />
-        <div className="px-10 py-10 mt-10 sm:w-[80%] h-max   border-2 rounded shadow-lg">
+        <div className="px-10 py-10 mt-10 lg:w-[80%] h-max   border-2 rounded shadow-lg">
           <div className="">
             <h1 className="text-xl font-bold tracking-wide text-center">INSTRUCTIONS</h1>
             <ul className="text-left list-disc mt-8 text-lg text-gray-500 ">

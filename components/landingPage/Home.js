@@ -26,8 +26,8 @@ const home = (props) => {
 
     return (
         <div>
-            <div className="fixed top-0 sm:w-[80%] w-full z-10 lg:py-3  bg-white" >
-                <div className="   px-4 sm:px-0 " >
+            <div className="fixed top-0 lg:w-[80%] w-full z-10 lg:py-3  bg-white" >
+                <div className="   px-4 lg:px-0 " >
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center justify-between w-full">
 
@@ -48,7 +48,7 @@ const home = (props) => {
                                 </span>
                             </div>
 
-                            <div className="hidden md:block">
+                            <div className="hidden lg:block">
                                 <div className="ml-10 flex items-baseline space-x-4">
                                     <a href="#home" className=" hover:text-violet-500 text-gray-500 transition-all duration-150 ease-linear px-3 py-2 rounded-md text-lg font-medium">Home</a>
                                     <a href="#features" className=" hover:text-violet-500 text-gray-500 transition-all duration-150 ease-linear  px-3 py-2 rounded-md text-lg font-medium">Features</a>
@@ -57,7 +57,7 @@ const home = (props) => {
                             </div>
 
                             <button
-                                className="border-2 md:block hidden  tracking-wide text-lg py-2   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-[20px] w-max  rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                className="border-2 lg:block hidden  tracking-wide text-lg py-2   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-[20px] w-max  rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
                                 onClick={() => {
                                     authState.change({ showAuth: true, signIn: true })
                                 }}
@@ -67,7 +67,7 @@ const home = (props) => {
 
                         </div>
 
-                        <div className={`md:hidden`}>
+                        <div className={`lg:hidden`}>
                             <button
                                 type="button"
                                 className="text-gray-700 focus:outline-none "
@@ -100,7 +100,7 @@ const home = (props) => {
 
             <div className='p-7' id="home">
 
-                <div className="flex h-screen bg-image  sm:mt-0 mt-10 rounded  flex-col-reverse sm:w-full md:flex-row justify-around items-center">
+                <div className="flex h-screen bg-image  sm:mt-0 mt-10 rounded  flex-col-reverse sm:w-full lg:flex-row justify-around items-center">
                     <div className="flex sm:w-[50%]  flex-col items-center sm:mt-0">
                         {/* <Image
                             src={getStartImage}
@@ -151,8 +151,8 @@ const home = (props) => {
                     <div className="h-[15vh] w-[6rem]">
 
                     </div>
-                    <h1 className="font-bold  md:text-5xl text-2xl font-rajdhani  text-center">Take control of your work stress…</h1>
-                    <p className='md:text-2xl text-xl sm:leading-3 leading-loose mt-5'>
+                    <h1 className="font-bold  lg:text-5xl text-2xl font-rajdhani  text-center">Take control of your work stress…</h1>
+                    <p className='lg:text-2xl text-xl  leading-loose mt-5'>
                         No more guessing or struggling to understand your stress levels. Quick and
                         easy actions allow you to take control of your stress levels and improve
                         your productivity. Don't let stress hold you back - try Stress Sense AI today.
@@ -225,7 +225,7 @@ const home = (props) => {
 
                 <div className='w-full flex sm:flex-row flex-col mt-[5rem]' id="test">
                     <div className='sm:w-[50%] w-full'>
-                        <h1 className="font-bold  md:text-4xl text-2xl font-rajdhani  leading-[3rem]">Relieve stress with personalized videos
+                        <h1 className="font-bold  lg:text-4xl text-2xl font-rajdhani  leading-[3rem]">Relieve stress with personalized videos
                             designed just for you</h1>
                         <p className='text-xl leading-loose mt-4'>
                             Take control of your stress levels with
