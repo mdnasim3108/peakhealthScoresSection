@@ -106,8 +106,8 @@ const results = (props) => {
                 ? voiceState.voiceFeatures.energy
                 : 0
             }
-            minValue={0}
-            maxValue={36}
+            minValue={3}
+            maxValue={12}
             segments={4}
             currentValueText="Energy"
             customSegmentLabels={labels}
