@@ -6,7 +6,14 @@ import AnswerContextProvider from '../components/landingPage/contextStrore/answe
 import VoiceContextProvider from '../components/landingPage/contextStrore/voiceContextProvider';
 import AuthContextProvider from '@/components/landingPage/contextStrore/authContextProvider';
 import HomeContextProvider from '@/components/landingPage/contextStrore/homeContextProvider';
+
+var delighted = require('delighted')('N0eSl5rCYkJF5SIaalxxsRDfTV7JBUPN');
 const App = ({ Component, pageProps, router }) => {
+ 
+  delighted.person.create({
+    email: 'support@peakhealth.tech',
+    properties: { "Purchase Experience": "Mobile App", "State": "CA" },
+  });
 
 
   return (
@@ -16,18 +23,13 @@ const App = ({ Component, pageProps, router }) => {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
         </Head>
 
-      <Script>
-        {
-          ` (function(h,o,t,j,a,r){
-    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-    h._hjSettings={hjid:3406143,hjsv:6};
-    a=o.getElementsByTagName('head')[0];
-    r=o.createElement('script');r.async=1;
-    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-    a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`
-        }
-      </Script>
+<Script type="text/javascript">
+  {`
+  !function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var p=t.getElementsByTagName("script")[0];p.parentNode.insertBefore(o,p)}}(window,document,"YjyHQ8uZ4Xg6knXi","delightedNps");
+
+  delightedNps.survey();`
+}
+</Script>
 
 
       <Script type="text/javascript">
