@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         
         <p>Please use this One Time Password (OTP) to register your account.</p>
         
-        <p><b>${otp}</b></p>
+        <p style="font-size:30px"><b>${otp}</b></p>
         
         <p>This OTP is valid for only 10 minutes.</p>
         

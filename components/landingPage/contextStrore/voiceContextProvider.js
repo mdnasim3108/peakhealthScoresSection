@@ -4,6 +4,8 @@ import { useReducer } from "react";
 import { Buffer } from "buffer";
 import generateTranscript from "./generateTranscript";
 import base from "./base";
+import { browserName } from 'react-device-detect';
+import axios from "axios";
 const VoiceContextProvider = (props) => {
 
   const voiceStateHandler = (state, action) => {
@@ -31,8 +33,8 @@ const VoiceContextProvider = (props) => {
           live: action.scores.live,
           energy: action.scores.energy,
         };
-        case "videoData":
-          return {...state,videoData:action.videoData,videos:true}
+      case "videoData":
+        return { ...state, videoData: action.videoData, videos: true }
       default:
         return { loading: true };
     }
@@ -44,21 +46,19 @@ const VoiceContextProvider = (props) => {
     registered: false,
   });
 
-  let uid, filePath, token, signedURL, userId,userData;
+  let uid, filePath, token, signedURL, userId, userData;
   const generateToken = async (user) => {
     try {
       dispatchVoiceFeatures({ type: "registering" })
       // const apiKey = "2522a39b608f58b1c4767082442713896d2ffc7597abf67075bb29a5";
-      try{
+      try {
         const ipdata = await Axios.post("/api/ip");
         userData = { ...user, ip: ipdata.data };
       }
-      catch(er){
+      catch (er) {
         console.log(er)
-        userData={...user,ip:"0.0.0.0"}
+        userData = { ...user, ip: "0.0.0.0" }
       }
-      
-      
       console.log(userData)
       const uidData = await Axios.post("/api/createUser", { details: userData });
       userId = uidData.data;
@@ -120,18 +120,21 @@ const VoiceContextProvider = (props) => {
       filePath = res3.data.filePath;
       console.log(filePath);
       console.log(signedURL);
-      dispatchVoiceFeatures({ type: "registerUser", data: { objId: userId, uid, signedURL, token, filePath } })
+      dispatchVoiceFeatures({ type: "registerUser", data: { objId: userId, uid, signedURL, token, filePath, ip: userData.ip } })
     }
     catch (err) {
-      console.log(err)
+      console.log(err.message)
+      console.log(typeof (err))
+      if (err.response) await axios.post("/api/logError", { ip: userData.ip, browser: browserName, error: err.response })
+      else await axios.post("/api/logError", { ip: userData.ip, browser: browserName, error: err.message })
       dispatchVoiceFeatures(
         {
           type: "error",
           content: 1,
           head: "Registration unsucessfull",
-          message: "you are not registered,check your internet connection and try again...",
+          message: "check your internet connection and try again..",
           btnLabel: "register again",
-          registered:false
+          registered: false
         }
       )
     }
@@ -159,7 +162,6 @@ const VoiceContextProvider = (props) => {
             {
               type: "Acoustic",
               version: "v4",
-
             },
           ],
           userIdentifier: voiceFeatures.uid,
@@ -173,7 +175,7 @@ const VoiceContextProvider = (props) => {
           },
         }
       );
-  
+
       const jobid = res5.data.jobId;
       console.log("jobid" + jobid);
       let res6;
@@ -214,42 +216,45 @@ const VoiceContextProvider = (props) => {
           scores: { overallScore: score, live: liveScore, energy: EnergyScore },
         });
         generateTranscript(blobObj, voiceFeatures.objId)
-        const videoRes=await Axios.post("/api/videosData",{objId:voiceFeatures.objId});
+        const videoRes = await Axios.post("/api/videosData", { objId: voiceFeatures.objId });
         console.log(videoRes.data)
-        dispatchVoiceFeatures({type:"videoData",videoData:videoRes.data})
+        dispatchVoiceFeatures({ type: "videoData", videoData: videoRes.data })
       }
       if (status === "FAIL") {
         console.log(res6)
 
-      if(res6.data.result.code==="INVALID_AUDIO_FILE"){
-        dispatchVoiceFeatures({
-          type: "error",
-          content: 2,
-          head: "Invalid Audio",
-          message: "check if microphone is in use by any other application",
-          btnLabel: "record again",
-          registered:true
-        });
-      }
+        if (res6.data.result.code === "INVALID_AUDIO_FILE") {
+          dispatchVoiceFeatures({
+            type: "error",
+            content: 2,
+            head: "Invalid Audio",
+            message: "check if microphone is in use by any other application",
+            btnLabel: "record again",
+            registered: true
+          });
+        }
         dispatchVoiceFeatures({
           type: "error",
           content: 2,
           head: "Audio not supported",
           message: "your audio format is invalid,please re record your voice and try again...",
           btnLabel: "record again",
-          registered:true
+          registered: true
         });
       }
     }
     catch (err) {
       console.log(err)
+      console.log(typeof (err))
+      if (err.response) await axios.post("/api/logError", { ip: voiceFeatures.ip, browser: browserName, error: err.response })
+      else await axios.post("/api/logError", { ip: voiceFeatures.ip, browser: browserName, error: err.message })
       dispatchVoiceFeatures({
         type: "error",
         content: 2,
         head: "Audio not uploaded",
         message: "Something went wrong!  Please record your voice again...",
         btnLabel: "record again",
-        registered:true
+        registered: true
       });
     }
   };
@@ -268,7 +273,7 @@ const VoiceContextProvider = (props) => {
       btnLabel: "record again",
       hideButton: true
     }),
-    failAuth:()=>dispatchVoiceFeatures({
+    failAuth: () => dispatchVoiceFeatures({
       type: "error",
       content: 1,
       head: "Authentication failed.",

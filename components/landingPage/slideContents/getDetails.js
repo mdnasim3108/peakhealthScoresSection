@@ -47,9 +47,9 @@ const GetDetails = (props) => {
         </h1>
       </div>
 
-      <div className="flex md:flex-row flex-col-reverse md:mt-20 mt-5 justify-around w-full">
+      <div className="flex lg:flex-row flex-col-reverse lg:mt-20 mt-5 justify-around w-full">
         <div className="flex flex-col justify-center items-center ">
-          <div className="ml-10 mt-5 md:m-0">
+          <div className="ml-10 mt-5 lg:m-0">
             <Player
               autoplay
               loop
@@ -64,33 +64,28 @@ const GetDetails = (props) => {
           </p>
 
         </div>
-        <div className="md:w-[50%]">
+        <div className="lg:w-[50%]">
           <form className="mt-10" onSubmit={getSubmitHandler}>
             <div className="w-full flex justify-between mb-4">
 
-              <div
-                className="flex  items-center  border py-2 px-4  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-[#3F4FDB] w-[49%]"
-              >
-
-                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px] pb-[0.5px] pl-[0.5px] flex items-center justify-center  rounded-full w-[20px] h-[20px]">
-                  <input id="bordered-radio-1" type="radio" value="male" name="bordered-radio"
-                    className=" cursor-pointer"
-                    onFocus={(e) => setDetails((prev) => { return { ...prev, gender: e.target.value } })}
-                  />
-                </div>
-
+            <div
+               className="flex  items-center  border py-2 px-4  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-violet-500 w-[49%]"
+               >
+                <input id="bordered-radio-1" type="radio" value="male" name="bordered-radio"
+                  className="mr-2 cursor-pointer h-[1.05rem] w-[1.05rem]"
+                  onClick={(e)=>setDetails((prev)=>{ return {...prev,gender:e.target.value} })}    
+                />
                 <label for="bordered-radio-1" className="cursor-pointer">Male</label>
               </div>
 
-              <div className="flex items-center  py-2 px-4 border  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-[#3F4FDB] w-[49%]"
+              <div class="flex items-center  py-2 px-4 border  bg-white text-gray-400 text-[17px] shadow focus:outline-none   rounded  focus:border-violet-500 w-[49%]"
               >
-                <div className="border-gray-500 mr-2 border-[2px] sm:pt-[0.5px pb-[0.2px] pr-[1px] flex items-center justify-center  rounded-full w-[20px] h-[20px]" >
-                  <input id="bordered-radio-2" type="radio" value="female" name="bordered-radio"
-                    className=" cursor-pointer"
-                    onFocus={(e) => setDetails((prev) => { return { ...prev, gender: e.target.value } })}
-                  />
-                </div>
-                <label for="bordered-radio-2" className="cursor-pointer">Female</label>
+                <input id="bordered-radio-2" type="radio" value="female" name="bordered-radio"
+                  
+                  className="mr-2 cursor-pointer h-[1.05rem] w-[1.05rem]"
+                  onClick={(e)=>setDetails((prev)=>{ return {...prev,gender:e.target.value} })}    
+                />
+                <label for="bordered-radio-2" className="cursor-pointer">Female</label>  
               </div>
 
             </div>

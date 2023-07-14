@@ -145,7 +145,7 @@ const Card = () => {
 
 
   return (
-    <div className={` flex-col items-center  lg:h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   sm:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
+    <div className={` flex-col items-center  h-screen ${homeState.showHome && " overflow-scroll hide-scrollbar "}   lg:w-[88%] w-full bg-white  sm:shadow-2xl  lg:py-7 xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]`}>
       
       {homeState.showHome && <Home check={() => homeState.setShowHome(false)} />}
       {/* {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
@@ -182,19 +182,19 @@ const Card = () => {
           <div
             onClick={() => homeState.setShowHome(true)}
 
-            className="md:relative md:bottom-[5vh] -translate-x-10 sm:-translate-x-[5%] flex items-center justify-between cursor-pointer">
+            className="lg:relative lg:bottom-[5vh] -translate-x-10 lg:-translate-x-[5%] flex items-center justify-between cursor-pointer">
             <Image
               src={logoImg}
-              className="md:w-[3rem] w-[10rem]"
+              className="lg:w-[3rem] w-[10rem]"
             />
 
-            <span className="text-[30px] mr-1 hidden sm:block  text-[#ea7f17] font-bold font-rajdhani">
+            <span className="text-[30px] mr-1 hidden lg:block  text-[#ea7f17] font-bold font-rajdhani">
               Stress
             </span>
-            <span className="text-[30px] mr-1 hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
+            <span className="text-[30px] mr-1 hidden lg:block  text-[#4855dc] font-bold font-rajdhani">
               Sense
             </span>
-            <span className="text-[30px]  mr-1 hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
+            <span className="text-[30px]  mr-1 hidden lg:block  text-[#4855dc] font-bold font-rajdhani">
               AI
             </span>
           </div>

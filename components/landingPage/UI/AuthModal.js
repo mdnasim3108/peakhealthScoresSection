@@ -9,14 +9,14 @@ const authModal = (props) => {
     const authState=useContext(authContext)
     const Backdrop = () => {
         return (
-            <div className=" w-screen absolute sm:h-[100vh] h-[400vh] bg-black/75 z-20"
+            <div className=" w-screen absolute lg:h-[100vh] h-[400vh] bg-black/75 z-20"
                  onClick={()=>authState.close()}
-            ></div> 
+            ></div>  
         )
     }
     const OverLay = (props) => {
         return (
-            <div className={`authModal ${authState.signUp?"top-[15vh]":"top-[3vh]"}  sm:top-0 relative   sm:pb-10 p-4 sm:px-0 sm:pt-0  w-[70rem] max-w-[90%] bg-white rounded shadow-lg z-30`}>
+            <div className={`authModal ${authState.signUp?"top-[15vh] sm:top-0":"top-[3vh] sm:top-[4vh]"}  lg:top-0 relative   lg:pb-10 p-4 lg:px-0 lg:pt-0  w-[70rem] max-w-[90%] bg-white rounded shadow-lg z-30`}>
                 <div className="w-full cursor-pointer flex justify-end ">
                     <div
                      className="rounded-full w-[25px] h-[25px] bg-red-500 pl-[0.3rem] cursor-pointer transition-all duration-100 ease-linear relative sm:left-3 sm:bottom-3 left-5 bottom-5"

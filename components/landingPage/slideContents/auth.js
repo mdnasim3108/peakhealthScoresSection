@@ -172,8 +172,8 @@ const Auth = (props) => {
         }
     }
 
-    const signInHideContent = <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
-        <div className="md:w-[70%] w-full text-center">
+    const signInHideContent = <div className="lg:w-[50%] w-full flex flex-col lg:m-0 mt-3 items-center justify-center text-center">
+        <div className="lg:w-[70%] w-full text-center">
             <form onSubmit={forgotSubmitHandler} className="text-center" >
                 <label className="text-lg text-center my-4">Enter the registered Email</label>
                 <input
@@ -193,8 +193,8 @@ const Auth = (props) => {
         </div>
     </div>
 
-    const signUpHideContent = <div className="md:w-[50%] w-full flex flex-col md:m-0 mt-3 items-center justify-center text-center">
-        <div className="md:w-[70%] w-full text-center">
+    const signUpHideContent = <div className="lg:w-[50%] w-full flex flex-col lg:m-0 mt-3 items-center justify-center text-center">
+        <div className="lg:w-[70%] w-full text-center">
             <form onSubmit={otpSubmitHandler} className="text-center" >
                 <label className="text-lg text-center my-4">{`Enter the OTP sent to ${value.value}`}</label>
                 <input
@@ -221,18 +221,18 @@ const Auth = (props) => {
 
     const submitHandler = !authState.signIn ? signUpSubmitHandler : signInSubmitHandler
 
-    return <div className="flex flex-col md:flex-row sm:pl-8">
+    return <div className="flex flex-col lg:flex-row lg:pl-8">
         {
             !authState.signUp ?
 
-                <div className="md:w-[50%] w-full md:m-0 mx-auto mb-5 flex items-center justify-center md:block">
+                <div className="lg:w-[50%] w-full lg:m-0 mx-auto mb-5 flex items-center justify-center md:block">
                     <Image
                         src={authImage}
-                        className="md:w-full w-[80%]"
+                        className="lg:w-full w-[80%]"
                     />
                 </div>
                 :
-                <div className="md:w-[50%] w-full  mb-5 border-2 rounded p-5">
+                <div className="lg:w-[50%] w-full  mb-5 border-2 rounded p-5">
 
                     <h1 className="xl:text-3xl lg:text-2xl font-rajdhani text-xl font-bold">
                         Get deep insights to unlock personal
@@ -261,9 +261,9 @@ const Auth = (props) => {
                 </div>
 
         }
-        {!hideSign ? <div className="md:w-[50%] w-full flex flex-col items-center justify-center">
+        {!hideSign ? <div className="lg:w-[50%] w-full flex flex-col items-center justify-center">
             <button
-                className="bg-[#4285f4] hover:bg-[#1d6ae5] md:w-[70%] w-full py-2 text-lg font-bold  rounded-lg flex items-center justify-center transition-all duration-75 ease-linear"
+                className="bg-[#4285f4] hover:bg-[#1d6ae5] lg:w-[70%] w-full py-2 text-lg font-bold  rounded-lg flex items-center justify-center transition-all duration-75 ease-linear"
                 onClick={handleClick}
             >
                 <Image
@@ -272,13 +272,13 @@ const Auth = (props) => {
                 />
                 <p className="text-lg  text-white ">continue with Google</p>
             </button>
-            <div className="flex items-center mt-4 md:w-[70%] w-full">
+            <div className="flex items-center mt-4 lg:w-[70%] w-full">
                 <div className="bg-gray-300 w-[48%] h-[1px]" />
                 <h1 className="text-gray-400 mx-2">OR</h1>
                 <div className="bg-gray-300 w-[48%] h-[1px]" />
             </div>
-            <div className="md:w-[70%] w-full mt-4">
-                <form className="" onSubmit={submitHandler}>
+            <div className="lg:w-[70%] w-full mt-4">
+                <form className="" onSubmit={submitHandler}>                                                                  
                     {/* <label className="text-lg text-left">Email</label> */}
                     <input
                         className={`border-[1.5px] my-2  rounded shadow appearance-none ${value.isValid ? "border-gray-400 focus:border-gray-600" : "border-red-500 focus:border-red-500"}    text-lg focus:outline-none  transition-all duration-75 ease-linear w-full pl-3 py-2`}
