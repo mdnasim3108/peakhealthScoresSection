@@ -3,6 +3,14 @@ import dynamic from "next/dynamic";
 import voiceContext from "../contextStrore/voiceContext";
 import axios from "axios";
 import authContext from "../contextStrore/authContext";
+import {Helmet} from "react-helmet";
+import Script from 'next/script'
+
+var delighted = require('delighted')('N0eSl5rCYkJF5SIaalxxsRDfTV7JBUPN');
+delighted.person.create({
+  email: 'support@peakhealth.tech',
+  properties: { "Purchase Experience": "Mobile App", "State": "CA" },
+});
 const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), {
   ssr: false,
 });
@@ -83,6 +91,16 @@ const results = (props) => {
     },
   ];
   return (
+    <div>
+      <Helmet>
+      <script type="text/javascript">
+        {`
+        !function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var p=t.getElementsByTagName("script")[0];p.parentNode.insertBefore(o,p)}}(window,document,"YjyHQ8uZ4Xg6knXi","delightedNps");
+
+        delightedNps.survey();`
+      }
+      </script>
+      </Helmet>
     <div className=" px-0 md:px-10 recording md:relative text-center top-[5vh]">
       <h1 className="xl:text-[40px] lg:text-[40px] font-rajdhani text-xl font-bold">
         Your Work Stress Score for Today
@@ -137,7 +155,7 @@ const results = (props) => {
           />
         </div>
       </div>
-
+         
       <div className="relative bottom-[3.5rem] w-full">
         <div className="sm:flex-row w-full flex-col justify-between mb-3">
           <button
@@ -164,7 +182,8 @@ const results = (props) => {
           </p>
         </div>
       </div>
-
+     
+    </div>
     </div>
   );
 };
