@@ -10,6 +10,15 @@ import ThumbsUp from '../UI/FASolid/thumbsUp';
 import ThumbsDown from '../UI/FASolid/thumbsDown';
 import axios from 'axios';
 import voiceContext from '../contextStrore/voiceContext';
+import {Helmet} from "react-helmet";
+
+
+
+var delighted = require('delighted')('N0eSl5rCYkJF5SIaalxxsRDfTV7JBUPN');
+delighted.person.create({
+  email: 'support@peakhealth.tech',
+  properties: { "Purchase Experience": "Mobile App", "State": "CA" },
+});
 const YoutubeComp = (props) => {
     const useMediaQuery = (width) => {
     const [targetReached, setTargetReached] = useState(false);
@@ -70,6 +79,19 @@ const YoutubeComp = (props) => {
     },
   };
   return (
+<div>
+<Helmet>
+ <script type="text/javascript">
+        {`
+        !function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var p=t.getElementsByTagName("script")[0];p.parentNode.insertBefore(o,p)}}(window,document,"YjyHQ8uZ4Xg6knXi","delightedNps");
+
+        delightedNps.survey();`
+      }
+       
+      </script>
+</Helmet>
+
+  
     <div className=' flex flex-col items-center justify-center lg:p-10'>
 
         
@@ -168,7 +190,7 @@ const YoutubeComp = (props) => {
 
     </div>
 
-
+    </div>
   )
 }
 export default YoutubeComp;
