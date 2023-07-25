@@ -13,7 +13,10 @@ var userSchema = new Schema(
     guessScore:{type:String},
     audio:{type:String},
     transcript:{type:String},
-    videos:{type:Array}
+    videos:{type:Array},
+    occupation:{type:String},
+    linkedIn:{type:String},
+
   },
   { timestamps: true }
 );

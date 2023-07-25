@@ -154,7 +154,7 @@ const VoiceContextProvider = (props) => {
       });
 
       console.log(res4.status);
-
+      console.log(voiceFeatures)
       const res5 = await Axios.post(
         "https://api.sondeservices.com/platform/async/v1/inference/voice-feature-scores",
         {
@@ -222,7 +222,7 @@ const VoiceContextProvider = (props) => {
       }
       if (status === "FAIL") {
         console.log(res6)
-
+        await axios.post("/api/logError", { ip: voiceFeatures.ip, browser: browserName, error: res6.data.result})
         if (res6.data.result.code === "INVALID_AUDIO_FILE") {
           dispatchVoiceFeatures({
             type: "error",
@@ -269,7 +269,7 @@ const VoiceContextProvider = (props) => {
       type: "error",
       content: 2,
       head: "This browser is not supported.",
-      message: "To use AI powered Stress Assistant,we recommend using the latest version of Chrome,Firefox,Safari or Microsoft Edge.",
+      message: "To use AI powered Stress Assistant, we recommend using the latest version of Chrome, Firefox, Safari or Microsoft Edge.",
       btnLabel: "record again",
       hideButton: true
     }),

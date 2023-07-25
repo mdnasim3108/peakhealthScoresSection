@@ -64,18 +64,23 @@
     }
 } */
 
-.hide-scrollbar::-webkit-scrollbar {
-    width: 0.5em;
-    /* Adjust this value if needed */
+@media screen and (min-width:640px){
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0em;
+        display: none;
+        visibility: hidden;
+        /* Adjust this value if needed */
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
 }
 
-.hide-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-.hide-scrollbar::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
 
 
 .voiceRecord {
@@ -383,16 +388,18 @@ input::-webkit-inner-spin-button {
 
 @media screen and (min-width:640px){
     .bg-image{
-        background-image: url('/SSAIBgImage.jpg');
-        background-size: cover;
-        background-position: center;
-    }
-}
-
-@media screen and (max-width:1024px){
-    .bg-image{
         background-image: url('/mobileBgImage.jpg');
         background-size: cover;
         background-position: center;
     }
 }
+
+@media screen and (min-width:1024px){
+    .bg-image{
+        background-image: url('/bannerBackground.png');
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+

@@ -12,6 +12,7 @@ import { WavRecorder } from "webm-to-wav-converter";
 import DynamicText from "./dynamicText";
 // import checkMicrophoneConflict from "@/utils/micCheck";
 const VoiceRecord = (props) => {
+
   const toastifyFailure = (str) => {
     toast.error(str, {
       position: "top-center",
@@ -24,6 +25,20 @@ const VoiceRecord = (props) => {
       theme: "light",
     });
   };
+
+  const questions=[
+      "How has stress impacted your work, causing missed deadlines or errors?",
+      "How do you feel stress is affecting your social interactions and relationships with others?",
+      "How do you feel stress impacts your confidence and self-worth?",
+      "Have you noticed any changes in your health due to work stress?",
+      "Is job stress affect your eating or sleep in any way?",
+      "Can you describe any changes in your level of motivation or interest?",
+      "Can you identify any recurring emotions you experience during stressful situations?"
+
+  ]
+
+  const questionIndex=Math.floor(Math.random()*questions.length)
+
   const voiceState = useContext(voiceContext);
 
   const [status, setStatus] = useState("")
@@ -99,7 +114,7 @@ const VoiceRecord = (props) => {
             } transition-all  duration-[300] lg:ml-[3rem] ease-linear text-center`}
         >
           <p className="mt-5 sm:text-[36px] text-[30px] ">
-            How are you feeling about your work stress today?
+            {questions[questionIndex]}
           </p>
 
           {status === "" && (

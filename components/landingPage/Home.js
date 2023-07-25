@@ -3,7 +3,8 @@ import Image from 'next/image';
 import logoImg from "../../public/phLogo.png"
 import authContext from './contextStrore/authContext';
 import logoText from "../../public/phLogoText.png"
-import getStartImage from "../../public/getStart.jpg"
+import mobileBgImage from "../../public/mobileBgImage.jpg"
+import heroSmallImage from "../../public/heroImageSmall.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 const home = (props) => {
@@ -25,13 +26,15 @@ const home = (props) => {
     }, []);
 
     return (
-        <div>
-            <div className="fixed top-0 lg:w-[80%] w-full z-10 lg:py-3  bg-white" >
-                <div className="   px-4 lg:px-0 " >
+        <div className={`w-full ${isMobileMenuOpen && "h-screen "}`}>
+
+            <div className="fixed top-0  w-full  lg:py-1  bg-white border-gray-400 z-10 lg:px-5 shadow-lg" >
+
+                <div className=" " >
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center justify-between w-full">
 
-                            <div className="md:relative flex items-center justify-between">
+                            <div className="md:relative flex pl-4 lg:p-0 items-center justify-between">
                                 <Image
                                     src={logoImg}
                                     className="w-[3rem]"
@@ -67,24 +70,25 @@ const home = (props) => {
 
                         </div>
 
-                        <div className={`lg:hidden`}>
+                        <div className={`lg:hidden pr-4 lg:p-0`}>
                             <button
                                 type="button"
                                 className="text-gray-700 focus:outline-none "
                                 onClick={toggleMobileMenu}
                             >
-                                {!isMobileMenuOpen?<svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                {!isMobileMenuOpen ? <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                                 </svg>
-                                :
-                                <FontAwesomeIcon icon={faClose} className='text-2xl' />
+                                    :
+                                    <FontAwesomeIcon icon={faClose} className='text-2xl' />
                                 }
                             </button>
                         </div>
                     </div>
 
-                    {isMobileMenuOpen && <div className="nav-fade-in">
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3  bg-gray-200">
+
+                    <div className={`w-full flex lg:hidden justify-end z-20 box-border`}>
+                        <div className={`nav-fade-in pt-2 pb-3 space-y-1 px-auto box-border bg-white w-[50%] fixed h-[100vh] ${isMobileMenuOpen ? "right-0" : "right-[-999px]"} transition-all duration-[400ms] ease-in-out`}>
                             <a href="#home" onClick={toggleMobileMenu} className="text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                             <a href="#features" onClick={toggleMobileMenu} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Features</a>
                             <a href="#test" onClick={toggleMobileMenu} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
@@ -94,28 +98,35 @@ const home = (props) => {
                             }} className="text-gray-600  block px-3 py-2 rounded-md text-base font-medium">Sign In</a>
                         </div>
                     </div>
-}
+
+
                 </div>
             </div>
 
-            <div className='p-7' id="home">
 
-                <div className="flex h-screen bg-image  sm:mt-0 mt-10 rounded  flex-col-reverse sm:w-full lg:flex-row justify-around items-center">
-                    <div className="flex sm:w-[50%]  flex-col items-center sm:mt-0">
-                        {/* <Image
-                            src={getStartImage}
-                            className="xl:w-[25rem] md:w-[20rem] w-[15rem] transform scale-x-[-1]"
-                            alt="getStart"
-                        /> */}
-                        {/* <p
-                            className="font-sans text-lg md:w-[27rem]  text-center mt-5 text-gray-500">
-                            Measure your job stress level in minutes
-                            using cutting-edge Voice AI technology.
-                            Take control of your well-being and find
-                            balance in your busy work life.
-                        </p> */}
-                    </div>
-                    <div className="flex sm:w-[50%] flex-col items-center justify-start">
+
+            <div className='sm:pt-7' id="home">
+
+                {isMobileMenuOpen && <div className=" w-full nav-fade-in absolute lg:h-[100vh] h-[400vh] bg-black/75"
+                    onClick={() => { setMobileMenuOpen(false) }}
+                ></div>}
+
+                <div className="flex h-screen bg-image  sm:mt-0 mt-10 rounded  flex-col-reverse sm:w-full lg:flex-row justify-evenly items-center">
+
+                    <Image
+                        src={heroSmallImage}
+                        className='h-[100vh] w-[50%] lg:block hidden'
+                    />
+                    <div className="flex sm:w-[50%] w-full lg:m-0 sm:my-auto flex-col items-center justify-start bg-[#eff2f6] sm:bg-transparent">
+
+                        <Image
+                            src={mobileBgImage}
+                            className='w-full rounded block sm:hidden'
+                        />
+
+
+
+
 
                         <div>
                             <span className="sm:text-[76px] text-[40px] sm:mr-5  text-[#ea7f17] font-bold font-rajdhani">
@@ -129,7 +140,7 @@ const home = (props) => {
                             </span>
                         </div>
 
-                        <p className="font-[montserrat] text-[36px] leading-tight  mb-5 text-center sm:w-[90%]">
+                        <p className="font-[montserrat] p-2 sm:p-0 text-[36px] leading-tight  mb-5 text-center sm:w-[90%]">
                             Your personal AI assistant
                             to measure, understand,
                             and conquer stress.
@@ -147,7 +158,7 @@ const home = (props) => {
                     </div>
                 </div>
 
-                <div className='flex flex-col items-center justify-center text-center w-full mt-10 sm:mt-10' id="features">
+                <div className='flex p-7  flex-col items-center justify-center text-center w-full mt-10 sm:mt-10' id="features">
                     <div className="h-[15vh] w-[6rem]">
 
                     </div>
@@ -165,7 +176,7 @@ const home = (props) => {
                     </button>
                 </div>
 
-                <div className='w-full flex sm:flex-row flex-col mt-[5rem]'>
+                <div className='w-full p-7  flex sm:flex-row flex-col mt-[5rem]'>
 
                     <div className='sm:w-[50%] w-full'>
                         <h1 className="font-bold  md:text-4xl text-2xl font-rajdhani  leading-loose">Measure your stress in just 1 minute</h1>
@@ -195,7 +206,7 @@ const home = (props) => {
 
                 </div>
 
-                <div className='w-full flex sm:flex-row flex-col mt-[5rem]'>
+                <div className='w-full flex sm:flex-row flex-col mt-[5rem] p-7'>
                     <div className='sm:w-[50%]  h-full'>
 
                     </div>
@@ -223,7 +234,7 @@ const home = (props) => {
                     </div>
                 </div>
 
-                <div className='w-full flex sm:flex-row flex-col mt-[5rem]' id="test">
+                <div className='w-full flex sm:flex-row flex-col mt-[5rem] p-7 ' id="test">
                     <div className='sm:w-[50%] w-full'>
                         <h1 className="font-bold  lg:text-4xl text-2xl font-rajdhani  leading-[3rem]">Relieve stress with personalized videos
                             designed just for you</h1>
