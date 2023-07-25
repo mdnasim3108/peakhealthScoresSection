@@ -36,8 +36,7 @@ const VoiceRecord = (props) => {
       "Can you identify any recurring emotions you experience during stressful situations?"
 
   ]
-
-  const questionIndex=Math.floor(Math.random()*questions.length)
+  const [questionIndex,setQuestionIndex]=useState(Math.floor(Math.random()*questions.length))
 
   const voiceState = useContext(voiceContext);
 
@@ -63,7 +62,6 @@ const VoiceRecord = (props) => {
   // })
   useEffect(() => {
     ref.current = new WavRecorder()
-
   }, [])
   const voiceClickHandler = async () => {
     // if(await isMicrophoneInUse()){
@@ -80,6 +78,7 @@ const VoiceRecord = (props) => {
         toastifyFailure("Enable microphone access in your browser to record");
       });
   };
+
   return (
     <>
       <h1 className="sm:text-[40px] text-[30px]  sm:relative top-5 sm:top-0 font-bold  font-rajdhani text-center">
