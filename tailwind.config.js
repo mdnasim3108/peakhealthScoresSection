@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     fontFamily: {
       rajdhani: ['Rajdhani', 'sans-serif'],
-      montserrat:['Montserrat'],
+      sansSerif:['sans-serif'],
       sans:['Montserrat']
     },
   },

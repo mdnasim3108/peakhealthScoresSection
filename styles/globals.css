@@ -37,32 +37,7 @@
     }
 }
 
-/* input[type="radio"] {
 
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-} */
-
-/* input[type="radio"]:checked {
-    background-color: #905cf4;
-} */
-
-/* input[type="radio"]:focus {
-  outline: 2px solid blue;
-} */
-
-/* @media screen and (max-width:640px) {
-    input[type="radio"] {
-
-        width: 12px;
-        height: 12px;
-
-    }
-} */
 
 @media screen and (min-width:640px){
     .hide-scrollbar::-webkit-scrollbar {

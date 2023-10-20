@@ -4,8 +4,6 @@ import voiceContext from "../contextStrore/voiceContext";
 import axios from "axios";
 import authContext from "../contextStrore/authContext";
 import {Helmet} from "react-helmet";
-
-
 var delighted = require('delighted')('N0eSl5rCYkJF5SIaalxxsRDfTV7JBUPN');
 delighted.person.create({
   email: 'support@peakhealth.tech',
@@ -149,7 +147,7 @@ const results = (props) => {
           <ReactSpeedometer
             value={
               !voiceState.voiceFeatures.loading
-                ? Number(voiceState.voiceFeatures.liveliness)
+                ? Number(voiceState.voiceFeatures.live)
                 : 0
             }
             

@@ -9,7 +9,13 @@ import ContentContext from "../contextStrore/contentContext";
 import axios from "axios";
 import authContext from "../contextStrore/authContext";
 import homeContext from "../contextStrore/homeContext";
+import { useRouter } from 'next/router';
 const Auth = (props) => {
+    const router = useRouter();
+
+    
+
+
     const [secret, setSecret] = useState(Math.floor(Math.random() * 1000000))
     const homeState = useContext(homeContext)
     const [otp, setOtp] = useState("")
@@ -24,6 +30,14 @@ const Auth = (props) => {
     const [hideSign, setHideSign] = useState(false)
     const [email, setEmail] = useState("")
     const authState = useContext(authContext)
+
+    // useEffect(()=>{
+    //     if(voiceState.voiceFeatures.registered){
+    //         router.push("/gamifiedChallenges/goalSelection") 
+    //     }
+    // },[voiceState.voiceFeatures.registered])
+
+
     const signInHandleClick = async () => {
         signInWithPopup(auth, provider).then(async (result) => {
             console.log(result.user.email)
@@ -31,16 +45,19 @@ const Auth = (props) => {
             console.log(res.data)
             content.hideSignUp()
             if (res.data.audio) {
+                authState.close()
                 props.toastSuccess("sign in sucessfull!")
+                voiceState.registerUser({
+                    gender: res.data.gender,
+                    year: res.data.year,
+                    email: res.data.email
+                });
+                
                 setTimeout(() => {
-                    authState.close()
                     content.resetContent(2)
-                    voiceState.registerUser({
-                        gender: res.data.gender,
-                        year: res.data.year,
-                        email: res.data.email
-                    });
-                    homeState.setShowHome(false)
+                    // router.push("/gamifiedChallenges/goalSelection")
+
+                    homeState.setHome({dash:true})
                 }, 3000)
             }
             else if (res.data === "not found") {
@@ -101,7 +118,7 @@ const Auth = (props) => {
                         year: res.data.year,
                         email: res.data.email
                     });
-                    homeState.setShowHome(false)
+                    homeState.setHome({dash:true})
                 }, 3000)
             }
             else props.toastFail("you have not made a stress check before!")

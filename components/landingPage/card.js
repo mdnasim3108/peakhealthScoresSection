@@ -24,7 +24,10 @@ import logoImg from "../../public/phLogo.png"
 import aiText from "../../public/AIText.png"
 import Home from "./Home";
 import homeContext from "./contextStrore/homeContext";
+import HomePage from "@/pages/DashBoard/homePage";
+import voiceContext from "./contextStrore/voiceContext";
 const Card = () => {
+  const voiceState=useContext(voiceContext)
   const content = useContext(ContentContext)
   const authState = useContext(authContext)
   const [showAuth, setShowAuth] = useState({ auth: false, signUp: false })
@@ -145,42 +148,18 @@ const Card = () => {
 
 
   return (
-    <div className={` flex-col items-center  h-screen ${homeState.showHome && " sm:overflow-scroll hide-scrollbar "}  w-full bg-white  sm:shadow-2xl  lg:py-7  ${!homeState.showHome && "xl:pl-[4rem] lg:pl-[3rem] lg:pr-[3rem]"}`}>
+    <div className={` ${homeState.home.stress && "flex-col items-center  h-screen    sm:shadow-2xl  lg:py-7 xl:pl-[4rem] "}  ${homeState.home.home && " sm:overflow-scroll hide-scrollbar h-screen"}  w-full bg-white`}>
       
-      {homeState.showHome && <Home check={() => homeState.setShowHome(false)} />}
-      {/* {content.contentNumber === 0 && !homeState.showHome && <div className="w-full flex justify-end">
-        <button
-          className="border-2 absolute tracking-wide text-lg   border-[#3F4FDB] text-[#3F4FDB] hover:text-white  hover:bg-[#3F4FDB]  font-bold px-2 pb-2 rounded-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
-          onClick={() => authState.change({ showAuth: true, signIn: true })}
-        >
-          sign in
-        </button>
-      </div>} */}
+      {homeState.home.home && <Home check={() => homeState.setHome({stress:true})} />}
+      
 
-      {!homeState.showHome && <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
+
+      {homeState.home.stress && <div className="flex lg:flex-row flex-col sm:items-center sm:justify-center py-10 w-full">
 
         <div className="lg:flex-[1] flex lg:flex-col py-3 z-10  fixed top-0  bg-white pl-[15%]  w-full lg:p-0 lg:relative">
-
-          {/* <div className="md:relative  flex items-center justify-around "
-          >
-            <Image
-              src={logoImg}
-              className="md:w-[3rem] w-[10rem]  mr-3"
-            />
-
-            <span className="text-lg hidden sm:block text-[#ea7f17] font-bold font-rajdhani">
-              Stress
-            </span>
-            <span className="text-lg hidden sm:block text-[#4855dc] font-bold font-rajdhani">
-              Sense
-            </span>
-            <span className="text-lg hidden sm:block  text-[#4855dc] font-bold font-rajdhani">
-              AI
-            </span>
-          </div> */}
       
           <div
-            onClick={() => homeState.setShowHome(true)}
+            onClick={() => homeState.setHome({home:true})}
 
             className="lg:relative lg:bottom-[5vh] -translate-x-10 lg:-translate-x-[5%] flex items-center justify-between cursor-pointer">
             <Image
@@ -219,6 +198,10 @@ const Card = () => {
 
         </div>
       </div>
+      }
+
+      {
+        homeState.home.dash && <HomePage data={voiceState} stress={()=>homeState.setHome({stress:true})}/>
       }
     </div>
   );

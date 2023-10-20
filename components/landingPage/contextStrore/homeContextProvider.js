@@ -1,8 +1,8 @@
 import HomeContext from "./homeContext";
 import { useState } from "react";
 const homeContextProvider=(props)=>{
-    const [showHome,setShowHome]=useState(true)
-    return <HomeContext.Provider value={{showHome,setShowHome}}>
+    const [home,setHome]=useState({home:true})
+    return <HomeContext.Provider value={{home,setHome}}>
                     {props.children}
     </HomeContext.Provider>
 }

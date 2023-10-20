@@ -10,6 +10,7 @@ import Auth from '@/components/landingPage/slideContents/auth';
 import authContext from '@/components/landingPage/contextStrore/authContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import GoalSelection from './DashBoard/goalSelection/goalSelection';
 export default function Home() {
   const toastifySuccess = (msg) => {
     toast.success(msg, {
